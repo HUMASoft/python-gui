@@ -7,3 +7,4 @@ g++ -c -fPIC foo.cpp -o foo.o
 
 g++ -shared -Wl,-install_name,libfctn.so -o libfctn.so  fctn.o
 
+#Fin
