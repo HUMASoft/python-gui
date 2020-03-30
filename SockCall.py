@@ -1,10 +1,10 @@
 from ctypes import cdll
 
-lib = cdll.LoadLibrary('./CiA402Device/SocketCanPort.so')
+lib = cdll.LoadLibrary('./CiA402Device/libSocket.so')
 
 class Socket:
-    def SocketCanPort:
-        lib.SocketCanPort::SocketCanPort()
+    def SocketCan():
+        lib.SocketCanPort()
 Sock = Socket()
 Sock.SocketCanPort()
 
