@@ -1,5 +1,6 @@
 from ctypes import cdll
 
+
 lib = cdll.LoadLibrary('./CiA402Device/libSocket.so')
 
 class Socket:
