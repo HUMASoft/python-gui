@@ -1,6 +1,7 @@
 from tkinter import Tk, BOTH
 from tkinter.ttk import *
 import Cia402device
+
 """
 Import clase Tkinter:
 	Tk class: Crea ventana
@@ -37,35 +38,35 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		
 		#Buttons
 		quitButton = Button(self, text = 'Quit testing', command = self.quit)
-		quitButton.place(x = 90, y = 130)
+		quitButton.place(x = 90, y = 140)
 		p_b = Button(self, text = 'Get Position', command = self.position)
-		p_b.place(x = 10, y = 70)
+		p_b.place(x = 10, y = 80)
 		v_b = Button(self, text = 'Get Velocity', command = self.velocity)
-		v_b.place(x = 150, y = 70)
+		v_b.place(x = 150, y = 80)
 		#textboxes
 		self.velocity = Entry(self, width = 10)
-		self.velocity.place(x = 150, y = 40)
+		self.velocity.place(x = 150, y = 50)
 		self.position = Entry(self, width = 10)
-		self.position.place(x = 10, y = 40)
+		self.position.place(x = 10, y = 50)
 
 		#Labels 
 		lbl_title = Label(self, text='TheoÂ´s testing GUI', font=("Helvetica", 16))
 		lbl_title.place(x = 40, y = 0)
 		lbl1 = Label(self, text = 'Position:')
-		lbl1.place(x = 10, y = 20)
+		lbl1.place(x = 10, y = 30)
 		lbl2 = Label(self, text = 'Velocity:')
-		lbl2.place(x = 150, y = 20)
+		lbl2.place(x = 150, y = 30)
 
 	def position(self):
 		cia402_pos = Cia402device.CiA402Device();
 		pos = cia402_pos.GetPosition();		
-		self.position.insert(pos) 
+		self.position.insert(str(pos)) 
 		
 
 	def velocity(self):
 		cia402_vel = Cia402device.CiA402Device();
-		vel = cia402_pos.GetVelocity();
-		self.velocity.insert(vel) 
+		vel = cia402_vel.GetVelocity();
+		self.velocity.insert(str(vel)) 
 		
 
 
@@ -80,7 +81,7 @@ Una vez creada la clase, creo el main para lanzar la GUI, a traves de una funciÃ
 
 def main():
 	root = Tk() 
-	root.geometry('260x160+1000+350')
+	root.geometry('250x180+300+150')
 	app = gui_example()
 
 	root.mainloop()
