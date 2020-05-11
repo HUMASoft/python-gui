@@ -24,7 +24,7 @@ initUI:
 
 
 
-class gui_example(Frame, Cia402device):
+class gui_example(Frame, Cia402device.CiA402Device):
 	def __init__(self):
 		super().__init__()
 		self.initUI()
@@ -50,19 +50,21 @@ class gui_example(Frame, Cia402device):
 
 		#Labels 
 		lbl_title = Label(self, text='Theo´s testing GUI', font=("Helvetica", 16))
-		lbl_title.place(x = 80, y = 0)
+		lbl_title.place(x = 40, y = 0)
 		lbl1 = Label(self, text = 'Position:')
 		lbl1.place(x = 10, y = 20)
 		lbl2 = Label(self, text = 'Velocity:')
 		lbl2.place(x = 150, y = 20)
 
 	def position(self):
-		pos = Cia402device.GetPosition()
+		cia402_pos = Cia402device.CiA402Device();
+		pos = cia402_pos.GetPosition();		
 		self.position.insert(pos) 
 		
 
 	def velocity(self):
-		vel = Cia402device.GetVelocity()
+		cia402_vel = Cia402device.CiA402Device();
+		vel = cia402_pos.GetVelocity();
 		self.velocity.insert(vel) 
 		
 
