@@ -1,5 +1,5 @@
-#Vamos a usar traits library
-import numpy as np
+from tkinter import Tk, BOTH
+from tkinter.ttk import *
 import Cia402device
 """
 Import clase Tkinter:
@@ -7,8 +7,7 @@ Import clase Tkinter:
 	Frame class: Clase raiz que contiene los widgets necesarios, lo hereda la clase GUI
 """
 
-from tkinter import Tk, BOTH
-from tkinter.ttk import *
+
 
 """ 
 A continuación creo la clase de la GUI, que hereda los widgets de Frame.
