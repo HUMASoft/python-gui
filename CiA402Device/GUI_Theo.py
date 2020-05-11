@@ -24,7 +24,7 @@ initUI:
 
 
 
-class gui_example(Frame):
+class gui_example(Frame, Cia402device):
 	def __init__(self):
 		super().__init__()
 		self.initUI()
@@ -32,39 +32,39 @@ class gui_example(Frame):
 	def initUI(self):
 		self.Style = Style()
 		self.Style.theme_use('default')
-		self.master.title('Prueba')
+		self.master.title('Theo´s testing GUI')
 		self.pack(fill = BOTH, expand = 1)
 		
 		#Buttons
-		quitButton = Button(self, text = 'Quit GUI', command = self.quit)
+		quitButton = Button(self, text = 'Quit testing', command = self.quit)
 		quitButton.place(x = 90, y = 130)
-		c_b = Button(self, text = 'Calculate', command = self.calculator)
-		c_b.place(x = 90, y = 70)
-		
+		p_b = Button(self, text = 'Get Position', command = self.position)
+		p_b.place(x = 10, y = 70)
+		v_b = Button(self, text = 'Get Velocity', command = self.velocity)
+		v_b.place(x = 150, y = 70)
 		#textboxes
-		self.rate = Entry(self, width = 10)
-		self.rate.place(x = 150, y = 40)
-		self.name = Entry(self, width = 10)
-		self.name.place(x = 10, y = 40)
+		self.velocity = Entry(self, width = 10)
+		self.velocity.place(x = 150, y = 40)
+		self.position = Entry(self, width = 10)
+		self.position.place(x = 10, y = 40)
 
 		#Labels 
-		lbl_title = Label(self, text='Short rate GUI', font=("Helvetica", 16))
+		lbl_title = Label(self, text='Theo´s testing GUI', font=("Helvetica", 16))
 		lbl_title.place(x = 80, y = 0)
-		lbl1 = Label(self, text = 'Name:')
+		lbl1 = Label(self, text = 'Position:')
 		lbl1.place(x = 10, y = 20)
-		lbl2 = Label(self, text = 'Rate:')
+		lbl2 = Label(self, text = 'Velocity:')
 		lbl2.place(x = 150, y = 20)
 
-	def calculator(self):
-		self.rate = self.rate.get()
-		self.name = self.name.get()
-		sr = short_rate(self.name, float(self.rate))
-		time_list = [0.0, 0.5, 1.0, 1.25, 1.75, 2.0]
-		dscnt = sr.get_discount_factors(time_list)
-		result = dscnt[0]
-		self.lbl_out = Label(self, text = str(result))
-		self.lbl_out.place(x = 120, y = 100)
+	def position(self):
+		pos = Cia402device.GetPosition()
+		self.position.insert(pos) 
+		
 
+	def velocity(self):
+		vel = Cia402device.GetVelocity()
+		self.velocity.insert(vel) 
+		
 
 
 """
