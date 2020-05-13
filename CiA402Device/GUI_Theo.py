@@ -58,13 +58,18 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		lbl2.place(x = 150, y = 30)
 
 	def position(self):
+		
 		cia402_pos = Cia402device.CiA402Device();
+		cia402_pos.Reset()
+		cia402_pos.SwitchOn();
 		pos = cia402_pos.GetPosition();		
 		self.position.insert(str(pos)) 
 		
 
 	def velocity(self):
 		cia402_vel = Cia402device.CiA402Device();
+		cia402_vel.Reset()
+		cia402_vel.SwitchOn();
 		vel = cia402_vel.GetVelocity();
 		self.velocity.insert(str(vel)) 
 		
