@@ -36,17 +36,6 @@ elif _swig_python_version_info >= (2, 6, 0):
     del swig_import_helper
 else:
     import _CiA402SetupData
-# pull in all the attributes from _CiA402SetupData
-if __name__.rpartition('.')[0] != '':
-    if _swig_python_version_info >= (2, 7, 0):
-        try:
-            from ._CiA402SetupData import *
-        except ImportError:
-            from _CiA402SetupData import *
-    else:
-        from _CiA402SetupData import *
-else:
-    from _CiA402SetupData import *
 del _swig_python_version_info
 
 try:
@@ -106,6 +95,35 @@ except __builtin__.Exception:
         pass
     _newclass = 0
 
+class CiA402SetupData(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, CiA402SetupData, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, CiA402SetupData, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        this = _CiA402SetupData.new_CiA402SetupData(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def getScaling_Factors_Velocity(self):
+        return _CiA402SetupData.CiA402SetupData_getScaling_Factors_Velocity(self)
+
+    def getScaling_Factors_Position(self):
+        return _CiA402SetupData.CiA402SetupData_getScaling_Factors_Position(self)
+
+    def getScaling_Factors_Acceleration(self):
+        return _CiA402SetupData.CiA402SetupData_getScaling_Factors_Acceleration(self)
+
+    def getEncRes(self):
+        return _CiA402SetupData.CiA402SetupData_getEncRes(self)
+    __swig_destroy__ = _CiA402SetupData.delete_CiA402SetupData
+    __del__ = lambda self: None
+CiA402SetupData_swigregister = _CiA402SetupData.CiA402SetupData_swigregister
+CiA402SetupData_swigregister(CiA402SetupData)
 
 # This file is compatible with both classic and new-style classes.
 
