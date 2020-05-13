@@ -1,8 +1,10 @@
 /* SocketCanPort.i */
 %module SocketCanPort
+%include <std_string.i>
+%include "typemaps.i"
 %import "PortBase.i"
 %ignore SocketCanPort();
-%include "typemaps.i"
+
 
 %{
 #define SWIG_FILE_WITH_INIT
