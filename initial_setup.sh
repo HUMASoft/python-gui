@@ -9,4 +9,4 @@ mv *_CiA301CommPort.cpy*  _CiA301CommPort.so
 python3 setup_CiA402SetupData.py  build_ext --inplace
 mv *_CiA402SetupData.cpy*  _CiA402SetupData.so
 python3 setup_Cia402device.py  build_ext --inplace
-
+mv *_Cia402device.cpy*  _Cia402device.so
