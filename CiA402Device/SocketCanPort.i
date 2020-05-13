@@ -1,8 +1,7 @@
 /* CiA301CommPort.i */
 %module SocketCanPort
 %import "PortBase.i"
-%ignore tx0;
-%ignore rx0;
+%ignore SocketCanPort.SocketCanPort();
 
 %{
 #define SWIG_FILE_WITH_INIT
