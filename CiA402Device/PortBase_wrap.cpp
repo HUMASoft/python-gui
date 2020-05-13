@@ -1633,14 +1633,6 @@ SwigPyObject_repr(SwigPyObject *v, PyObject *args)
   return repr;  
 }
 
-/* We need a version taking two PyObject* parameters so it's a valid
- * PyCFunction to use in swigobject_methods[]. */
-SWIGRUNTIME PyObject *
-SwigPyObject_repr2(PyObject *v, PyObject *SWIGUNUSEDPARM(args))
-{
-  return SwigPyObject_repr((SwigPyObject*)v);
-}
-
 SWIGRUNTIME int
 SwigPyObject_compare(SwigPyObject *v, SwigPyObject *w)
 {
@@ -1770,7 +1762,11 @@ SwigPyObject_append(PyObject* v, PyObject* next)
 }
 
 SWIGRUNTIME PyObject* 
+#ifdef METH_NOARGS
+SwigPyObject_next(PyObject* v)
+#else
 SwigPyObject_next(PyObject* v, PyObject *SWIGUNUSEDPARM(args))
+#endif
 {
   SwigPyObject *sobj = (SwigPyObject *) v;
   if (sobj->next) {    
@@ -1804,20 +1800,6 @@ SwigPyObject_acquire(PyObject* v, PyObject *SWIGUNUSEDPARM(args))
   sobj->own = SWIG_POINTER_OWN;
   return SWIG_Py_Void();
 }
-
-#ifdef METH_NOARGS
-static PyObject*
-SwigPyObject_disown2(PyObject* v, PyObject *SWIGUNUSEDPARM(args))
-{
-  return SwigPyObject_disown(v);
-}
-
-static PyObject*
-SwigPyObject_acquire2(PyObject* v, PyObject *SWIGUNUSEDPARM(args))
-{
-  return SwigPyObject_acquire(v);
-}
-#endif
 
 SWIGINTERN PyObject*
 SwigPyObject_own(PyObject *v, PyObject *args)
@@ -1859,12 +1841,12 @@ SwigPyObject_own(PyObject *v, PyObject *args)
 #ifdef METH_O
 static PyMethodDef
 swigobject_methods[] = {
-  {(char *)"disown",  (PyCFunction)SwigPyObject_disown2, METH_NOARGS,  (char *)"releases ownership of the pointer"},
-  {(char *)"acquire", (PyCFunction)SwigPyObject_acquire2,METH_NOARGS,  (char *)"acquires ownership of the pointer"},
+  {(char *)"disown",  (PyCFunction)SwigPyObject_disown,  METH_NOARGS,  (char *)"releases ownership of the pointer"},
+  {(char *)"acquire", (PyCFunction)SwigPyObject_acquire, METH_NOARGS,  (char *)"acquires ownership of the pointer"},
   {(char *)"own",     (PyCFunction)SwigPyObject_own,     METH_VARARGS, (char *)"returns/sets ownership of the pointer"},
   {(char *)"append",  (PyCFunction)SwigPyObject_append,  METH_O,       (char *)"appends another 'this' object"},
   {(char *)"next",    (PyCFunction)SwigPyObject_next,    METH_NOARGS,  (char *)"returns the next 'this' object"},
-  {(char *)"__repr__",(PyCFunction)SwigPyObject_repr2,   METH_NOARGS,  (char *)"returns object representation"},
+  {(char *)"__repr__",(PyCFunction)SwigPyObject_repr,    METH_NOARGS,  (char *)"returns object representation"},
   {0, 0, 0, 0}  
 };
 #else
@@ -1875,7 +1857,7 @@ swigobject_methods[] = {
   {(char *)"own",     (PyCFunction)SwigPyObject_own,     METH_VARARGS,  (char *)"returns/sets ownership of the pointer"},
   {(char *)"append",  (PyCFunction)SwigPyObject_append,  METH_VARARGS,  (char *)"appends another 'this' object"},
   {(char *)"next",    (PyCFunction)SwigPyObject_next,    METH_VARARGS,  (char *)"returns the next 'this' object"},
-  {(char *)"__repr__",(PyCFunction)SwigPyObject_repr,    METH_VARARGS,  (char *)"returns object representation"},
+  {(char *)"__repr__",(PyCFunction)SwigPyObject_repr,   METH_VARARGS,  (char *)"returns object representation"},
   {0, 0, 0, 0}  
 };
 #endif
@@ -4155,7 +4137,7 @@ fail:
 SWIGPY_DESTRUCTOR_CLOSURE(_wrap_delete_PortBase) /* defines _wrap_delete_PortBase_destructor_closure */
 
 static PyMethodDef SwigMethods[] = {
-	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
+	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -4186,12 +4168,12 @@ SwigPyBuiltin__PortBase_richcompare(PyObject *self, PyObject *other, int op) {
 }
 
 SWIGINTERN PyMethodDef SwigPyBuiltin__PortBase_methods[] = {
-  { "getPortId", _wrap_PortBase_getPortId, METH_VARARGS, "" },
-  { "FlushMsg", _wrap_PortBase_FlushMsg, METH_VARARGS, "" },
-  { "SetFilter", _wrap_PortBase_SetFilter, METH_VARARGS, "" },
-  { "GetMsg", _wrap_PortBase_GetMsg, METH_VARARGS, "" },
-  { "PutMsg", _wrap_PortBase_PutMsg, METH_VARARGS, "" },
-  { "GetNMT", _wrap_PortBase_GetNMT, METH_VARARGS, "" },
+  { "getPortId", (PyCFunction) _wrap_PortBase_getPortId, METH_VARARGS, (char *) "" },
+  { "FlushMsg", (PyCFunction) _wrap_PortBase_FlushMsg, METH_VARARGS, (char *) "" },
+  { "SetFilter", (PyCFunction) _wrap_PortBase_SetFilter, METH_VARARGS, (char *) "" },
+  { "GetMsg", (PyCFunction) _wrap_PortBase_GetMsg, METH_VARARGS, (char *) "" },
+  { "PutMsg", (PyCFunction) _wrap_PortBase_PutMsg, METH_VARARGS, (char *) "" },
+  { "GetNMT", (PyCFunction) _wrap_PortBase_GetNMT, METH_VARARGS, (char *) "" },
   { NULL, NULL, 0, NULL } /* Sentinel */
 };
 
@@ -4956,9 +4938,9 @@ extern "C" {
             char *ndoc = (char*)malloc(ldoc + lptr + 10);
             if (ndoc) {
               char *buff = ndoc;
-              memcpy(buff, methods[i].ml_doc, ldoc);
+              strncpy(buff, methods[i].ml_doc, ldoc);
               buff += ldoc;
-              memcpy(buff, "swig_ptr: ", 10);
+              strncpy(buff, "swig_ptr: ", 10);
               buff += 10;
               SWIG_PackVoidPtr(buff, ptr, ty->name, lptr);
               methods[i].ml_doc = ndoc;
@@ -5020,8 +5002,8 @@ SWIG_init(void) {
     (char *)"this", &SwigPyBuiltin_ThisClosure, NULL, NULL, NULL
   };
   static SwigPyGetSet thisown_getset_closure = {
-    SwigPyObject_own,
-    SwigPyObject_own
+    (PyCFunction) SwigPyObject_own,
+    (PyCFunction) SwigPyObject_own
   };
   static PyGetSetDef thisown_getset_def = {
     (char *)"thisown", SwigPyBuiltin_GetterClosure, SwigPyBuiltin_SetterClosure, NULL, &thisown_getset_closure
