@@ -107,8 +107,8 @@ class SocketCanPort(PortBase.PortBase):
     __getattr__ = lambda self, name: _swig_getattr(self, SocketCanPort, name)
     __repr__ = _swig_repr
 
-    def __init__(self, *args):
-        this = _SocketCanPort.new_SocketCanPort(*args)
+    def __init__(self, canPort):
+        this = _SocketCanPort.new_SocketCanPort(canPort)
         try:
             self.this.append(this)
         except __builtin__.Exception:

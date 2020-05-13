@@ -3124,20 +3124,7 @@ namespace swig {
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_new_SocketCanPort__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SocketCanPort *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":new_SocketCanPort")) SWIG_fail;
-  result = (SocketCanPort *)new SocketCanPort();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SocketCanPort, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_SocketCanPort__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_SocketCanPort(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   string arg1 ;
   void *argp1 ;
@@ -3164,39 +3151,6 @@ SWIGINTERN PyObject *_wrap_new_SocketCanPort__SWIG_1(PyObject *SWIGUNUSEDPARM(se
   return resultobj;
 fail:
   return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_SocketCanPort(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[2] = {
-    0
-  };
-  Py_ssize_t ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = args ? PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 0) {
-    return _wrap_new_SocketCanPort__SWIG_0(self, args);
-  }
-  if (argc == 1) {
-    int _v;
-    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_string, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_new_SocketCanPort__SWIG_1(self, args);
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_SocketCanPort'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    SocketCanPort::SocketCanPort()\n"
-    "    SocketCanPort::SocketCanPort(string)\n");
-  return 0;
 }
 
 
