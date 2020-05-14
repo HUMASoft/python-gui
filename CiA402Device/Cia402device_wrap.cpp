@@ -3008,12 +3008,17 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_CiA402SetupData swig_types[2]
 #define SWIGTYPE_p_PortBase swig_types[3]
 #define SWIGTYPE_p_char swig_types[4]
-#define SWIGTYPE_p_uint16_t swig_types[5]
-#define SWIGTYPE_p_uint32_t swig_types[6]
-#define SWIGTYPE_p_uint8_t swig_types[7]
-#define SWIGTYPE_p_vectorT_uint8_t_t swig_types[8]
-static swig_type_info *swig_types[10];
-static swig_module_info swig_module = {swig_types, 9, 0, 0, 0, 0};
+#define SWIGTYPE_p_int swig_types[5]
+#define SWIGTYPE_p_long_long swig_types[6]
+#define SWIGTYPE_p_short swig_types[7]
+#define SWIGTYPE_p_signed_char swig_types[8]
+#define SWIGTYPE_p_unsigned_char swig_types[9]
+#define SWIGTYPE_p_unsigned_int swig_types[10]
+#define SWIGTYPE_p_unsigned_long_long swig_types[11]
+#define SWIGTYPE_p_unsigned_short swig_types[12]
+#define SWIGTYPE_p_vectorT_unsigned_char_t swig_types[13]
+static swig_type_info *swig_types[15];
+static swig_module_info swig_module = {swig_types, 14, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3116,6 +3121,12 @@ namespace swig {
     }
   };
 }
+
+
+#include <string>
+
+
+#include <stdint.h>		// Use the C99 official header
 
 
 #define SWIG_FILE_WITH_INIT
@@ -3225,6 +3236,70 @@ SWIG_CanCastAsInteger(double *d, double min, double max) {
 
 
 SWIGINTERN int
+SWIG_AsVal_unsigned_SS_long (PyObject *obj, unsigned long *val) 
+{
+#if PY_VERSION_HEX < 0x03000000
+  if (PyInt_Check(obj)) {
+    long v = PyInt_AsLong(obj);
+    if (v >= 0) {
+      if (val) *val = v;
+      return SWIG_OK;
+    } else {
+      return SWIG_OverflowError;
+    }
+  } else
+#endif
+  if (PyLong_Check(obj)) {
+    unsigned long v = PyLong_AsUnsignedLong(obj);
+    if (!PyErr_Occurred()) {
+      if (val) *val = v;
+      return SWIG_OK;
+    } else {
+      PyErr_Clear();
+      return SWIG_OverflowError;
+    }
+  }
+#ifdef SWIG_PYTHON_CAST_MODE
+  {
+    int dispatch = 0;
+    unsigned long v = PyLong_AsUnsignedLong(obj);
+    if (!PyErr_Occurred()) {
+      if (val) *val = v;
+      return SWIG_AddCast(SWIG_OK);
+    } else {
+      PyErr_Clear();
+    }
+    if (!dispatch) {
+      double d;
+      int res = SWIG_AddCast(SWIG_AsVal_double (obj,&d));
+      if (SWIG_IsOK(res) && SWIG_CanCastAsInteger(&d, 0, ULONG_MAX)) {
+	if (val) *val = (unsigned long)(d);
+	return res;
+      }
+    }
+  }
+#endif
+  return SWIG_TypeError;
+}
+
+
+SWIGINTERN int
+SWIG_AsVal_unsigned_SS_char (PyObject * obj, unsigned char *val)
+{
+  unsigned long v;
+  int res = SWIG_AsVal_unsigned_SS_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v > UCHAR_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< unsigned char >(v);
+    }
+  }  
+  return res;
+}
+
+
+SWIGINTERN int
 SWIG_AsVal_long (PyObject *obj, long* val)
 {
 #if PY_VERSION_HEX < 0x03000000
@@ -3284,6 +3359,37 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 
 
   #define SWIG_From_long   PyInt_FromLong 
+
+
+SWIGINTERNINLINE PyObject* 
+SWIG_From_unsigned_SS_long  (unsigned long value)
+{
+  return (value > LONG_MAX) ?
+    PyLong_FromUnsignedLong(value) : PyInt_FromLong(static_cast< long >(value));
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_unsigned_SS_short  (unsigned short value)
+{    
+  return SWIG_From_unsigned_SS_long  (value);
+}
+
+
+SWIGINTERN int
+SWIG_AsVal_unsigned_SS_int (PyObject * obj, unsigned int *val)
+{
+  unsigned long v;
+  int res = SWIG_AsVal_unsigned_SS_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v > UINT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< unsigned int >(v);
+    }
+  }  
+  return res;
+}
 
 
 /* Getting isfinite working pre C99 across multiple platforms is non-trivial. Users can provide SWIG_isfinite on older platforms. */
@@ -3358,25 +3464,17 @@ fail:
 SWIGINTERN PyObject *_wrap_new_CiA402Device__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   uint8_t arg1 ;
-  void *argp1 ;
-  int res1 = 0 ;
+  unsigned char val1 ;
+  int ecode1 = 0 ;
   PyObject * obj0 = 0 ;
   CiA402Device *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:new_CiA402Device",&obj0)) SWIG_fail;
-  {
-    res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_uint8_t,  0  | 0);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CiA402Device" "', argument " "1"" of type '" "uint8_t""'"); 
-    }  
-    if (!argp1) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CiA402Device" "', argument " "1"" of type '" "uint8_t""'");
-    } else {
-      uint8_t * temp = reinterpret_cast< uint8_t * >(argp1);
-      arg1 = *temp;
-      if (SWIG_IsNewObj(res1)) delete temp;
-    }
-  }
+  ecode1 = SWIG_AsVal_unsigned_SS_char(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_CiA402Device" "', argument " "1"" of type '" "uint8_t""'");
+  } 
+  arg1 = static_cast< uint8_t >(val1);
   result = (CiA402Device *)new CiA402Device(arg1);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CiA402Device, SWIG_POINTER_NEW |  0 );
   return resultobj;
@@ -3389,8 +3487,8 @@ SWIGINTERN PyObject *_wrap_new_CiA402Device__SWIG_2(PyObject *SWIGUNUSEDPARM(sel
   PyObject *resultobj = 0;
   uint8_t arg1 ;
   int arg2 ;
-  void *argp1 ;
-  int res1 = 0 ;
+  unsigned char val1 ;
+  int ecode1 = 0 ;
   int val2 ;
   int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
@@ -3398,19 +3496,11 @@ SWIGINTERN PyObject *_wrap_new_CiA402Device__SWIG_2(PyObject *SWIGUNUSEDPARM(sel
   CiA402Device *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:new_CiA402Device",&obj0,&obj1)) SWIG_fail;
-  {
-    res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_uint8_t,  0  | 0);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CiA402Device" "', argument " "1"" of type '" "uint8_t""'"); 
-    }  
-    if (!argp1) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CiA402Device" "', argument " "1"" of type '" "uint8_t""'");
-    } else {
-      uint8_t * temp = reinterpret_cast< uint8_t * >(argp1);
-      arg1 = *temp;
-      if (SWIG_IsNewObj(res1)) delete temp;
-    }
-  }
+  ecode1 = SWIG_AsVal_unsigned_SS_char(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_CiA402Device" "', argument " "1"" of type '" "uint8_t""'");
+  } 
+  arg1 = static_cast< uint8_t >(val1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_CiA402Device" "', argument " "2"" of type '" "int""'");
@@ -3428,8 +3518,8 @@ SWIGINTERN PyObject *_wrap_new_CiA402Device__SWIG_3(PyObject *SWIGUNUSEDPARM(sel
   PyObject *resultobj = 0;
   uint8_t arg1 ;
   PortBase *arg2 = (PortBase *) 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
+  unsigned char val1 ;
+  int ecode1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
@@ -3437,19 +3527,11 @@ SWIGINTERN PyObject *_wrap_new_CiA402Device__SWIG_3(PyObject *SWIGUNUSEDPARM(sel
   CiA402Device *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:new_CiA402Device",&obj0,&obj1)) SWIG_fail;
-  {
-    res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_uint8_t,  0  | 0);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CiA402Device" "', argument " "1"" of type '" "uint8_t""'"); 
-    }  
-    if (!argp1) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CiA402Device" "', argument " "1"" of type '" "uint8_t""'");
-    } else {
-      uint8_t * temp = reinterpret_cast< uint8_t * >(argp1);
-      arg1 = *temp;
-      if (SWIG_IsNewObj(res1)) delete temp;
-    }
-  }
+  ecode1 = SWIG_AsVal_unsigned_SS_char(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_CiA402Device" "', argument " "1"" of type '" "uint8_t""'");
+  } 
+  arg1 = static_cast< uint8_t >(val1);
   res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_PortBase, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CiA402Device" "', argument " "2"" of type '" "PortBase *""'"); 
@@ -3468,8 +3550,8 @@ SWIGINTERN PyObject *_wrap_new_CiA402Device__SWIG_4(PyObject *SWIGUNUSEDPARM(sel
   uint8_t arg1 ;
   PortBase *arg2 = (PortBase *) 0 ;
   CiA402SetupData *arg3 = (CiA402SetupData *) 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
+  unsigned char val1 ;
+  int ecode1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   void *argp3 = 0 ;
@@ -3480,19 +3562,11 @@ SWIGINTERN PyObject *_wrap_new_CiA402Device__SWIG_4(PyObject *SWIGUNUSEDPARM(sel
   CiA402Device *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:new_CiA402Device",&obj0,&obj1,&obj2)) SWIG_fail;
-  {
-    res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_uint8_t,  0  | 0);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CiA402Device" "', argument " "1"" of type '" "uint8_t""'"); 
-    }  
-    if (!argp1) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CiA402Device" "', argument " "1"" of type '" "uint8_t""'");
-    } else {
-      uint8_t * temp = reinterpret_cast< uint8_t * >(argp1);
-      arg1 = *temp;
-      if (SWIG_IsNewObj(res1)) delete temp;
-    }
-  }
+  ecode1 = SWIG_AsVal_unsigned_SS_char(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_CiA402Device" "', argument " "1"" of type '" "uint8_t""'");
+  } 
+  arg1 = static_cast< uint8_t >(val1);
   res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_PortBase, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CiA402Device" "', argument " "2"" of type '" "PortBase *""'"); 
@@ -3528,16 +3602,20 @@ SWIGINTERN PyObject *_wrap_new_CiA402Device(PyObject *self, PyObject *args) {
   }
   if (argc == 1) {
     int _v;
-    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_uint8_t, 0);
-    _v = SWIG_CheckState(res);
+    {
+      int res = SWIG_AsVal_unsigned_SS_char(argv[0], NULL);
+      _v = SWIG_CheckState(res);
+    }
     if (_v) {
       return _wrap_new_CiA402Device__SWIG_1(self, args);
     }
   }
   if (argc == 2) {
     int _v;
-    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_uint8_t, 0);
-    _v = SWIG_CheckState(res);
+    {
+      int res = SWIG_AsVal_unsigned_SS_char(argv[0], NULL);
+      _v = SWIG_CheckState(res);
+    }
     if (_v) {
       void *vptr = 0;
       int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_PortBase, 0);
@@ -3549,8 +3627,10 @@ SWIGINTERN PyObject *_wrap_new_CiA402Device(PyObject *self, PyObject *args) {
   }
   if (argc == 2) {
     int _v;
-    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_uint8_t, 0);
-    _v = SWIG_CheckState(res);
+    {
+      int res = SWIG_AsVal_unsigned_SS_char(argv[0], NULL);
+      _v = SWIG_CheckState(res);
+    }
     if (_v) {
       {
         int res = SWIG_AsVal_int(argv[1], NULL);
@@ -3563,8 +3643,10 @@ SWIGINTERN PyObject *_wrap_new_CiA402Device(PyObject *self, PyObject *args) {
   }
   if (argc == 3) {
     int _v;
-    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_uint8_t, 0);
-    _v = SWIG_CheckState(res);
+    {
+      int res = SWIG_AsVal_unsigned_SS_char(argv[0], NULL);
+      _v = SWIG_CheckState(res);
+    }
     if (_v) {
       void *vptr = 0;
       int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_PortBase, 0);
@@ -3606,8 +3688,8 @@ SWIGINTERN PyObject *_wrap_CiA402Device_CheckStatus(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CiA402Device_CheckStatus" "', argument " "1"" of type '" "CiA402Device *""'"); 
   }
   arg1 = reinterpret_cast< CiA402Device * >(argp1);
-  result = (arg1)->CheckStatus();
-  resultobj = SWIG_NewPointerObj((new uint16_t(static_cast< const uint16_t& >(result))), SWIGTYPE_p_uint16_t, SWIG_POINTER_OWN |  0 );
+  result = (uint16_t)(arg1)->CheckStatus();
+  resultobj = SWIG_From_unsigned_SS_short(static_cast< unsigned short >(result));
   return resultobj;
 fail:
   return NULL;
@@ -3914,7 +3996,7 @@ SWIGINTERN PyObject *_wrap_CiA402Device_OperationMode(PyObject *SWIGUNUSEDPARM(s
   }
   arg1 = reinterpret_cast< CiA402Device * >(argp1);
   {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_uint8_t_t,  0  | 0);
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_unsigned_char_t,  0  | 0);
     if (!SWIG_IsOK(res2)) {
       SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CiA402Device_OperationMode" "', argument " "2"" of type '" "vector< uint8_t > const""'"); 
     }  
@@ -3941,10 +4023,10 @@ SWIGINTERN PyObject *_wrap_CiA402Device_Setup_Velocity_Mode__SWIG_0(PyObject *SW
   uint32_t arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  unsigned int val3 ;
+  int ecode3 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
@@ -3956,32 +4038,16 @@ SWIGINTERN PyObject *_wrap_CiA402Device_Setup_Velocity_Mode__SWIG_0(PyObject *SW
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CiA402Device_Setup_Velocity_Mode" "', argument " "1"" of type '" "CiA402Device *""'"); 
   }
   arg1 = reinterpret_cast< CiA402Device * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_uint32_t,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CiA402Device_Setup_Velocity_Mode" "', argument " "2"" of type '" "uint32_t const""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CiA402Device_Setup_Velocity_Mode" "', argument " "2"" of type '" "uint32_t const""'");
-    } else {
-      uint32_t * temp = reinterpret_cast< uint32_t * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
-    }
-  }
-  {
-    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_uint32_t,  0  | 0);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CiA402Device_Setup_Velocity_Mode" "', argument " "3"" of type '" "uint32_t const""'"); 
-    }  
-    if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CiA402Device_Setup_Velocity_Mode" "', argument " "3"" of type '" "uint32_t const""'");
-    } else {
-      uint32_t * temp = reinterpret_cast< uint32_t * >(argp3);
-      arg3 = *temp;
-      if (SWIG_IsNewObj(res3)) delete temp;
-    }
-  }
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CiA402Device_Setup_Velocity_Mode" "', argument " "2"" of type '" "uint32_t""'");
+  } 
+  arg2 = static_cast< uint32_t >(val2);
+  ecode3 = SWIG_AsVal_unsigned_SS_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CiA402Device_Setup_Velocity_Mode" "', argument " "3"" of type '" "uint32_t""'");
+  } 
+  arg3 = static_cast< uint32_t >(val3);
   result = (long)(arg1)->Setup_Velocity_Mode(arg2,arg3);
   resultobj = SWIG_From_long(static_cast< long >(result));
   return resultobj;
@@ -3996,8 +4062,8 @@ SWIGINTERN PyObject *_wrap_CiA402Device_Setup_Velocity_Mode__SWIG_1(PyObject *SW
   uint32_t arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   long result;
@@ -4008,19 +4074,11 @@ SWIGINTERN PyObject *_wrap_CiA402Device_Setup_Velocity_Mode__SWIG_1(PyObject *SW
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CiA402Device_Setup_Velocity_Mode" "', argument " "1"" of type '" "CiA402Device *""'"); 
   }
   arg1 = reinterpret_cast< CiA402Device * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_uint32_t,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CiA402Device_Setup_Velocity_Mode" "', argument " "2"" of type '" "uint32_t const""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CiA402Device_Setup_Velocity_Mode" "', argument " "2"" of type '" "uint32_t const""'");
-    } else {
-      uint32_t * temp = reinterpret_cast< uint32_t * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
-    }
-  }
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CiA402Device_Setup_Velocity_Mode" "', argument " "2"" of type '" "uint32_t""'");
+  } 
+  arg2 = static_cast< uint32_t >(val2);
   result = (long)(arg1)->Setup_Velocity_Mode(arg2);
   resultobj = SWIG_From_long(static_cast< long >(result));
   return resultobj;
@@ -4078,8 +4136,10 @@ SWIGINTERN PyObject *_wrap_CiA402Device_Setup_Velocity_Mode(PyObject *self, PyOb
     int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CiA402Device, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_uint32_t, 0);
-      _v = SWIG_CheckState(res);
+      {
+        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
       if (_v) {
         return _wrap_CiA402Device_Setup_Velocity_Mode__SWIG_1(self, args);
       }
@@ -4091,11 +4151,15 @@ SWIGINTERN PyObject *_wrap_CiA402Device_Setup_Velocity_Mode(PyObject *self, PyOb
     int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CiA402Device, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_uint32_t, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_uint32_t, 0);
+      {
+        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
         _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_unsigned_SS_int(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
         if (_v) {
           return _wrap_CiA402Device_Setup_Velocity_Mode__SWIG_0(self, args);
         }
@@ -4257,10 +4321,10 @@ SWIGINTERN PyObject *_wrap_CiA402Device_SetupPositionMode__SWIG_0(PyObject *SWIG
   uint32_t arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  unsigned int val3 ;
+  int ecode3 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
@@ -4272,32 +4336,16 @@ SWIGINTERN PyObject *_wrap_CiA402Device_SetupPositionMode__SWIG_0(PyObject *SWIG
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CiA402Device_SetupPositionMode" "', argument " "1"" of type '" "CiA402Device *""'"); 
   }
   arg1 = reinterpret_cast< CiA402Device * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_uint32_t,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CiA402Device_SetupPositionMode" "', argument " "2"" of type '" "uint32_t const""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CiA402Device_SetupPositionMode" "', argument " "2"" of type '" "uint32_t const""'");
-    } else {
-      uint32_t * temp = reinterpret_cast< uint32_t * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
-    }
-  }
-  {
-    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_uint32_t,  0  | 0);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CiA402Device_SetupPositionMode" "', argument " "3"" of type '" "uint32_t const""'"); 
-    }  
-    if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CiA402Device_SetupPositionMode" "', argument " "3"" of type '" "uint32_t const""'");
-    } else {
-      uint32_t * temp = reinterpret_cast< uint32_t * >(argp3);
-      arg3 = *temp;
-      if (SWIG_IsNewObj(res3)) delete temp;
-    }
-  }
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CiA402Device_SetupPositionMode" "', argument " "2"" of type '" "uint32_t""'");
+  } 
+  arg2 = static_cast< uint32_t >(val2);
+  ecode3 = SWIG_AsVal_unsigned_SS_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CiA402Device_SetupPositionMode" "', argument " "3"" of type '" "uint32_t""'");
+  } 
+  arg3 = static_cast< uint32_t >(val3);
   result = (long)(arg1)->SetupPositionMode(arg2,arg3);
   resultobj = SWIG_From_long(static_cast< long >(result));
   return resultobj;
@@ -4312,8 +4360,8 @@ SWIGINTERN PyObject *_wrap_CiA402Device_SetupPositionMode__SWIG_1(PyObject *SWIG
   uint32_t arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   long result;
@@ -4324,19 +4372,11 @@ SWIGINTERN PyObject *_wrap_CiA402Device_SetupPositionMode__SWIG_1(PyObject *SWIG
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CiA402Device_SetupPositionMode" "', argument " "1"" of type '" "CiA402Device *""'"); 
   }
   arg1 = reinterpret_cast< CiA402Device * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_uint32_t,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CiA402Device_SetupPositionMode" "', argument " "2"" of type '" "uint32_t const""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CiA402Device_SetupPositionMode" "', argument " "2"" of type '" "uint32_t const""'");
-    } else {
-      uint32_t * temp = reinterpret_cast< uint32_t * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
-    }
-  }
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CiA402Device_SetupPositionMode" "', argument " "2"" of type '" "uint32_t""'");
+  } 
+  arg2 = static_cast< uint32_t >(val2);
   result = (long)(arg1)->SetupPositionMode(arg2);
   resultobj = SWIG_From_long(static_cast< long >(result));
   return resultobj;
@@ -4394,8 +4434,10 @@ SWIGINTERN PyObject *_wrap_CiA402Device_SetupPositionMode(PyObject *self, PyObje
     int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CiA402Device, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_uint32_t, 0);
-      _v = SWIG_CheckState(res);
+      {
+        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
       if (_v) {
         return _wrap_CiA402Device_SetupPositionMode__SWIG_1(self, args);
       }
@@ -4407,11 +4449,15 @@ SWIGINTERN PyObject *_wrap_CiA402Device_SetupPositionMode(PyObject *self, PyObje
     int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CiA402Device, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_uint32_t, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_uint32_t, 0);
+      {
+        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
         _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_unsigned_SS_int(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
         if (_v) {
           return _wrap_CiA402Device_SetupPositionMode__SWIG_0(self, args);
         }
@@ -4767,10 +4813,15 @@ static swig_type_info _swigt__p_CiA402Device = {"_p_CiA402Device", "CiA402Device
 static swig_type_info _swigt__p_CiA402SetupData = {"_p_CiA402SetupData", "CiA402SetupData *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PortBase = {"_p_PortBase", "PortBase *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_uint16_t = {"_p_uint16_t", "uint16_t *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_uint32_t = {"_p_uint32_t", "uint32_t *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_uint8_t = {"_p_uint8_t", "uint8_t *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_vectorT_uint8_t_t = {"_p_vectorT_uint8_t_t", "vector< uint8_t > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_int = {"_p_int", "intptr_t *|int *|int_least32_t *|int_fast32_t *|int32_t *|int_fast16_t *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_long_long = {"_p_long_long", "int_least64_t *|int_fast64_t *|int64_t *|long long *|intmax_t *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_short = {"_p_short", "short *|int_least16_t *|int16_t *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_signed_char = {"_p_signed_char", "signed char *|int_least8_t *|int_fast8_t *|int8_t *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_unsigned_char = {"_p_unsigned_char", "unsigned char *|uint_least8_t *|uint_fast8_t *|uint8_t *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_unsigned_int = {"_p_unsigned_int", "uintptr_t *|uint_least32_t *|uint_fast32_t *|uint32_t *|unsigned int *|uint_fast16_t *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_unsigned_long_long = {"_p_unsigned_long_long", "uint_least64_t *|uint_fast64_t *|uint64_t *|unsigned long long *|uintmax_t *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_unsigned_short = {"_p_unsigned_short", "unsigned short *|uint_least16_t *|uint16_t *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_vectorT_unsigned_char_t = {"_p_vectorT_unsigned_char_t", "vector< unsigned char > *|vector< uint8_t > *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_CiA301CommPort,
@@ -4778,10 +4829,15 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_CiA402SetupData,
   &_swigt__p_PortBase,
   &_swigt__p_char,
-  &_swigt__p_uint16_t,
-  &_swigt__p_uint32_t,
-  &_swigt__p_uint8_t,
-  &_swigt__p_vectorT_uint8_t_t,
+  &_swigt__p_int,
+  &_swigt__p_long_long,
+  &_swigt__p_short,
+  &_swigt__p_signed_char,
+  &_swigt__p_unsigned_char,
+  &_swigt__p_unsigned_int,
+  &_swigt__p_unsigned_long_long,
+  &_swigt__p_unsigned_short,
+  &_swigt__p_vectorT_unsigned_char_t,
 };
 
 static swig_cast_info _swigc__p_CiA301CommPort[] = {  {&_swigt__p_CiA402Device, _p_CiA402DeviceTo_p_CiA301CommPort, 0, 0},  {&_swigt__p_CiA301CommPort, 0, 0, 0},{0, 0, 0, 0}};
@@ -4789,10 +4845,15 @@ static swig_cast_info _swigc__p_CiA402Device[] = {  {&_swigt__p_CiA402Device, 0,
 static swig_cast_info _swigc__p_CiA402SetupData[] = {  {&_swigt__p_CiA402SetupData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PortBase[] = {  {&_swigt__p_PortBase, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_uint16_t[] = {  {&_swigt__p_uint16_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_uint32_t[] = {  {&_swigt__p_uint32_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_uint8_t[] = {  {&_swigt__p_uint8_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_vectorT_uint8_t_t[] = {  {&_swigt__p_vectorT_uint8_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_long_long[] = {  {&_swigt__p_long_long, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_short[] = {  {&_swigt__p_short, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_signed_char[] = {  {&_swigt__p_signed_char, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_unsigned_char[] = {  {&_swigt__p_unsigned_char, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_unsigned_int[] = {  {&_swigt__p_unsigned_int, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_unsigned_long_long[] = {  {&_swigt__p_unsigned_long_long, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_unsigned_short[] = {  {&_swigt__p_unsigned_short, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_vectorT_unsigned_char_t[] = {  {&_swigt__p_vectorT_unsigned_char_t, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_CiA301CommPort,
@@ -4800,10 +4861,15 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_CiA402SetupData,
   _swigc__p_PortBase,
   _swigc__p_char,
-  _swigc__p_uint16_t,
-  _swigc__p_uint32_t,
-  _swigc__p_uint8_t,
-  _swigc__p_vectorT_uint8_t_t,
+  _swigc__p_int,
+  _swigc__p_long_long,
+  _swigc__p_short,
+  _swigc__p_signed_char,
+  _swigc__p_unsigned_char,
+  _swigc__p_unsigned_int,
+  _swigc__p_unsigned_long_long,
+  _swigc__p_unsigned_short,
+  _swigc__p_vectorT_unsigned_char_t,
 };
 
 
