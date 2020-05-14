@@ -1,5 +1,8 @@
 /* CiA301CommPort.i */
 %module CiA301CommPort
+%include <std_string.i>
+%include "stdint.i"
+%include "typemaps.i"
 %import "PortBase.i"
 %ignore tx0;
 %ignore rx0;

@@ -1,5 +1,8 @@
 /* Cia402device.i */
 %module Cia402device
+%include <std_string.i>
+%include "stdint.i"
+%include "typemaps.i"
 %import "PortBase.i"
 %import "CiA301CommPort.i" /*Clase base*/
 %import "CiA402SetupData.i"

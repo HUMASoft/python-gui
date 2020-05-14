@@ -1,6 +1,7 @@
 /* SocketCanPort.i */
 %module SocketCanPort
 %include <std_string.i>
+%include "stdint.i"
 %include "typemaps.i"
 %import "PortBase.i"
 %ignore SocketCanPort();
