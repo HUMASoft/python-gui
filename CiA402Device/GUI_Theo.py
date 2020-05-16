@@ -39,7 +39,7 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		
 		#Buttons
 		quitButton = Button(self, text = 'Quit testing', command = self.quit)
-		quitButton.place(x = 90, y = 140)
+		quitButton.place(x = 350, y = 290)
 		#Position
 		p_b = Button(self, text = 'Get Position', command = self.position)
 		p_b.place(x = 10, y = 80)
@@ -48,27 +48,27 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		v_b.place(x = 150, y = 80)
 		#Mean Velocity
 		mv_b = Button(self, text = 'Get Mean Velocity', command = self.mean_velocity)
-		mv_b.place(x = 290, y = 80)
+		mv_b.place(x = 275, y = 80)
 		#Get Amps
 		amps_b = Button(self, text = 'Get Amps', command = self.amps)
-		amps_b.place(x = 330, y = 80)
+		amps_b.place(x = 450, y = 80)
 		#Get filtered amps
-		amps_b = Button(self, text = 'Get filtered amps', command = self.filtered_amps)
-		amps_b.place(x = 470, y = 80)
+		famps_b = Button(self, text = 'Get filtered amps', command = self.filtered_amps)
+		famps_b.place(x = 570, y = 80)
 		#textboxes
 		self.velocity = Entry(self, width = 10)
 		self.velocity.place(x = 150, y = 50)
 		self.position = Entry(self, width = 10)
 		self.position.place(x = 10, y = 50)
-		self.meanvelocity = Entry(self, width = 10)
+		self.meanvelocity = Entry(self, width = 12)
 		self.meanvelocity.place(x = 290, y = 50)
 		self.amps = Entry(self, width = 10)
-		self.amps.place(x = 330, y = 50)
+		self.amps.place(x = 450, y = 50)
 		self.filtamps = Entry(self, width = 10)
-		self.filtamps.place(x = 470, y = 50)
+		self.filtamps.place(x = 570, y = 50)
 		#Labels 
 		lbl_title = Label(self, text='TheoÂ´s testing GUI', font=("Helvetica", 16))
-		lbl_title.place(x = 40, y = 0)
+		lbl_title.place(x = 280, y = 0)
 		lbl1 = Label(self, text = 'Position:')
 		lbl1.place(x = 10, y = 30)
 		lbl2 = Label(self, text = 'Velocity:')
@@ -76,9 +76,9 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		lbl3 = Label(self, text = 'Mean Velocity:')
 		lbl3.place(x = 290, y = 30)
 		lbl4 = Label(self, text = 'Amps:')
-		lbl4.place(x = 330, y = 30)
+		lbl4.place(x = 450, y = 30)
 		lbl5 = Label(self, text = 'Filtered amps:')
-		lbl5.place(x = 470, y = 30)
+		lbl5.place(x = 570, y = 30)
 
 	def position(self):
 		pm1 = SocketCanPort.SocketCanPort("can1")
@@ -132,7 +132,7 @@ Una vez creada la clase, creo el main para lanzar la GUI, a traves de una funciÃ
 
 def main():
 	root = Tk() 
-	root.geometry('500x360+300+150')
+	root.geometry('700x360+500+150')
 	app = gui_example()
 	root.mainloop()
 
