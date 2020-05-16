@@ -1,5 +1,6 @@
 from tkinter import Tk, BOTH
 from tkinter.ttk import *
+import SocketCanPort
 import Cia402device
 
 """
@@ -39,16 +40,32 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		#Buttons
 		quitButton = Button(self, text = 'Quit testing', command = self.quit)
 		quitButton.place(x = 90, y = 140)
+		#Position
 		p_b = Button(self, text = 'Get Position', command = self.position)
 		p_b.place(x = 10, y = 80)
+		#Velocity
 		v_b = Button(self, text = 'Get Velocity', command = self.velocity)
 		v_b.place(x = 150, y = 80)
+		#Mean Velocity
+		mv_b = Button(self, text = 'Get Mean Velocity', command = self.mean_velocity)
+		mv_b.place(x = 290, y = 80)
+		#Get Amps
+		amps_b = Button(self, text = 'Get Amps', command = self.amps)
+		amps_b.place(x = 330, y = 80)
+		#Get filtered amps
+		amps_b = Button(self, text = 'Get filtered amps', command = self.filtered_amps)
+		amps_b.place(x = 470, y = 80)
 		#textboxes
 		self.velocity = Entry(self, width = 10)
 		self.velocity.place(x = 150, y = 50)
 		self.position = Entry(self, width = 10)
 		self.position.place(x = 10, y = 50)
-
+		self.meanvelocity = Entry(self, width = 10)
+		self.meanvelocity.place(x = 290, y = 50)
+		self.amps = Entry(self, width = 10)
+		self.amps.place(x = 330, y = 50)
+		self.filtamps = Entry(self, width = 10)
+		self.filtamps.place(x = 470, y = 50)
 		#Labels 
 		lbl_title = Label(self, text='Theo´s testing GUI', font=("Helvetica", 16))
 		lbl_title.place(x = 40, y = 0)
@@ -56,24 +73,53 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		lbl1.place(x = 10, y = 30)
 		lbl2 = Label(self, text = 'Velocity:')
 		lbl2.place(x = 150, y = 30)
+		lbl3 = Label(self, text = 'Mean Velocity:')
+		lbl3.place(x = 290, y = 30)
+		lbl4 = Label(self, text = 'Amps:')
+		lbl4.place(x = 330, y = 30)
+		lbl5 = Label(self, text = 'Filtered amps:')
+		lbl5.place(x = 470, y = 30)
 
 	def position(self):
-		
-		cia402_pos = Cia402device.CiA402Device();
-		cia402_pos.Reset()
+		pm1 = SocketCanPort.SocketCanPort("can1")
+		cia402_pos = Cia402device.CiA402Device(31, pm1);
+		cia402_pos.Reset();
 		cia402_pos.SwitchOn();
-		pos = cia402_pos.GetPosition();		
+		pos = cia402_pos.GetPosition();	
 		self.position.insert(str(pos)) 
 		
 
 	def velocity(self):
-		cia402_vel = Cia402device.CiA402Device();
+		pm1 = SocketCanPort.SocketCanPort("can1")
+		cia402_vel = Cia402device.CiA402Device(31, pm1);
 		cia402_vel.Reset()
 		cia402_vel.SwitchOn();
 		vel = cia402_vel.GetVelocity();
 		self.velocity.insert(str(vel)) 
 		
-
+	def mean_velocity(self):
+		pm1 = SocketCanPort.SocketCanPort("can1")
+		cia402_mean_vel = Cia402device.CiA402Device(31, pm1);		
+		cia402_mean_vel.Reset()
+		cia402_mean_vel.SwitchOn();
+		mean_vel = cia402_mean_vel.GetMeanVelocity();		
+		self.meanvelocity.insert(str(mean_vel)) 
+		
+	def amps(self):
+		pm1 = SocketCanPort.SocketCanPort("can1")
+		cia402_amps = Cia402device.CiA402Device(31, pm1);
+		cia402_amps.Reset()
+		cia402_amps.SwitchOn();
+		amps = cia402_amps.GetAmps();
+		self.velocity.insert(str(amps)) 
+	
+	def filtered_amps(self):
+		pm1 = SocketCanPort.SocketCanPort("can1")
+		cia402_famp = Cia402device.CiA402Device(31, pm1);
+		cia402_famp.Reset()
+		cia402_famp.SwitchOn();
+		famp = cia402_vel.GetFilterdAmps();
+		self.velocity.insert(str(famp)) 
 
 """
 Una vez creada la clase, creo el main para lanzar la GUI, a traves de una función:
@@ -86,9 +132,8 @@ Una vez creada la clase, creo el main para lanzar la GUI, a traves de una funci�
 
 def main():
 	root = Tk() 
-	root.geometry('250x180+300+150')
+	root.geometry('500x360+300+150')
 	app = gui_example()
-
 	root.mainloop()
 
 main()
