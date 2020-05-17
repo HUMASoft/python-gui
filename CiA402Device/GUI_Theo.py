@@ -55,6 +55,13 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		#Get filtered amps
 		famps_b = Button(self, text = 'Get filtered amps', command = self.filtered_amps)
 		famps_b.place(x = 570, y = 80)
+		#Reset and Switch ON
+		resButton = Button(self, text = 'Switch On', command = self.SwitchOn)
+		resButton.place(x = 10, y = 190)
+		#Checkboxes
+		self.check_switch = Checkbutton(self, text = 'ON', variable = 'varswitch', onvalue = 'Yes', offvalue = 'No')
+		self.check_switch.place(x = 30, y = 150)		
+		
 		#textboxes
 		self.velocity = Entry(self, width = 10)
 		self.velocity.place(x = 150, y = 50)
@@ -79,6 +86,8 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		lbl4.place(x = 450, y = 30)
 		lbl5 = Label(self, text = 'Filtered amps:')
 		lbl5.place(x = 570, y = 30)
+		lblswitch = Label(self, text = 'Switched on:')
+		lblswitch.place(x = 10, y = 150)
 
 	def position(self):
 		pm1 = SocketCanPort.SocketCanPort("can1")
@@ -120,6 +129,14 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		cia402_famp.SwitchOn();
 		famp = cia402_vel.GetFilterdAmps();
 		self.velocity.insert(str(famp)) 
+
+	def SwitchOn(self):
+		pm1 = SocketCanPort.SocketCanPort("can1")
+		cia402_famp = Cia402device.CiA402Device(31, pm1);
+		cia402_famp.Reset()
+		cia402_famp.SwitchOn();
+		self.check_switch.varswitch = 'Yes'
+
 
 """
 Una vez creada la clase, creo el main para lanzar la GUI, a traves de una función:
