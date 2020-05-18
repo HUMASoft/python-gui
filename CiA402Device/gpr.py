@@ -59,7 +59,9 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		lbl1.place(x = 10, y = 130)
 
 	def position(self):
-		pos = self.port.get()
+		pos = int(self.port.get())
+		print(type(31))
+		print(type(pos))		
 		self.position.delete('0', END)		
 		self.position.insert(0, str(pos)) 
 		

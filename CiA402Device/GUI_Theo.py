@@ -75,8 +75,8 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		self.amps.place(x = 450, y = 150)
 		self.filtamps = Entry(self, width = 10)
 		self.filtamps.place(x = 570, y = 150)
-		self.port = Entry(self, width = 10)
-		self.port.place(x = 100, y = 70)
+		self.port = Entry(self, width = 3)
+		self.port.place(x = 200, y = 70)
 		#Labels 
 		lbl_title = Label(self, text='Theo´s testing GUI', font=("Helvetica", 16))
 		lbl_title.place(x = 280, y = 0)
@@ -92,7 +92,8 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		lbl5.place(x = 570, y = 130)
 		lblswitch = Label(self, text = 'Switched on:')
 		lblswitch.place(x = 10, y = 70)
-
+		lbl6 = Label(self, text = 'Port:')
+		lbl6.place(x = 150, y = 70)
 	def position(self):
 		pos = cia402.GetPosition();	
 		self.position.delete('0', END)
@@ -120,7 +121,9 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		self.filtamps.insert(0, str(famp)) 
 
 	def SwitchOn(self):
-		port = self.port.get()
+		port = int(self.port.get())
+		print(type(port))
+		print(type(31))
 		pm1 = SocketCanPort.SocketCanPort("can1")
 		cia402 = Cia402device.CiA402Device(port, pm1);
 		cia402.Reset()
