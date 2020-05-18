@@ -1,4 +1,4 @@
-from tkinter import Tk, BOTH, IntVar
+from tkinter import Tk, BOTH, IntVar, END
 from tkinter.ttk import *
 import SocketCanPort
 import Cia402device
