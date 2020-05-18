@@ -75,6 +75,8 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		self.amps.place(x = 450, y = 150)
 		self.filtamps = Entry(self, width = 10)
 		self.filtamps.place(x = 570, y = 150)
+		self.port = Entry(self, width = 10)
+		self.port.place(x = 100, y = 70)
 		#Labels 
 		lbl_title = Label(self, text='Theo´s testing GUI', font=("Helvetica", 16))
 		lbl_title.place(x = 280, y = 0)
@@ -93,28 +95,34 @@ class gui_example(Frame, Cia402device.CiA402Device):
 
 	def position(self):
 		pos = cia402.GetPosition();	
+		self.position.delete('0', END)
 		self.position.insert(0, str(pos)) 
 		
 
 	def velocity(self):
 		vel = cia402.GetVelocity();
+		self.velocity.delete('0', END)
 		self.velocity.insert(0, str(vel)) 
 		
 	def mean_velocity(self):
 		mean_vel = cia402.GetMeanVelocity();		
+		self.meanvelocity.delete('0', END)
 		self.meanvelocity.insert(0, str(mean_vel)) 
 		
 	def amps(self):
 		amps = cia402.GetAmps();
+		self.amps.delete('0', END)
 		self.amps.insert(0, str(amps)) 
 	
 	def filtered_amps(self):
 		famp = cia402.GetFilterdAmps();
+		self.filtamps.delete('0', END)
 		self.filtamps.insert(0, str(famp)) 
 
 	def SwitchOn(self):
+		port = self.port.get()
 		pm1 = SocketCanPort.SocketCanPort("can1")
-		cia402 = Cia402device.CiA402Device(31, pm1);
+		cia402 = Cia402device.CiA402Device(port, pm1);
 		cia402.Reset()
 		cia402.SwitchOn();
 		self.var1.set(True)
