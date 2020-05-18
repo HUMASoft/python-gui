@@ -1,4 +1,4 @@
-from tkinter import Tk, BOTH, IntVar
+from tkinter import Tk, BOTH, IntVar, END
 from tkinter.ttk import *
 import SocketCanPort
 import Cia402device
@@ -50,7 +50,8 @@ class gui_example(Frame, Cia402device.CiA402Device):
 
 		self.position = Entry(self, width = 10)
 		self.position.place(x = 10, y = 150)
-
+		self.port = Entry(self, width = 10)
+		self.port.place(x = 10, y = 100)
 		#Labels 
 		lbl_title = Label(self, text='Theo´s testing GUI', font=("Helvetica", 16))
 		lbl_title.place(x = 280, y = 0)
@@ -58,8 +59,8 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		lbl1.place(x = 10, y = 130)
 
 	def position(self):
-		pos = 3.14
-		
+		pos = self.port.get()
+		self.position.delete('0', END)		
 		self.position.insert(0, str(pos)) 
 		
 
