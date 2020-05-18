@@ -136,7 +136,7 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		# cia402_famp = Cia402device.CiA402Device(31, pm1);
 		# cia402_famp.Reset()
 		# cia402_famp.SwitchOn();
-		self.check_switch.set('ON')
+		self.check_switch.var1.set('ON')
 
 
 """
