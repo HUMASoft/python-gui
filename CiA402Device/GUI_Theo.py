@@ -1,4 +1,4 @@
-from tkinter import Tk, BOTH
+from tkinter import Tk, BOTH, IntVar
 from tkinter.ttk import *
 import SocketCanPort
 import Cia402device
@@ -39,56 +39,57 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		
 		#Buttons
 		quitButton = Button(self, text = 'Quit testing', command = self.quit)
-		quitButton.place(x = 350, y = 290)
+		quitButton.place(x = 300, y = 290)
 		#Position
 		p_b = Button(self, text = 'Get Position', command = self.position)
-		p_b.place(x = 10, y = 80)
+		p_b.place(x = 10, y = 180)
 		#Velocity
 		v_b = Button(self, text = 'Get Velocity', command = self.velocity)
-		v_b.place(x = 150, y = 80)
+		v_b.place(x = 150, y = 180)
 		#Mean Velocity
 		mv_b = Button(self, text = 'Get Mean Velocity', command = self.mean_velocity)
-		mv_b.place(x = 275, y = 80)
+		mv_b.place(x = 275, y = 180)
 		#Get Amps
 		amps_b = Button(self, text = 'Get Amps', command = self.amps)
-		amps_b.place(x = 450, y = 80)
+		amps_b.place(x = 450, y = 180)
 		#Get filtered amps
 		famps_b = Button(self, text = 'Get filtered amps', command = self.filtered_amps)
-		famps_b.place(x = 570, y = 80)
+		famps_b.place(x = 570, y = 180)
 		#Reset and Switch ON
 		resButton = Button(self, text = 'Switch On', command = self.SwitchOn)
-		resButton.place(x = 10, y = 190)
+		resButton.place(x = 10, y =40)
 		#Checkboxes
-		self.check_switch = Checkbutton(self, text = 'ON',  state = NORMAL)
-		self.check_switch.place(x = 30, y = 150)		
+		self.var1 = IntVar()		
+		self.check_switch = Checkbutton(self, variable = self.var1)
+		self.check_switch.place(x = 100, y = 70)		
 		
         
 		#textboxes
 		self.velocity = Entry(self, width = 10)
-		self.velocity.place(x = 150, y = 50)
+		self.velocity.place(x = 150, y = 150)
 		self.position = Entry(self, width = 10)
-		self.position.place(x = 10, y = 50)
+		self.position.place(x = 10, y = 150)
 		self.meanvelocity = Entry(self, width = 12)
-		self.meanvelocity.place(x = 290, y = 50)
+		self.meanvelocity.place(x = 290, y = 150)
 		self.amps = Entry(self, width = 10)
-		self.amps.place(x = 450, y = 50)
+		self.amps.place(x = 450, y = 150)
 		self.filtamps = Entry(self, width = 10)
-		self.filtamps.place(x = 570, y = 50)
+		self.filtamps.place(x = 570, y = 150)
 		#Labels 
 		lbl_title = Label(self, text='TheoÂ´s testing GUI', font=("Helvetica", 16))
 		lbl_title.place(x = 280, y = 0)
 		lbl1 = Label(self, text = 'Position:')
-		lbl1.place(x = 10, y = 30)
+		lbl1.place(x = 10, y = 130)
 		lbl2 = Label(self, text = 'Velocity:')
-		lbl2.place(x = 150, y = 30)
+		lbl2.place(x = 150, y = 130)
 		lbl3 = Label(self, text = 'Mean Velocity:')
-		lbl3.place(x = 290, y = 30)
+		lbl3.place(x = 290, y = 130)
 		lbl4 = Label(self, text = 'Amps:')
-		lbl4.place(x = 450, y = 30)
+		lbl4.place(x = 450, y = 130)
 		lbl5 = Label(self, text = 'Filtered amps:')
-		lbl5.place(x = 570, y = 30)
+		lbl5.place(x = 570, y = 130)
 		lblswitch = Label(self, text = 'Switched on:')
-		lblswitch.place(x = 10, y = 150)
+		lblswitch.place(x = 10, y = 70)
 
 	def position(self):
 		pm1 = SocketCanPort.SocketCanPort("can1")
@@ -132,11 +133,11 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		self.velocity.insert(str(famp)) 
 
 	def SwitchOn(self):
-		# pm1 = SocketCanPort.SocketCanPort("can1")
-		# cia402_famp = Cia402device.CiA402Device(31, pm1);
-		# cia402_famp.Reset()
-		# cia402_famp.SwitchOn();
-		self.check_switch.toggle()
+		pm1 = SocketCanPort.SocketCanPort("can1")
+		cia402_switch = Cia402device.CiA402Device(31, pm1);
+		cia402_switch.Reset()
+		cia402_switch.SwitchOn();
+		self.var1.set(True)
 
 
 """
@@ -151,7 +152,7 @@ Una vez creada la clase, creo el main para lanzar la GUI, a traves de una funciÃ
 def main():
 	root = Tk() 
 	root.geometry('700x360+500+150')
-	#var1 = IntVar()
+	
 	app = gui_example()
 	
 	root.mainloop()
