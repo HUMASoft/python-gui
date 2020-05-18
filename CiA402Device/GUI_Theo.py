@@ -93,7 +93,7 @@ class gui_example(Frame, Cia402device.CiA402Device):
 
 	def position(self):
 		pos = cia402.GetPosition();	
-		self.position.insert(str(pos)) 
+		self.position.insert(0, str(pos)) 
 		
 
 	def velocity(self):
@@ -106,11 +106,11 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		
 	def amps(self):
 		amps = cia402.GetAmps();
-		self.velocity.insert(0, str(amps)) 
+		self.amps.insert(0, str(amps)) 
 	
 	def filtered_amps(self):
 		famp = cia402.GetFilterdAmps();
-		self.velocity.insert(0, str(famp)) 
+		self.filtamps.insert(0, str(famp)) 
 
 	def SwitchOn(self):
 		pm1 = SocketCanPort.SocketCanPort("can1")
