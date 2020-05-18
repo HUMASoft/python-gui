@@ -92,51 +92,31 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		lblswitch.place(x = 10, y = 70)
 
 	def position(self):
-		pm1 = SocketCanPort.SocketCanPort("can1")
-		cia402_pos = Cia402device.CiA402Device(31, pm1);
-		cia402_pos.Reset();
-		cia402_pos.SwitchOn();
-		pos = cia402_pos.GetPosition();	
+		pos = cia402.GetPosition();	
 		self.position.insert(str(pos)) 
 		
 
 	def velocity(self):
-		pm1 = SocketCanPort.SocketCanPort("can1")
-		cia402_vel = Cia402device.CiA402Device(31, pm1);
-		cia402_vel.Reset()
-		cia402_vel.SwitchOn();
-		vel = cia402_vel.GetVelocity();
-		self.velocity.insert(str(vel)) 
+		vel = cia402.GetVelocity();
+		self.velocity.insert(0, str(vel)) 
 		
 	def mean_velocity(self):
-		pm1 = SocketCanPort.SocketCanPort("can1")
-		cia402_mean_vel = Cia402device.CiA402Device(31, pm1);		
-		cia402_mean_vel.Reset()
-		cia402_mean_vel.SwitchOn();
-		mean_vel = cia402_mean_vel.GetMeanVelocity();		
-		self.meanvelocity.insert(str(mean_vel)) 
+		mean_vel = cia402.GetMeanVelocity();		
+		self.meanvelocity.insert(0, str(mean_vel)) 
 		
 	def amps(self):
-		pm1 = SocketCanPort.SocketCanPort("can1")
-		cia402_amps = Cia402device.CiA402Device(31, pm1);
-		cia402_amps.Reset()
-		cia402_amps.SwitchOn();
-		amps = cia402_amps.GetAmps();
-		self.velocity.insert(str(amps)) 
+		amps = cia402.GetAmps();
+		self.velocity.insert(0, str(amps)) 
 	
 	def filtered_amps(self):
-		pm1 = SocketCanPort.SocketCanPort("can1")
-		cia402_famp = Cia402device.CiA402Device(31, pm1);
-		cia402_famp.Reset()
-		cia402_famp.SwitchOn();
-		famp = cia402_vel.GetFilterdAmps();
-		self.velocity.insert(str(famp)) 
+		famp = cia402.GetFilterdAmps();
+		self.velocity.insert(0, str(famp)) 
 
 	def SwitchOn(self):
 		pm1 = SocketCanPort.SocketCanPort("can1")
-		cia402_switch = Cia402device.CiA402Device(31, pm1);
-		cia402_switch.Reset()
-		cia402_switch.SwitchOn();
+		cia402 = Cia402device.CiA402Device(31, pm1);
+		cia402.Reset()
+		cia402.SwitchOn();
 		self.var1.set(True)
 
 

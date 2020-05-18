@@ -59,7 +59,8 @@ class gui_example(Frame, Cia402device.CiA402Device):
 
 	def position(self):
 		pos = 3.14
-		self.position.insert(str(pos)) 
+		
+		self.position.insert(0, str(pos)) 
 		
 
 
