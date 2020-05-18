@@ -59,7 +59,7 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		resButton = Button(self, text = 'Switch On', command = self.SwitchOn)
 		resButton.place(x = 10, y = 190)
 		#Checkboxes
-		self.check_switch = Checkbutton(self, text = 'ON',  variable=var1, onvalue = 'ON' , offvalue = 'OFF', command=self.SwitchOn)
+		self.check_switch = Checkbutton(self, text = 'ON',  state = NORMAL)
 		self.check_switch.place(x = 30, y = 150)		
 		
         
@@ -136,7 +136,7 @@ class gui_example(Frame, Cia402device.CiA402Device):
 		# cia402_famp = Cia402device.CiA402Device(31, pm1);
 		# cia402_famp.Reset()
 		# cia402_famp.SwitchOn();
-		self.check_switch.var1.set('ON')
+		self.check_switch.toggle()
 
 
 """
@@ -151,7 +151,9 @@ Una vez creada la clase, creo el main para lanzar la GUI, a traves de una funci√
 def main():
 	root = Tk() 
 	root.geometry('700x360+500+150')
+	#var1 = IntVar()
 	app = gui_example()
+	
 	root.mainloop()
 
 main()
