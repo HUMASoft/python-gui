@@ -23,6 +23,11 @@ initUI:
 	- Creo botones con Button() 
 """
 
+class MyClass:
+	"This is my second class"
+	a = 10
+	def func(self):
+		return a
 
 
 
@@ -60,10 +65,17 @@ class gui_example(Frame, Cia402device.CiA402Device):
 
 	def position(self):
 		pos = int(self.port.get())
-		print(type(31))
+		posit = cia402.func()
+		print(posit)
 		print(type(pos))		
 		self.position.delete('0', END)		
-		self.position.insert(0, str(pos)) 
+		self.position.insert(0, str(posit)) 
+
+	def SwitchOn(self):
+		port = int(self.port.get())
+		cia402 = Myclass()
+
+
 		
 
 
