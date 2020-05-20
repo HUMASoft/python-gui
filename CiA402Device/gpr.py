@@ -30,23 +30,33 @@ initUI:
 class Master_Window(Frame):
 	def __init__(self):
 		super().__init__()
-		self.butnew('Open window 2', '2', Window2)
-		self.butnew('Open window 3', '3', Window3)
+
 		self.Style = Style()
 		self.Style.theme_use('default')
 		self.master.title('Theo´s testing GUI')
 		self.pack(fill = BOTH, expand = 1)
 		#Buttons
+
+		#Windows
+		bw2 = Button(self, text = 'Open window 2', command = lambda: self.new_window(Window2))
+		bw2.place(x = 150, y = 180)
+		bw3 = Button(self, text = 'Open window 3', command = lambda: self.new_window(Window3))
+		bw3.place(x = 150, y = 50)
+
+		#Quit
 		quitButton = Button(self, text = 'Quit testing', command = self.quit)
 		quitButton.place(x = 300, y = 290)
+
 		#Position
 		p_b = Button(self, text = 'Get Position', command = self.position)
 		p_b.place(x = 10, y = 180)
+
 		#textboxes
 		self.position = Entry(self, width = 10)
 		self.position.place(x = 10, y = 150)
 		self.port = Entry(self, width = 10)
 		self.port.place(x = 10, y = 100)
+		
 		#Labels 
 		lbl_title = Label(self, text='Theo´s testing GUI', font=("Helvetica", 16))
 		lbl_title.place(x = 280, y = 0)
@@ -58,21 +68,17 @@ class Master_Window(Frame):
 		self.position.delete('0', END)		
 		self.position.insert(0, str(pos)) 
 
-	def SwitchOn(self):
-		port = int(self.port.get())
 
-	def butnew(self, text, number, _class):
-		tkinter.Button(self, text = text, command = lambda: self.new_window(number, _class)).pack()	
-
-	def new_window(self, number, _class):
-			self.new = tkinter.Toplevel(self.master)
-			_class(self.new, number)
+	def new_window(self, _class):
+			self.new = tkinter.Toplevel(self)
+			_class(self.new)
 
 	
 	
 
 class Window2:
-	def __init__(self, master, number):
+	def __init__(self):
+		super().__init__()
 		self.Style = Style()
 		self.Style.theme_use('default')
 		self.master.title('Theo´s window2')
@@ -80,7 +86,8 @@ class Window2:
 		self.pack(fill = BOTH, expand = 1)
 
 class Window3:
-	def __init__(self, master, number):
+	def __init__(self):
+		super().__init__()
 		self.Style = Style()
 		self.Style.theme_use('default')
 		self.master.title('Theo´s window2')
