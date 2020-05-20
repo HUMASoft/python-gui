@@ -1,7 +1,7 @@
-from tkinter import Tk, BOTH, IntVar, END
+import tkinter
+from tkinter import * 
 from tkinter.ttk import *
-import SocketCanPort
-import Cia402device
+
 
 """
 Import clase Tkinter:
@@ -27,28 +27,22 @@ initUI:
 
 
 
-class gui_example(Frame, Cia402device.CiA402Device):
+class Master_Window(Frame):
 	def __init__(self):
 		super().__init__()
-		self.initUI()
-
-	def initUI(self):
+		self.butnew('Open window 2', '2', Window2)
+		self.butnew('Open window 3', '3', Window3)
 		self.Style = Style()
 		self.Style.theme_use('default')
 		self.master.title('Theo´s testing GUI')
 		self.pack(fill = BOTH, expand = 1)
-		
 		#Buttons
 		quitButton = Button(self, text = 'Quit testing', command = self.quit)
 		quitButton.place(x = 300, y = 290)
 		#Position
 		p_b = Button(self, text = 'Get Position', command = self.position)
 		p_b.place(x = 10, y = 180)
-
-		
-        
 		#textboxes
-
 		self.position = Entry(self, width = 10)
 		self.position.place(x = 10, y = 150)
 		self.port = Entry(self, width = 10)
@@ -67,6 +61,33 @@ class gui_example(Frame, Cia402device.CiA402Device):
 	def SwitchOn(self):
 		port = int(self.port.get())
 
+	def butnew(self, text, number, _class):
+		tkinter.Button(self, text = text, command = lambda: self.new_window(number, _class)).pack()	
+
+	def new_window(self, number, _class):
+			self.new = tkinter.Toplevel(self.master)
+			_class(self.new, number)
+
+	
+	
+
+class Window2:
+	def __init__(self, master, number):
+		self.Style = Style()
+		self.Style.theme_use('default')
+		self.master.title('Theo´s window2')
+		self.geometry('400x400+200+200')
+		self.pack(fill = BOTH, expand = 1)
+
+class Window3:
+	def __init__(self, master, number):
+		self.Style = Style()
+		self.Style.theme_use('default')
+		self.master.title('Theo´s window2')
+		self.geometry('400x400+200+200')
+		self.pack(fill = BOTH, expand = 1)
+
+
 
 		
 
@@ -82,11 +103,9 @@ Una vez creada la clase, creo el main para lanzar la GUI, a traves de una funci�
 
 
 def main():
-	root = Tk() 
+	root = tkinter.Tk() 
 	root.geometry('700x360+500+150')
-	
-	app = gui_example()
-	
+	app = Master_Window()
 	root.mainloop()
 
 main()
