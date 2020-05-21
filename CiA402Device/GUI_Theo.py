@@ -37,10 +37,10 @@ class Master_Window(Cia402device.CiA402Device):
         self.frame.pack(fill = BOTH, expand = 1)
         #Buttons
         #Button to open window 2
-        self.bw2 = Button(self.frame, text = 'Open control window', width = 15, command = self.new_window2)
+        self.bw2 = Button(self.frame, text = 'Open control window', width = 20, command = self.new_window2)
         self.bw2.place(x = 250, y = 130)
         #Button to open window 3
-        self.bw3 = Button(self.frame, text = 'Open error window', width = 15, command = self.new_window3)
+        self.bw3 = Button(self.frame, text = 'Open error window', width = 20, command = self.new_window3)
         self.bw3.place(x = 250, y = 180)
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit GUI', width = 15, command = self.master.quit)
