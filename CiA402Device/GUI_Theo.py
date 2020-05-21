@@ -33,18 +33,45 @@ class Master_Window(Cia402device.CiA402Device):
         self.Style = Style()
         self.Style.theme_use('default')
         self.master.title('Theo´s testing GUI')
-        self.master.geometry('700x360+500+150')
+        self.master.geometry('450x280+500+150')
         self.frame.pack(fill = BOTH, expand = 1)
         #Buttons
         #Button to open window 2
-        self.bw2 = Button(self.frame, text = 'Open control window', width = 25, command = self.new_window2)
-        self.bw2.place(x = 300, y = 180)
+        self.bw2 = Button(self.frame, text = 'Open control window', width = 15, command = self.new_window2)
+        self.bw2.place(x = 250, y = 130)
         #Button to open window 3
-        self.bw3 = Button(self.frame, text = 'Open error window', width = 25, command = self.new_window3)
-        self.bw3.place(x = 10, y = 180)
+        self.bw3 = Button(self.frame, text = 'Open error window', width = 15, command = self.new_window3)
+        self.bw3.place(x = 250, y = 180)
         #Quit
-        self.quitButton = Button(self.frame, text = 'Quit testing', width = 25, command = self.master.quit)
-        self.quitButton.place(x = 200, y = 290)
+        self.quitButton = Button(self.frame, text = 'Quit GUI', width = 15, command = self.master.quit)
+        self.quitButton.place(x = 250, y = 230)
+        #Reset and Switch ON
+        self.resButton = Button(self.frame, text = 'Switch On', command = self.SwitchOn)
+        self.resButton.place(x = 300, y =30)
+        self.offButton = Button(self.frame, text = 'Switch Off', command = self.SwitchOff)
+        self.offButton.place(x = 300, y =60)
+        #Label
+        lbl_title = Label(self.frame, text='Please, to start testing, switch on Teo:')
+        lbl_title.place(x = 0, y = 30)
+        lbl_off = Label(self.frame, text='Please, to stop testing, turn off Teo:')
+        lbl_off.place(x = 0, y = 60)
+        lbl = Label(self.frame, text='Once Teo is ON, open the testing window you want to use:')
+        lbl.place(x = 0, y = 100)
+        lblq = Label(self.frame, text='Once Teo is OFF, to quit the GUI app:')
+        lblq.place(x = 0, y = 235)
+        lblport = Label(self.frame, text='Before switching Teo ON entry the comm port:')
+        lblport.place(x = 0, y = 0)
+        #Entries:
+        self.port = Entry(self.frame, width = 3)
+        self.port.place(x = 310, y = 0)
+        #Checkboxes
+        self.var1 = IntVar()        
+        self.check_switchon = Checkbutton(self.frame,  variable = self.var1)
+        self.check_switchon.place(x = 400, y = 30)
+        self.var2 = IntVar()        
+        self.check_switchoff = Checkbutton(self.frame, variable = self.var2)
+        self.check_switchoff.place(x = 400, y = 60)
+
 
     def new_window2(self):
         self.newWindow2 = tk.Toplevel(self.master)
@@ -52,6 +79,23 @@ class Master_Window(Cia402device.CiA402Device):
     def new_window3(self):
         self.newWindow3 = tk.Toplevel(self.master)
         self.app = Window3(self.newWindow3)
+
+    def SwitchOn(self):
+        port = int(self.port.get())
+        pm1 = SocketCanPort.SocketCanPort("can1")
+        cia402 = Cia402device.CiA402Device(port, pm1);
+        cia402.Reset()
+        cia402.SwitchOn();
+        self.var1.set(True)
+        self.var2.set(False)
+    def SwitchOff(self):
+        port = int(self.port.get())
+        pm1 = SocketCanPort.SocketCanPort("can1")
+        cia402 = Cia402device.CiA402Device(port, pm1);
+        cia402.SwitchOff();
+        self.var1.set(False)
+        self.var2.set(True)
+        self.port.delete('0', END)
 
 class Window2(Cia402device.CiA402Device):
     def __init__(self, master):
@@ -81,15 +125,6 @@ class Window2(Cia402device.CiA402Device):
         #Get filtered amps
         self.famps_b = Button(self.frame, text = 'Get filtered amps', command = self.filtered_amps)
         self.famps_b.place(x = 570, y = 180)
-        #Reset and Switch ON
-        self.resButton = Button(self.frame, text = 'Switch On', command = self.SwitchOn)
-        self.resButton.place(x = 10, y =40)
-        
-        #Checkboxes
-        self.var1 = IntVar()        
-        self.check_switch = Checkbutton(self.frame, variable = self.var1)
-        self.check_switch.place(x = 100, y = 70)
-
         #textboxes
         self.velocity = Entry(self.frame, width = 10)
         self.velocity.place(x = 150, y = 150)
@@ -101,10 +136,8 @@ class Window2(Cia402device.CiA402Device):
         self.amps.place(x = 450, y = 150)
         self.filtamps = Entry(self.frame, width = 10)
         self.filtamps.place(x = 570, y = 150)
-        self.port = Entry(self.frame, width = 3)
-        self.port.place(x = 200, y = 70)
         #Labels 
-        lbl_title = Label(self.frame, text='Theo´s testing GUI', font=("Helvetica", 16))
+        lbl_title = Label(self.frame, text='Control Window', font=("Helvetica", 16))
         lbl_title.place(x = 280, y = 0)
         lbl1 = Label(self.frame, text = 'Position:')
         lbl1.place(x = 10, y = 130)
@@ -116,10 +149,7 @@ class Window2(Cia402device.CiA402Device):
         lbl4.place(x = 450, y = 130)
         lbl5 = Label(self.frame, text = 'Filtered amps:')
         lbl5.place(x = 570, y = 130)
-        lblswitch = Label(self.frame, text = 'Switched on:')
-        lblswitch.place(x = 10, y = 70)
-        lbl6 = Label(self.frame, text = 'Port:')
-        lbl6.place(x = 150, y = 70)
+
 
     def position(self):
         port = int(self.port.get())
