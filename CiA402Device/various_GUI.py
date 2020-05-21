@@ -85,10 +85,10 @@ class Window2(Cia402device.CiA402Device):
         self.resButton = Button(self.frame, text = 'Switch On', command = self.SwitchOn)
         self.resButton.place(x = 10, y =40)
         
-        # #Checkboxes
-        # self.var1 = IntVar()        
-        # self.check_switch = Checkbutton(self, variable = self.var1)
-        # self.check_switch.place(x = 100, y = 70)
+        #Checkboxes
+        self.var1 = IntVar()        
+        self.check_switch = Checkbutton(self.frame, variable = self.var1)
+        self.check_switch.place(x = 100, y = 70)
 
         #textboxes
         self.velocity = Entry(self.frame, width = 10)
