@@ -1,118 +1,67 @@
-import tkinter
-from tkinter import * 
-from tkinter.ttk import *
+import tkinter as tk
 
-
-"""
-Import clase Tkinter:
-	Tk class: Crea ventana
-	Frame class: Clase raiz que contiene los widgets necesarios, lo hereda la clase GUI
-"""
-
-
-
-""" 
-A continuación creo la clase de la GUI, que hereda los widgets de Frame.
-Pasos:
-__init__:
-	- __init__ es el constructor de la clase de la gui, y llamamos a super().__init__(), que es el constructor de Frame. 
-	- Con self.initUI() delegamos la creación de la interfaz a la clase heredada.
-initUI:
-	- con .master.title() damos titulo a la ventana. Al usar master doy acceso a Tk
-	- .pack es uno de los organizadores de la ventana. Organiza la ventana en cuadrados 
-	- Creo botones con Button() 
-"""
-
-
-
-
-
-class Master_Window(Frame):
-	def __init__(self):
-		super().__init__()
-
+class Master_Window:
+	def __init__(self, master):
+      	self.master = master
+        self.frame = tk.Frame(self.master)
 		self.Style = Style()
 		self.Style.theme_use('default')
 		self.master.title('Theo´s testing GUI')
 		self.pack(fill = BOTH, expand = 1)
+		
 		#Buttons
-
 		#Windows
-		bw2 = Button(self, text = 'Open window 2', command = lambda: self.new_window(Window2))
-		bw2.place(x = 150, y = 180)
-		bw3 = Button(self, text = 'Open window 3', command = lambda: self.new_window(Window3))
-		bw3.place(x = 150, y = 50)
+		self.bw2 = tk.Button(self.frame, text = 'Open window 2', width = 25, command = self.new_window)
+		self.bw2.place(x = 150, y = 180)
 
 		#Quit
-		quitButton = Button(self, text = 'Quit testing', command = self.quit)
-		quitButton.place(x = 300, y = 290)
+		self.quitButton = Button(self.frame, text = 'Quit testing', command = self.quit)
+		self.quitButton.place(x = 300, y = 290)
 
 		#Position
-		p_b = Button(self, text = 'Get Position', command = self.position)
-		p_b.place(x = 10, y = 180)
+		self.p_b = Button(self.frame, text = 'Get Position', command = self.position)
+		self.p_b.place(x = 10, y = 180)
 
 		#textboxes
-		self.position = Entry(self, width = 10)
+		self.position = Entry(self.frame, width = 10)
 		self.position.place(x = 10, y = 150)
-		self.port = Entry(self, width = 10)
+		self.port = Entry(self.frame, width = 10)
 		self.port.place(x = 10, y = 100)
 		
 		#Labels 
-		lbl_title = Label(self, text='Theo´s testing GUI', font=("Helvetica", 16))
-		lbl_title.place(x = 280, y = 0)
-		lbl1 = Label(self, text = 'Position:')
-		lbl1.place(x = 10, y = 130)
-
+		self.lbl_title = Label(self.frame, text='Theo´s testing GUI', font=("Helvetica", 16))
+		self.lbl_title.place(x = 280, y = 0)
+		self.lbl1 = Label(self.frame, text = 'Position:')
+		self.lbl1.place(x = 10, y = 130)
+	
 	def position(self):
 		pos = int(self.port.get())
 		self.position.delete('0', END)		
 		self.position.insert(0, str(pos)) 
 
-
-	def new_window(self, _class):
-			self.new = tkinter.Toplevel(self)
-			_class(self.new)
-
-	
-	
+    def new_window(self):
+        self.newWindow = tk.Toplevel(self.master)
+        self.app = Window2(self.newWindow)
 
 class Window2:
-	def __init__(self):
-		super().__init__()
+	def __init__(self, master):
+        self.master = master
+        self.frame = tk.Frame(self.master)
 		self.Style = Style()
-		self.Style.theme_use('default')
+        self.Style.theme_use('default')
 		self.master.title('Theo´s window2')
-		self.geometry('400x400+200+200')
-		self.pack(fill = BOTH, expand = 1)
-
-class Window3:
-	def __init__(self):
-		super().__init__()
-		self.Style = Style()
-		self.Style.theme_use('default')
-		self.master.title('Theo´s window2')
-		self.geometry('400x400+200+200')
-		self.pack(fill = BOTH, expand = 1)
-
-
-
-		
-
-
-
-"""
-Una vez creada la clase, creo el main para lanzar la GUI, a traves de una función:
-	1º Creo la root window, que es la ventana de la aplicación. Debe ser la primera en ser creada siempre
-	2º Defino la geometria: Anchura x Altura + posición x + posición y (en pantalla)
-	3º Instancio la clase de la GUI
-	4º Lanzo el mainloop, siempre es el paso final, o el refresco de pantalla
-"""
-
+		self.master.geometry('400x400+200+200')
+		lbl_title = Label(self, text='Theo´s testing GUI', font=("Helvetica", 16))
+		lbl_title.place(x = 0, y = 0)
+		self.qButton = tk.Button(self.frame, text = 'Quit', width = 25, command = self.close_windows)
+        self.qButton.pack()
+    def close_windows(self):
+        self.master.destroy()
 
 def main():
-	root = tkinter.Tk() 
+	root = tk.Tk() 
 	root.geometry('700x360+500+150')
-	app = Master_Window()
+	app = Master_Window(root)
 	root.mainloop()
 
 main()
