@@ -113,19 +113,19 @@ class Window2(Cia402device.CiA402Device):
         self.quitButton.place(x = 300, y = 290)
         #Position
         self.p_b = Button(self.frame, text = 'Get Position', command = self.position)
-        self.p_b.place(x = 450, y = 50)
+        self.p_b.place(x = 430, y = 40)
         #Velocity
         self.v_b = Button(self.frame, text = 'Get Velocity', command = self.velocity)
-        self.v_b.place(x = 450, y = 100)
+        self.v_b.place(x = 430, y = 90)
         #Mean Velocity
         self.mv_b = Button(self.frame, text = 'Get Mean Velocity', command = self.mean_velocity)
-        self.mv_b.place(x = 450, y = 150)
+        self.mv_b.place(x = 430, y = 140)
         #Get Amps
         self.amps_b = Button(self.frame, text = 'Get Amps', command = self.amps)
-        self.amps_b.place(x = 450, y = 200)
+        self.amps_b.place(x = 430, y = 190)
         #Get filtered amps
         self.famps_b = Button(self.frame, text = 'Get filtered amps', command = self.filtered_amps)
-        self.famps_b.place(x = 450, y = 250)
+        self.famps_b.place(x = 430, y = 240)
         #textboxes
         self.velocity = Entry(self.frame, width = 10)
         self.velocity.place(x = 570, y = 100)
@@ -149,7 +149,7 @@ class Window2(Cia402device.CiA402Device):
         lbl5 = Label(self.frame, text = 'Filtered amps:')
         lbl5.place(x = 570, y = 230)
         lbl6 = Label(self.frame, text = 'Simulation data:')
-        lbl6.place(x = 450, y = 30)
+        lbl6.place(x = 450, y = 10)
 
     def position(self):
         port = porter
