@@ -81,9 +81,10 @@ class Master_Window(Cia402device.CiA402Device):
         self.app = Window3(self.newWindow3)
 
     def SwitchOn(self):
-        port = int(self.port.get())
+        global porter
+        porter = int(self.port.get())
         pm1 = SocketCanPort.SocketCanPort("can1")
-        cia402 = Cia402device.CiA402Device(port, pm1);
+        cia402 = Cia402device.CiA402Device(porter, pm1);
         cia402.Reset()
         cia402.SwitchOn();
         self.var1.set(True)
@@ -152,7 +153,8 @@ class Window2(Cia402device.CiA402Device):
 
 
     def position(self):
-        port = int(self.port.get())
+        port = porter
+        print(port)
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
         pos = cia402.GetPosition(); 
@@ -161,7 +163,7 @@ class Window2(Cia402device.CiA402Device):
         
 
     def velocity(self):
-        port = int(self.port.get())
+        port = porter
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
         vel = cia402.GetVelocity();
@@ -169,7 +171,7 @@ class Window2(Cia402device.CiA402Device):
         self.velocity.insert(0, str(vel)) 
         
     def mean_velocity(self):
-        port = int(self.port.get())
+        port = porter
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
         mean_vel = cia402.GetMeanVelocity();        
@@ -177,7 +179,7 @@ class Window2(Cia402device.CiA402Device):
         self.meanvelocity.insert(0, str(mean_vel)) 
         
     def amps(self):
-        port = int(self.port.get())
+        port = porter
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
         amps = cia402.GetAmps();
@@ -185,7 +187,7 @@ class Window2(Cia402device.CiA402Device):
         self.amps.insert(0, str(amps)) 
     
     def filtered_amps(self):
-        port = int(self.port.get())
+        port = porter
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
         famp = cia402.GetFilterdAmps();
@@ -193,7 +195,7 @@ class Window2(Cia402device.CiA402Device):
         self.filtamps.insert(0, str(famp)) 
 
     def SwitchOn(self):
-        port = int(self.port.get())
+        port = porter
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
         cia402.Reset()

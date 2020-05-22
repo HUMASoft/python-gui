@@ -70,8 +70,10 @@ class Master_Window:
         self.var2 = IntVar()        
         self.check_switchoff = Checkbutton(self.frame, variable = self.var2)
         self.check_switchoff.place(x = 400, y = 60)
+
     def SwitchOn(self):
-        port = int(self.port.get())
+        global porter
+        porter = int(self.port.get())
         self.var1.set(True)
         self.var2.set(False)
     def SwitchOff(self):
@@ -85,7 +87,7 @@ class Master_Window:
         self.newWindow3 = tk.Toplevel(self.master)
         self.app = Window3(self.newWindow3)
 
-class Window2:
+class Window2(Master_Window):
     def __init__(self, master):
         self.master = master
         self.frame = Frame(self.master)
@@ -128,9 +130,8 @@ class Window2:
         lbl5.place(x = 570, y = 130)
 
 
-
     def get_position(self):
-        pos = int(self.port.get())
+        pos = porter
         self.position.delete('0', END)      
         self.position.insert(0, str(pos)) 
 
