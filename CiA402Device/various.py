@@ -126,10 +126,8 @@ class Window2:
         lbl4.place(x = 450, y = 130)
         lbl5 = Label(self.frame, text = 'Filtered amps:')
         lbl5.place(x = 570, y = 130)
-        lblswitch = Label(self.frame, text = 'Switched on:')
-        lblswitch.place(x = 10, y = 70)
-        lbl6 = Label(self.frame, text = 'Port:')
-        lbl6.place(x = 150, y = 70)
+
+
 
     def get_position(self):
         pos = int(self.port.get())
