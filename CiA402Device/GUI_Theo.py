@@ -154,7 +154,6 @@ class Window2(Cia402device.CiA402Device):
 
     def position(self):
         port = porter
-        print(port)
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
         pos = cia402.GetPosition(); 
