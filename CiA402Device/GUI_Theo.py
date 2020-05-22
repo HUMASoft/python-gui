@@ -113,44 +113,43 @@ class Window2(Cia402device.CiA402Device):
         self.quitButton.place(x = 300, y = 290)
         #Position
         self.p_b = Button(self.frame, text = 'Get Position', command = self.position)
-        self.p_b.place(x = 10, y = 180)
+        self.p_b.place(x = 450, y = 50)
         #Velocity
         self.v_b = Button(self.frame, text = 'Get Velocity', command = self.velocity)
-        self.v_b.place(x = 150, y = 180)
+        self.v_b.place(x = 450, y = 100)
         #Mean Velocity
         self.mv_b = Button(self.frame, text = 'Get Mean Velocity', command = self.mean_velocity)
-        self.mv_b.place(x = 275, y = 180)
+        self.mv_b.place(x = 450, y = 150)
         #Get Amps
         self.amps_b = Button(self.frame, text = 'Get Amps', command = self.amps)
-        self.amps_b.place(x = 450, y = 180)
+        self.amps_b.place(x = 450, y = 200)
         #Get filtered amps
         self.famps_b = Button(self.frame, text = 'Get filtered amps', command = self.filtered_amps)
-        self.famps_b.place(x = 570, y = 180)
+        self.famps_b.place(x = 450, y = 250)
         #textboxes
         self.velocity = Entry(self.frame, width = 10)
-        self.velocity.place(x = 150, y = 150)
+        self.velocity.place(x = 570, y = 100)
         self.position = Entry(self.frame, width = 10)
-        self.position.place(x = 10, y = 150)
-        self.meanvelocity = Entry(self.frame, width = 12)
-        self.meanvelocity.place(x = 290, y = 150)
+        self.position.place(x = 570, y = 50)
+        self.meanvelocity = Entry(self.frame, width = 10)
+        self.meanvelocity.place(x = 570, y = 150)
         self.amps = Entry(self.frame, width = 10)
-        self.amps.place(x = 450, y = 150)
+        self.amps.place(x = 570, y = 200)
         self.filtamps = Entry(self.frame, width = 10)
-        self.filtamps.place(x = 570, y = 150)
+        self.filtamps.place(x = 570, y = 250)
         #Labels 
-        lbl_title = Label(self.frame, text='Control Window', font=("Helvetica", 16))
-        lbl_title.place(x = 280, y = 0)
         lbl1 = Label(self.frame, text = 'Position:')
-        lbl1.place(x = 10, y = 130)
+        lbl1.place(x = 570, y = 30)
         lbl2 = Label(self.frame, text = 'Velocity:')
-        lbl2.place(x = 150, y = 130)
+        lbl2.place(x = 570, y = 80)
         lbl3 = Label(self.frame, text = 'Mean Velocity:')
-        lbl3.place(x = 290, y = 130)
+        lbl3.place(x = 570, y = 130)
         lbl4 = Label(self.frame, text = 'Amps:')
-        lbl4.place(x = 450, y = 130)
+        lbl4.place(x = 570, y = 180)
         lbl5 = Label(self.frame, text = 'Filtered amps:')
-        lbl5.place(x = 570, y = 130)
-
+        lbl5.place(x = 570, y = 230)
+        lbl6 = Label(self.frame, text = 'Simulation data:')
+        lbl6.place(x = 450, y = 30)
 
     def position(self):
         port = porter
