@@ -102,7 +102,15 @@ class Window2(Master_Window):
         #Position
         self.p_b = Button(self.frame, text = 'Get Position', command = self.get_position)
         self.p_b.place(x = 450, y = 50)
-     
+        #Set Velocity
+        self.svel = Button(self.frame, text = 'Set Velocity', command = self.bsvel)
+        self.svel.place(x = 100, y = 50)
+        #Set Position
+        self.svel = Button(self.frame, text = 'Set Position', command = self.bsvel)
+        self.svel.place(x = 100, y = 150)
+        #Set Torque
+        self.svel = Button(self.frame, text = 'Set Torque', command = self.bsvel)
+        self.svel.place(x = 100, y = 100)
         #textboxes
         self.velocity = Entry(self.frame, width = 10)
         self.velocity.place(x = 570, y = 100)
@@ -114,9 +122,13 @@ class Window2(Master_Window):
         self.amps.place(x = 570, y = 200)
         self.filtamps = Entry(self.frame, width = 10)
         self.filtamps.place(x = 570, y = 250)
-
+        self.setvel = Entry(self.frame, width = 10)
+        self.setvel.place(x = 0, y = 50)
+        self.settorq = Entry(self.frame, width = 10)
+        self.settorq.place(x = 0, y = 100)
+        self.setpos = Entry(self.frame, width = 10)
+        self.setpos.place(x = 0, y = 150)
         #Labels 
-
         lbl1 = Label(self.frame, text = 'Position:')
         lbl1.place(x = 570, y = 30)
         lbl2 = Label(self.frame, text = 'Velocity:')
@@ -128,13 +140,25 @@ class Window2(Master_Window):
         lbl5 = Label(self.frame, text = 'Filtered amps:')
         lbl5.place(x = 570, y = 230)
         lbl6 = Label(self.frame, text = 'Simulation data:')
-        lbl6.place(x = 450, y = 30)
+        lbl6.place(x = 450, y = 10)
+        lbl6 = Label(self.frame, text = 'Simulation setup data:')
+        lbl6.place(x = 30, y = 10)
+        lbl6 = Label(self.frame, text = 'Velocity:')
+        lbl6.place(x = 30, y = 30)
+        lbl6 = Label(self.frame, text = 'Torque:')
+        lbl6.place(x = 30, y = 80)
+        lbl6 = Label(self.frame, text = 'Position:')
+        lbl6.place(x = 30, y = 130)
 
 
     def get_position(self):
-        pos = porter
+        pos = 0
         self.position.delete('0', END)      
         self.position.insert(0, str(pos)) 
+
+    def bsvel(self):
+        veloc = float(self.setvel.get())
+        print(veloc)
 
 class Window3:
     def __init__(self, master):
