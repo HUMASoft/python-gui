@@ -112,21 +112,9 @@ class Window2(Cia402device.CiA402Device):
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit', command = self.master.destroy)
         self.quitButton.place(x = 300, y = 290)
-        #Position
-        self.p_b = Button(self.frame, text = 'Get Position', command = self.position)
-        self.p_b.place(x = 430, y = 40)
-        #Velocity
-        self.v_b = Button(self.frame, text = 'Get Velocity', command = self.velocity)
-        self.v_b.place(x = 430, y = 90)
-        #Mean Velocity
-        self.mv_b = Button(self.frame, text = 'Get Mean Velocity', command = self.mean_velocity)
-        self.mv_b.place(x = 430, y = 140)
-        #Get Amps
-        self.amps_b = Button(self.frame, text = 'Get Amps', command = self.amps)
-        self.amps_b.place(x = 430, y = 190)
-        #Get filtered amps
-        self.famps_b = Button(self.frame, text = 'Get filtered amps', command = self.filtered_amps)
-        self.famps_b.place(x = 430, y = 240)
+        #Stop/Start Simulation
+        self.ssb = Button(self.frame, text = 'Stop/Start Simulation', command = lambda : self.loop(True))
+        self.ssb.place(x = 410, y = 10)
         #Set Velocity
         self.svel = Button(self.frame, text = 'Set Velocity', command = self.bsvel)
         self.svel.place(x = 100, y = 130)
@@ -165,7 +153,7 @@ class Window2(Cia402device.CiA402Device):
         lbl5 = Label(self.frame, text = 'Filtered amps:')
         lbl5.place(x = 570, y = 230)
         lbl6 = Label(self.frame, text = 'Simulation data:')
-        lbl6.place(x = 430, y = 10)
+        lbl6.place(x = 410, y = 40)
         lbl7 = Label(self.frame, text = 'Simulation setup data:')
         lbl7.place(x = 0, y = 90)
         lbl8 = Label(self.frame, text = 'Velocity:')
@@ -277,6 +265,25 @@ class Window2(Cia402device.CiA402Device):
         cia402 = Cia402device.CiA402Device(port, pm1);
         cia402.Setup_Torque_Mode();
 
+    def loop(self, toggle=False):
+        global tracking_var
+        if toggle:
+            if tracking_var:
+                tracking_var = False
+            else:
+                tracking_var = True
+
+
+        if tracking_var:
+            
+            self.position()
+            self.velocity()
+            self.mean_velocity()
+            self.amps()
+            self.filtered_amps()
+
+            self.frame.after(1000, self.loop) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
+
 
 
 
@@ -299,4 +306,5 @@ def main():
     root.mainloop()
 
 
+tracking_var = False
 main()

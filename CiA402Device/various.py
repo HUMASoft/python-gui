@@ -99,9 +99,9 @@ class Window2(Master_Window):
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit', command = self.master.destroy)
         self.quitButton.place(x = 300, y = 290)
-        #Position
-        self.p_b = Button(self.frame, text = 'Get Position', command = self.get_position)
-        self.p_b.place(x = 450, y = 50)
+        #Stop/Start Simulation
+        self.ssb = Button(self.frame, text = 'Stop/Start Simulation', command = lambda : self.loop(True))
+        self.ssb.place(x = 410, y = 10)
         #Set Velocity
         self.svel = Button(self.frame, text = 'Set Velocity', command = self.get_position)
         self.svel.place(x = 100, y = 130)
@@ -140,7 +140,7 @@ class Window2(Master_Window):
         lbl5 = Label(self.frame, text = 'Filtered amps:')
         lbl5.place(x = 570, y = 230)
         lbl6 = Label(self.frame, text = 'Simulation data:')
-        lbl6.place(x = 450, y = 10)
+        lbl6.place(x = 410, y = 40)
         lbl7 = Label(self.frame, text = 'Simulation setup data:')
         lbl7.place(x = 0, y = 90)
         lbl8 = Label(self.frame, text = 'Velocity:')
@@ -164,11 +164,27 @@ class Window2(Master_Window):
         self.vart = IntVar()        
         self.check_t = Checkbutton(self.frame, text = 'Torque mode',  variable = self.vart, command = self.tormode)
         self.check_t.place(x = 0, y = 60)
+        #counter
+        self.cont = 0
 
     def get_position(self):
-        pos = 0
+        self.cont = self.cont + 1
+        pos = self.cont
         self.position.delete('0', END)      
         self.position.insert(0, str(pos)) 
+
+    def loop(self, toggle=False):
+        global tracking_var
+        if toggle:
+            if tracking_var:
+                tracking_var = False
+            else:
+                tracking_var = True
+
+
+        if tracking_var:
+            self.get_position()
+            self.frame.after(1000, self.loop) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
 
     def posmode(self):
         print('pos mode')
@@ -203,5 +219,5 @@ def main():
     app = Master_Window(root)
     root.mainloop()
 
-
+tracking_var = False
 main()
