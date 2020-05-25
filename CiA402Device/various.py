@@ -159,11 +159,16 @@ class Window2(Master_Window):
 
     def bsvel(self):
         veloc = float(self.setvel.get())
-    	e_al = example.Math()
-    	x = veloc
-    	y = veloc
-    	res = e_al.pi(x, y, 'can1')
-    	print(res)
+        e_al = example.Math()
+    	
+        x = veloc
+    	
+        y = veloc
+    	
+        res = e_al.pi(x, y, 'can1')
+    	
+        print(res)
+
 class Window3:
     def __init__(self, master):
         self.master = master
