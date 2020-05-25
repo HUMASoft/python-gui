@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter.ttk import *
 from tkinter import Tk, BOTH, IntVar, END
-import example
 
 """
 Import clase Tkinter:
@@ -104,14 +103,14 @@ class Window2(Master_Window):
         self.p_b = Button(self.frame, text = 'Get Position', command = self.get_position)
         self.p_b.place(x = 450, y = 50)
         #Set Velocity
-        self.svel = Button(self.frame, text = 'Set Velocity', command = self.bsvel)
-        self.svel.place(x = 100, y = 50)
+        self.svel = Button(self.frame, text = 'Set Velocity', command = self.get_position)
+        self.svel.place(x = 100, y = 130)
         #Set Position
-        self.svel = Button(self.frame, text = 'Set Position', command = self.bsvel)
-        self.svel.place(x = 100, y = 150)
+        self.svel = Button(self.frame, text = 'Set Position', command = self.get_position)
+        self.svel.place(x = 100, y = 230)
         #Set Torque
-        self.svel = Button(self.frame, text = 'Set Torque', command = self.bsvel)
-        self.svel.place(x = 100, y = 100)
+        self.svel = Button(self.frame, text = 'Set Torque', command = self.get_position)
+        self.svel.place(x = 100, y = 180)
         #textboxes
         self.velocity = Entry(self.frame, width = 10)
         self.velocity.place(x = 570, y = 100)
@@ -124,11 +123,11 @@ class Window2(Master_Window):
         self.filtamps = Entry(self.frame, width = 10)
         self.filtamps.place(x = 570, y = 250)
         self.setvel = Entry(self.frame, width = 10)
-        self.setvel.place(x = 0, y = 50)
+        self.setvel.place(x = 0, y = 130)
         self.settorq = Entry(self.frame, width = 10)
-        self.settorq.place(x = 0, y = 100)
+        self.settorq.place(x = 0, y = 180)
         self.setpos = Entry(self.frame, width = 10)
-        self.setpos.place(x = 0, y = 150)
+        self.setpos.place(x = 0, y = 230)
         #Labels 
         lbl1 = Label(self.frame, text = 'Position:')
         lbl1.place(x = 570, y = 30)
@@ -142,32 +141,49 @@ class Window2(Master_Window):
         lbl5.place(x = 570, y = 230)
         lbl6 = Label(self.frame, text = 'Simulation data:')
         lbl6.place(x = 450, y = 10)
-        lbl6 = Label(self.frame, text = 'Simulation setup data:')
-        lbl6.place(x = 30, y = 10)
-        lbl6 = Label(self.frame, text = 'Velocity:')
-        lbl6.place(x = 30, y = 30)
-        lbl6 = Label(self.frame, text = 'Torque:')
-        lbl6.place(x = 30, y = 80)
-        lbl6 = Label(self.frame, text = 'Position:')
-        lbl6.place(x = 30, y = 130)
-
+        lbl7 = Label(self.frame, text = 'Simulation setup data:')
+        lbl7.place(x = 0, y = 90)
+        lbl8 = Label(self.frame, text = 'Velocity:')
+        lbl8.place(x = 0, y = 110)
+        lbl9 = Label(self.frame, text = 'Torque:')
+        lbl9.place(x = 0, y = 160)
+        lbl10 = Label(self.frame, text = 'Position:')
+        lbl10.place(x = 0, y = 210)
+        lbl11 = Label(self.frame, text = 'Simulation mode:')
+        lbl11.place(x = 0, y = 0)
+        #Checkboxes
+        #pos mode
+        self.varp = IntVar()        
+        self.check_p = Checkbutton(self.frame, text = 'Position mode',  variable = self.varp, command = self.posmode)
+        self.check_p.place(x = 0, y = 20)
+        #vel mode
+        self.varv = IntVar()        
+        self.check_v = Checkbutton(self.frame, text = 'Velocity mode', variable = self.varv, command = self.velmode)
+        self.check_v.place(x = 0, y = 40)
+        #torquemode
+        self.vart = IntVar()        
+        self.check_t = Checkbutton(self.frame, text = 'Torque mode',  variable = self.vart, command = self.tormode)
+        self.check_t.place(x = 0, y = 60)
 
     def get_position(self):
         pos = 0
         self.position.delete('0', END)      
         self.position.insert(0, str(pos)) 
 
-    def bsvel(self):
-        veloc = float(self.setvel.get())
-        e_al = example.Math()
-    	
-        x = veloc
-    	
-        y = veloc
-    	
-        res = e_al.pi(x, y, 'can1')
-    	
-        print(res)
+    def posmode(self):
+        print('pos mode')
+        self.varv.set(False)
+        self.vart.set(False)
+
+    def velmode(self):
+        print('vel mode')
+        self.varp.set(False)
+        self.vart.set(False)
+
+    def tormode(self):
+        print('torque mode')
+        self.varv.set(False)
+        self.varp.set(False)
 
 class Window3:
     def __init__(self, master):

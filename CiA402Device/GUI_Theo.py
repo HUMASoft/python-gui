@@ -87,10 +87,9 @@ class Master_Window(Cia402device.CiA402Device):
         cia402 = Cia402device.CiA402Device(porter, pm1);
         cia402.Reset()
         cia402.SwitchOn();
-        cia402.Setup_Velocity_Mode();
-        cia402.Setup_Torque_Mode();
         self.var1.set(True)
         self.var2.set(False)
+
     def SwitchOff(self):
         port = int(self.port.get())
         pm1 = SocketCanPort.SocketCanPort("can1")
@@ -130,13 +129,13 @@ class Window2(Cia402device.CiA402Device):
         self.famps_b.place(x = 430, y = 240)
         #Set Velocity
         self.svel = Button(self.frame, text = 'Set Velocity', command = self.bsvel)
-        self.svel.place(x = 100, y = 50)
+        self.svel.place(x = 100, y = 130)
         #Set Position
         self.svel = Button(self.frame, text = 'Set Position', command = self.bspos)
-        self.svel.place(x = 100, y = 150)
+        self.svel.place(x = 100, y = 230)
         #Set Torque
         self.svel = Button(self.frame, text = 'Set Torque', command = self.bstorque)
-        self.svel.place(x = 100, y = 100)
+        self.svel.place(x = 100, y = 180)
         #textboxes
         self.velocity = Entry(self.frame, width = 10)
         self.velocity.place(x = 570, y = 100)
@@ -149,11 +148,11 @@ class Window2(Cia402device.CiA402Device):
         self.filtamps = Entry(self.frame, width = 10)
         self.filtamps.place(x = 570, y = 250)
         self.setvel = Entry(self.frame, width = 10)
-        self.setvel.place(x = 10, y = 50)
+        self.setvel.place(x = 0, y = 130)
         self.settorq = Entry(self.frame, width = 10)
-        self.settorq.place(x = 10, y = 100)
+        self.settorq.place(x = 0, y = 180)
         self.setpos = Entry(self.frame, width = 10)
-        self.setpos.place(x = 10, y = 150)
+        self.setpos.place(x = 0, y = 230)
         #Labels 
         lbl1 = Label(self.frame, text = 'Position:')
         lbl1.place(x = 570, y = 30)
@@ -167,14 +166,29 @@ class Window2(Cia402device.CiA402Device):
         lbl5.place(x = 570, y = 230)
         lbl6 = Label(self.frame, text = 'Simulation data:')
         lbl6.place(x = 430, y = 10)
-        lbl6 = Label(self.frame, text = 'Simulation setup data:')
-        lbl6.place(x = 10, y = 10)
-        lbl6 = Label(self.frame, text = 'Velocity:')
-        lbl6.place(x = 10, y = 30)
-        lbl6 = Label(self.frame, text = 'Torque:')
-        lbl6.place(x = 10, y = 80)
-        lbl6 = Label(self.frame, text = 'Position:')
-        lbl6.place(x = 10, y = 130)
+        lbl7 = Label(self.frame, text = 'Simulation setup data:')
+        lbl7.place(x = 0, y = 90)
+        lbl8 = Label(self.frame, text = 'Velocity:')
+        lbl8.place(x = 0, y = 110)
+        lbl9 = Label(self.frame, text = 'Torque:')
+        lbl9.place(x = 0, y = 160)
+        lbl10 = Label(self.frame, text = 'Position:')
+        lbl10.place(x = 0, y = 210)
+        lbl11 = Label(self.frame, text = 'Simulation mode:')
+        lbl11.place(x = 0, y = 0)
+        #Checkboxes
+        #pos mode
+        self.varp = IntVar()        
+        self.check_p = Checkbutton(self.frame, text = 'Position mode',  variable = self.varp, command = self.posmode)
+        self.check_p.place(x = 0, y = 20)
+        #vel mode
+        self.varv = IntVar()        
+        self.check_v = Checkbutton(self.frame, text = 'Velocity mode', variable = self.varv, command = self.velmode)
+        self.check_v.place(x = 0, y = 40)
+        #torquemode
+        self.vart = IntVar()        
+        self.check_t = Checkbutton(self.frame, text = 'Torque mode',  variable = self.vart, command = self.torquemode)
+        self.check_t.place(x = 0, y = 60)
 
     def position(self):
         port = porter
@@ -237,6 +251,33 @@ class Window2(Cia402device.CiA402Device):
         cia402 = Cia402device.CiA402Device(port, pm1);
         posit = float(self.setpos.get())
         cia402.SetPosition(posit)
+
+
+    def posmode(self):
+        self.varv.set(False)
+        self.vart.set(False)
+        port = porter
+        pm1 = SocketCanPort.SocketCanPort("can1")
+        cia402 = Cia402device.CiA402Device(port, pm1);
+        cia402.SetupPositionMode();
+
+    def velmode(self):
+        self.varp.set(False)
+        self.vart.set(False)
+        port = porter
+        pm1 = SocketCanPort.SocketCanPort("can1")
+        cia402 = Cia402device.CiA402Device(port, pm1);
+        cia402.Setup_Velocity_Mode(); 
+
+    def torquemode(self):
+        self.varv.set(False)
+        self.varp.set(False)
+        port = porter
+        pm1 = SocketCanPort.SocketCanPort("can1")
+        cia402 = Cia402device.CiA402Device(port, pm1);
+        cia402.Setup_Torque_Mode();
+
+
 
 
 class Window3:
