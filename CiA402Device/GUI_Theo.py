@@ -178,7 +178,7 @@ class Window2(Cia402device.CiA402Device):
         self.check_t = Checkbutton(self.frame, text = 'Torque mode',  variable = self.vart, command = self.torquemode)
         self.check_t.place(x = 0, y = 60)
 
-    def position(self):
+    def get_position(self):
         port = porter
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
@@ -187,7 +187,7 @@ class Window2(Cia402device.CiA402Device):
         self.position.insert(0, str(pos)) 
         
 
-    def velocity(self):
+    def get_velocity(self):
         port = porter
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
@@ -195,7 +195,7 @@ class Window2(Cia402device.CiA402Device):
         self.velocity.delete('0', END)
         self.velocity.insert(0, str(vel)) 
         
-    def mean_velocity(self):
+    def get_mean_velocity(self):
         port = porter
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
@@ -203,7 +203,7 @@ class Window2(Cia402device.CiA402Device):
         self.meanvelocity.delete('0', END)
         self.meanvelocity.insert(0, str(mean_vel)) 
         
-    def amps(self):
+    def get_amps(self):
         port = porter
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
@@ -211,7 +211,7 @@ class Window2(Cia402device.CiA402Device):
         self.amps.delete('0', END)
         self.amps.insert(0, str(amps)) 
     
-    def filtered_amps(self):
+    def get_filtered_amps(self):
         port = porter
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
@@ -276,11 +276,11 @@ class Window2(Cia402device.CiA402Device):
 
         if tracking_var:
             
-            self.position()
-            self.velocity()
-            self.mean_velocity()
-            self.amps()
-            self.filtered_amps()
+            self.get_position()
+            self.get_velocity()
+            self.get_mean_velocity()
+            self.get_amps()
+            self.get_filtered_amps()
 
             self.frame.after(1000, self.loop) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
 
