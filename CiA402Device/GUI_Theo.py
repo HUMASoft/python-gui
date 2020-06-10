@@ -300,6 +300,12 @@ class Window3:
         self.quitButton = Button(self.frame, text = 'Quit', command = self.master.destroy)
         self.quitButton.place(x = 100, y = 290)
 
+    def getmsg(self):
+        pm1 = SocketCanPort.SocketCanPort("vcan1")
+        msg = pm1.GetMsg()
+
+
+
 def main(): 
     root = tk.Tk() 
     app = Master_Window(root)
