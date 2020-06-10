@@ -299,10 +299,14 @@ class Window3:
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit', command = self.master.destroy)
         self.quitButton.place(x = 100, y = 290)
+        #Get Msg
+        self.gmsg = Button(self.frame, text = 'Get Msg', command = self.getmsg)
+        self.gmsg.place(x = 100, y = 130)
 
     def getmsg(self):
         pm1 = SocketCanPort.SocketCanPort("vcan1")
         msg = pm1.GetMsg()
+        print(msg)
 
 
 
