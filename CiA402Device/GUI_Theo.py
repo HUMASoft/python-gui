@@ -305,8 +305,8 @@ class Window3:
 
     def getmsg(self):
         pm1 = SocketCanPort.SocketCanPort("vcan1")
-        data = 0
-        size = 0
+        global data 
+        global size 
         msg = pm1.GetMsg(pm1, data, size)
         print(msg)
 
