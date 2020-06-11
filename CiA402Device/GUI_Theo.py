@@ -304,11 +304,8 @@ class Window3:
         self.gmsg.place(x = 100, y = 130)
 
     def getmsg(self):
-        canid = 0
-        data = 0
-        size = 0
         pm1 = SocketCanPort.SocketCanPort("vcan1")
-        msg = pm1.GetMsg(canid, data, size)
+        msg = pm1.GetMsg(pm1, data, size)
         print(msg)
 
 
