@@ -11,7 +11,10 @@
 #include "SocketCanPort.h"
 %}
 
-    
+%inline %{
+extern long GetMsg(unsigned int *OUTPUT, unsigned int *OUTPUT, unsigned int *OUTPUT);
+%}
+
 %include "SocketCanPort.h"
 
 
