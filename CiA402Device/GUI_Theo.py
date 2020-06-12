@@ -307,7 +307,7 @@ class Window3:
         pm1 = SocketCanPort.SocketCanPort("vcan1")
         global data 
         global size 
-        msg = pm1.GetMsg(pm1, pm1, pm1)
+        msg = pm1.GetMsg((pm1), (pm1), (pm1))
         print(msg)
 
 
