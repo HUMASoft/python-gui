@@ -5,15 +5,14 @@
 %include "typemaps.i"
 %import "PortBase.i"
 %ignore SocketCanPort();
-
+typedef unsigned int __uint32_t;
+long GetMsg(uint32_t *OUTPUT, uint8_t *OUTPUT, uint8_t *OUTPUT);
 %{
 #define SWIG_FILE_WITH_INIT
 #include "SocketCanPort.h"
 %}
 
-%inline %{
-extern long GetMsg(unsigned int *OUTPUT, unsigned int *OUTPUT, unsigned int *OUTPUT);
-%}
+
 
 %include "SocketCanPort.h"
 
