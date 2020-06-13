@@ -3,8 +3,6 @@
 %include <std_string.i>
 %include "stdint.i"
 %include "typemaps.i"
-typedef unsigned int __uint32_t;
-
 %import "PortBase.i"
 %ignore SocketCanPort();
 

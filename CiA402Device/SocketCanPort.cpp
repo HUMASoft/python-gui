@@ -87,7 +87,7 @@ long SocketCanPort::GetNMT(uint8_t *data, uint8_t & size)
 
 
 
-long SocketCanPort::GetMsg(uint8_t &canId, uint8_t *data, uint8_t &size)
+long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
 {
     //get a message from canbus and store in canId and data out parameters.
     //in socketcan, only one device will be listened, given a port, trough SetFilter
