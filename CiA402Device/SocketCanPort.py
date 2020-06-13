@@ -105,14 +105,10 @@ class SocketCanPort(PortBase.PortBase):
     for _s in [PortBase.PortBase]:
         __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
     __getattr__ = lambda self, name: _swig_getattr(self, SocketCanPort, name)
-    __repr__ = _swig_repr
 
-    def __init__(self, canPort):
-        this = _SocketCanPort.new_SocketCanPort(canPort)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
     __swig_destroy__ = _SocketCanPort.delete_SocketCanPort
     __del__ = lambda self: None
 
