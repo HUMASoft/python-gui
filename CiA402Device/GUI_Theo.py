@@ -284,10 +284,7 @@ class Window2(Cia402device.CiA402Device):
 
             self.frame.after(1000, self.loop) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
 
-
-
-
-class Window3:
+class Window3(Cia402device.CiA402Device):
     def __init__(self, master):
         self.master = master
         self.frame = Frame(self.master)
