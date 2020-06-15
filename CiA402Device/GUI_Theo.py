@@ -291,18 +291,18 @@ class Window3(Cia402device.CiA402Device):
         self.Style = Style()
         self.Style.theme_use('default')
         self.master.title('Theo´s error window')
-        self.master.geometry('700x360+100+150')
+        self.master.geometry('450x280+100+150')
         self.frame.pack(fill = BOTH, expand = 1)
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit', command = self.master.destroy)
-        self.quitButton.place(x = 100, y = 290)
+        self.quitButton.place(x = 100, y = 250)
         #Get Msg
         self.gmsg = Button(self.frame, text = 'Get Msg', command = self.getmsg)
         self.gmsg.place(x = 100, y = 130)
 
     def getmsg(self):
         pm1 = SocketCanPort.SocketCanPort("vcan1")
-        msg = pm1.GetMsg(pm1, pm1, pm1)
+        pm1.GetMsg(pm1, pm1, pm1)
         #print(msg)
 
 
