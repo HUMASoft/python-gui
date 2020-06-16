@@ -302,7 +302,7 @@ class Window3(Cia402device.CiA402Device):
 
     def getmsg(self):
         pm1 = SocketCanPort.SocketCanPort("vcan1")
-        pm1.GetMsg(pm1, pm1, pm1)
+        pm1.GetMsg()
         #print(msg)
 
 

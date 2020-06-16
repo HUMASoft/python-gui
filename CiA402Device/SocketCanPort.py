@@ -95,70 +95,6 @@ except __builtin__.Exception:
         pass
     _newclass = 0
 
-class SwigPyIterator(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, SwigPyIterator, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, SwigPyIterator, name)
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined - class is abstract")
-    __repr__ = _swig_repr
-    __swig_destroy__ = _SocketCanPort.delete_SwigPyIterator
-    __del__ = lambda self: None
-
-    def value(self):
-        return _SocketCanPort.SwigPyIterator_value(self)
-
-    def incr(self, n=1):
-        return _SocketCanPort.SwigPyIterator_incr(self, n)
-
-    def decr(self, n=1):
-        return _SocketCanPort.SwigPyIterator_decr(self, n)
-
-    def distance(self, x):
-        return _SocketCanPort.SwigPyIterator_distance(self, x)
-
-    def equal(self, x):
-        return _SocketCanPort.SwigPyIterator_equal(self, x)
-
-    def copy(self):
-        return _SocketCanPort.SwigPyIterator_copy(self)
-
-    def next(self):
-        return _SocketCanPort.SwigPyIterator_next(self)
-
-    def __next__(self):
-        return _SocketCanPort.SwigPyIterator___next__(self)
-
-    def previous(self):
-        return _SocketCanPort.SwigPyIterator_previous(self)
-
-    def advance(self, n):
-        return _SocketCanPort.SwigPyIterator_advance(self, n)
-
-    def __eq__(self, x):
-        return _SocketCanPort.SwigPyIterator___eq__(self, x)
-
-    def __ne__(self, x):
-        return _SocketCanPort.SwigPyIterator___ne__(self, x)
-
-    def __iadd__(self, n):
-        return _SocketCanPort.SwigPyIterator___iadd__(self, n)
-
-    def __isub__(self, n):
-        return _SocketCanPort.SwigPyIterator___isub__(self, n)
-
-    def __add__(self, n):
-        return _SocketCanPort.SwigPyIterator___add__(self, n)
-
-    def __sub__(self, *args):
-        return _SocketCanPort.SwigPyIterator___sub__(self, *args)
-    def __iter__(self):
-        return self
-SwigPyIterator_swigregister = _SocketCanPort.SwigPyIterator_swigregister
-SwigPyIterator_swigregister(SwigPyIterator)
-
 import PortBase
 class SocketCanPort(PortBase.PortBase):
     __swig_setmethods__ = {}
@@ -183,14 +119,14 @@ class SocketCanPort(PortBase.PortBase):
     def SetFilter(self, canId, mask):
         return _SocketCanPort.SocketCanPort_SetFilter(self, canId, mask)
 
-    def GetMsg(self, canId, data, size):
-        return _SocketCanPort.SocketCanPort_GetMsg(self, canId, data, size)
+    def GetMsg(self):
+        return _SocketCanPort.SocketCanPort_GetMsg(self)
 
-    def PutMsg(self, canId, data, size):
-        return _SocketCanPort.SocketCanPort_PutMsg(self, canId, data, size)
+    def PutMsg(self, size):
+        return _SocketCanPort.SocketCanPort_PutMsg(self, size)
 
-    def GetNMT(self, data, size):
-        return _SocketCanPort.SocketCanPort_GetNMT(self, data, size)
+    def GetNMT(self):
+        return _SocketCanPort.SocketCanPort_GetNMT(self)
 SocketCanPort_swigregister = _SocketCanPort.SocketCanPort_swigregister
 SocketCanPort_swigregister(SocketCanPort)
 
