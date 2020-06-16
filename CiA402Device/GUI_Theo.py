@@ -291,22 +291,50 @@ class Window3(Cia402device.CiA402Device):
         self.Style = Style()
         self.Style.theme_use('default')
         self.master.title('Theo´s error window')
-        self.master.geometry('450x280+100+150')
+        self.master.geometry('380x280+100+150')
         self.frame.pack(fill = BOTH, expand = 1)
         #Quit
-        self.quitButton = Button(self.frame, text = 'Quit', command = self.master.destroy)
-        self.quitButton.place(x = 100, y = 250)
+        self.quitButton = Button(self.frame, text = 'Quit error window.', command = self.master.destroy)
+        self.quitButton.place(x = 170, y = 140)
         #Get Msg
-        self.gmsg = Button(self.frame, text = 'Get Msg', command = self.getmsg)
-        self.gmsg.place(x = 100, y = 130)
+        self.gmsg = Button(self.frame, text = 'Get error message.', command = self.getmsg)
+        self.gmsg.place(x = 170, y = 90)
+        #Labels 
+        lbl1 = Label(self.frame, text = 'Can id:')
+        lbl1.place(x = 10, y = 30)
+        lbl2 = Label(self.frame, text = 'Data:')
+        lbl2.place(x = 10, y = 80)
+        lbl3 = Label(self.frame, text = 'Size:')
+        lbl3.place(x = 10, y = 130)
+        lbl4 = Label(self.frame, text = 'Error type:')
+        lbl4.place(x = 10, y = 180)
+        lbl5 = Label(self.frame, text = 'Error:')
+        lbl5.place(x = 10, y = 230)
+        #textboxes
+        self.canid = Entry(self.frame, width = 10)
+        self.canid.place(x = 60, y = 30)
+        self.dat = Entry(self.frame, width = 10)
+        self.dat.place(x = 50, y = 80)
+        self.siz = Entry(self.frame, width = 10)
+        self.siz.place(x = 50, y = 130)
+        self.err_typ = Entry(self.frame, width = 10)
+        self.err_typ.place(x = 80, y = 180)
+        self.errrr = Entry(self.frame, width = 10)
+        self.errrr.place(x = 50, y = 230)
 
     def getmsg(self):
         pm1 = SocketCanPort.SocketCanPort("vcan1")
         err,cid,dat,siz = pm1.GetMsg()
-        print(err)
-        print(cid)
-        print(dat)
-        print(siz)
+        
+        self.canid.delete('0', END)
+        self.canid.insert(0, str(cid))
+        self.dat.delete('0', END)
+        self.dat.insert(0, str(dat)) 
+        self.siz.delete('0', END)
+        self.siz.insert(0, str(siz)) 
+        self.err_typ.delete('0', END)
+        self.err_typ.insert(0, str(err))  
+
 
 
 
