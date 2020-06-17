@@ -325,7 +325,7 @@ class Window3(Cia402device.CiA402Device):
     def getmsg(self):
         pm1 = SocketCanPort.SocketCanPort("vcan1")
         err,cid,dat,siz = pm1.GetMsg()
-        
+        #err,dat,siz = pm1.GetNMT()
         self.canid.delete('0', END)
         self.canid.insert(0, str(cid))
         self.dat.delete('0', END)
