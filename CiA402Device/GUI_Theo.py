@@ -85,7 +85,7 @@ class Master_Window(Cia402device.CiA402Device):
         porter = int(self.port.get())
         pm1 = SocketCanPort.SocketCanPort("vcan1")
         cia402 = Cia402device.CiA402Device(porter, pm1);
-        cia402.Reset()
+        #cia402.Reset()
         cia402.SwitchOn();
         self.var1.set(True)
         self.var2.set(False)
@@ -330,7 +330,7 @@ class Window3(Cia402device.CiA402Device):
         pb = PortBase.PortBase()
         idd = pb.getPortId()
         print(idd)
-        # self.canid.delete('0', END)
+        #self.canid.delete('0', END)
         # self.canid.insert(0, str(cid))
         # self.dat.delete('0', END)
         # self.dat.insert(0, str(dat)) 
