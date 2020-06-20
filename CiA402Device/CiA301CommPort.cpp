@@ -433,7 +433,7 @@ long CiA301CommPort::CanOpenToCanBus(const co_msg & input, can_msg & output)
 {
 
         output.id=input.id_co;
-        cout<<output.id<<endl;
+
 
         //output.fi=input.id_co;
         //output.fi<<=4;
@@ -479,10 +479,11 @@ long CiA301CommPort::CanBusToCanOpen(const can_msg & input, co_msg & output)
 
 
 co_msg CiA301CommPort::SetCanOpenMsg(unsigned short id_co, unsigned short rtr, vector<uint8_t> coDataFrame){
-    cout<<"El id es:"<<endl;
-    cout<<id_co<<endl;
+
     co_msg msg_co;
     msg_co.id_co=id_co;
+    cout<<el id es:<<endl;
+    cout<<msg_co.id<<endl;
     msg_co.dlc_co=coDataFrame.size();
 
     memcpy(msg_co.data_co, coDataFrame.data(), (msg_co.dlc_co)*sizeof(uint8_t));
@@ -514,7 +515,6 @@ int CiA301CommPort::SendMessage(co_msg input)
 //                printf("%02x ",input.data_co[i]);
 //            }
 //            cout<<endl;
-    cout<<CanOpenToCanBus(input,send_msg)<<endl;
     if (CanOpenToCanBus(input,send_msg) < 0)
     {
         cout<<"Error al transformar el mensaje"<<endl;
