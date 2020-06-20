@@ -499,7 +499,6 @@ co_msg CiA301CommPort::SetCanOpenMsg(unsigned short id_co, unsigned short rtr, v
 //        printf("%02x ",msg_co.data_co[i]);
 //    }
 //    cout<<endl;
-    cout<<msg_co<<endl;
     return msg_co;
 }
 
