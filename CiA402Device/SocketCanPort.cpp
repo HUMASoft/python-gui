@@ -148,6 +148,7 @@ long SocketCanPort::PutMsg(const uint32_t &canId, uint8_t * const data, uint8_t 
 
     nbytes = write(portId, &frame, sizeof(struct can_frame) );
     /* send frame */
+    cout<<frame.can_id<<endl;
     if (nbytes != sizeof(struct can_frame))
     {
 
