@@ -147,7 +147,6 @@ long SocketCanPort::PutMsg(const uint32_t &canId, uint8_t * const data, uint8_t 
 
 
     nbytes = write(portId, &frame, sizeof(struct can_frame) );
-    cout<<nbytes<<endl;
     /* send frame */
     if (nbytes != sizeof(struct can_frame))
     {
@@ -155,6 +154,7 @@ long SocketCanPort::PutMsg(const uint32_t &canId, uint8_t * const data, uint8_t 
         fprintf(stderr, "Write Failed in Port %d ", portId);
         //perror("Write Failed", portId);
         cerr << "PutMsg: " << hex << frame.can_id << dec << "  | ";
+        cout<<frame.can_id<<endl;
         cerr << "data[0]: " << hex << frame.data[0] << dec << "  | ";
         cerr << "nbytes: " << nbytes << endl;
         return 1;
