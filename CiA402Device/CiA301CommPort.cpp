@@ -573,6 +573,7 @@ int CiA301CommPort::SendCanMessage(can_msg &input)
     if(usesockets)
     {
         uint32_t tmpid = send_msg.id;
+        cout<<tmpid;
         port->PutMsg(tmpid, send_msg.data, send_msg.dlc);
 
     }
