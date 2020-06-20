@@ -489,7 +489,7 @@ co_msg CiA301CommPort::SetCanOpenMsg(unsigned short id_co, unsigned short rtr, v
     cout<<msg_co.data_co<<endl;
     msg_co.rtr=rtr;
     //msg_co.fun_code=fund_code;
-//    cout<<"cob id: " << std::hex << msg_co.id_co << std::dec << " rtr: " << msg_co.rtr << endl;
+    cout<<"cob id: " << std::hex << msg_co.id_co << std::dec << " rtr: " << msg_co.rtr << endl;
 
 //    cout<<"data: ";
 //    for (int i = 0; i < msg_co.dlc_co; i++) {
