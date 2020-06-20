@@ -505,8 +505,8 @@ co_msg CiA301CommPort::SetCanOpenMsg(unsigned short id_co, unsigned short rtr, v
 /* Transforma mensaje de canopen a can y lo envía al puerto  */
 int CiA301CommPort::SendMessage(co_msg input)
 {
-   cout<<"SendMessage " << endl;
-   cout<<"sent cob id " << std::hex << input.id_co << std::dec <<" rtr: " << input.rtr << endl;
+//    cout<<"SendMessage " << endl;
+//    cout<<"sent cob id " << std::hex << input.id_co << std::dec <<" rtr: " << input.rtr << endl;
 //            cout<<"sent data: ";
 //            for (int i = 0; i < input.dlc_co; i++)
 //            {
@@ -522,15 +522,15 @@ int CiA301CommPort::SendMessage(co_msg input)
     else
     {
         //print can frame information
-//        cout<<"sent can id " << (bitset<16>)send_msg.id << " rtr: " << send_msg.rtr << endl;
+       cout<<"sent can id " << (bitset<16>)send_msg.id << " rtr: " << send_msg.rtr << endl;
 
-//        cout<<"sent data: ";
-//        for (int i = 0; i < send_msg.dlc; i++)
-//        {
+       cout<<"sent data: ";
+       for (int i = 0; i < send_msg.dlc; i++)
+       {
 
-//            printf("%02x ",send_msg.data[i]);
-//        }
-//        cout<<endl;
+           printf("%02x ",send_msg.data[i]);
+       }
+       cout<<endl;
 
 
         /* Write the message to the Port */
