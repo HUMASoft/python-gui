@@ -522,19 +522,19 @@ int CiA301CommPort::SendMessage(co_msg input)
     else
     {
         //print can frame information
-       cout<<"sent can id " << (bitset<16>)send_msg.id << " rtr: " << send_msg.rtr << endl;
+//        cout<<"sent can id " << (bitset<16>)send_msg.id << " rtr: " << send_msg.rtr << endl;
 
-       cout<<"sent data: ";
-       for (int i = 0; i < send_msg.dlc; i++)
-       {
+//        cout<<"sent data: ";
+//        for (int i = 0; i < send_msg.dlc; i++)
+//        {
 
-           printf("%02x ",send_msg.data[i]);
-       }
-       cout<<endl;
+//            printf("%02x ",send_msg.data[i]);
+//        }
+//        cout<<endl;
 
 
         /* Write the message to the Port */
-
+        cout<<usescockets<<endl;
         if(usesockets)
         {
             uint32_t tmpid = send_msg.id;
