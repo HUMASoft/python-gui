@@ -4,7 +4,8 @@
 %include "stdint.i"
 %include "typemaps.i"
 %import "PortBase.i"
-
+%ignore tx0;
+%ignore rx0;
 
 %{
 #define SWIG_FILE_WITH_INIT

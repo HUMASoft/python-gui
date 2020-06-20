@@ -4019,34 +4019,6 @@ SWIGINTERN PyObject *CiA301CommPort_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN int Swig_var_tx0_set(PyObject *) {
-  SWIG_Error(SWIG_AttributeError,"Variable tx0 is read-only.");
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_tx0_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_From_unsigned_SS_short(static_cast< unsigned short >(sdo::tx0));
-  return pyobj;
-}
-
-
-SWIGINTERN int Swig_var_rx0_set(PyObject *) {
-  SWIG_Error(SWIG_AttributeError,"Variable rx0 is read-only.");
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_rx0_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_From_unsigned_SS_short(static_cast< unsigned short >(sdo::rx0));
-  return pyobj;
-}
-
-
 SWIGINTERN int Swig_var_tx0enable_set(PyObject *) {
   SWIG_Error(SWIG_AttributeError,"Variable tx0enable is read-only.");
   return 1;
@@ -5004,8 +4976,6 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "USE_TIMEOUT",SWIG_From_int(static_cast< int >(200)));
   SWIG_Python_SetConstant(d, "FIND_RETRY",SWIG_From_int(static_cast< int >(20)));
   PyDict_SetItemString(md,(char *)"cvar", SWIG_globals());
-  SWIG_addvarlink(SWIG_globals(),(char *)"tx0",Swig_var_tx0_get, Swig_var_tx0_set);
-  SWIG_addvarlink(SWIG_globals(),(char *)"rx0",Swig_var_rx0_get, Swig_var_rx0_set);
   SWIG_addvarlink(SWIG_globals(),(char *)"tx0enable",Swig_var_tx0enable_get, Swig_var_tx0enable_set);
   SWIG_addvarlink(SWIG_globals(),(char *)"tx0sub1",Swig_var_tx0sub1_get, Swig_var_tx0sub1_set);
   SWIG_addvarlink(SWIG_globals(),(char *)"tx0sub2",Swig_var_tx0sub2_get, Swig_var_tx0sub2_set);
