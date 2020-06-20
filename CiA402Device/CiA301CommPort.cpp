@@ -118,7 +118,6 @@ long CiA301CommPort::WriteSDO(const vector<uint8_t> &address, const vector<uint8
 
     //every write operation returns an empty answer if correct
     //wait the answer in TPDO1 (tx0(580)+id)
-    cout
     co_msg output;
     ReadCobId(sdo::tx0+id, output);
     //alternative: use PDO, but no check is available.
