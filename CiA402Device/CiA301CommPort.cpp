@@ -113,7 +113,7 @@ long CiA301CommPort::WriteSDO(const vector<uint8_t> &address, const vector<uint8
     int size=value.size();
     cout<<sdo::rx0+id <<endl;
     cout<<sdo::rx0<<endl;
-    cout<<id<<endl;
+    cout<<sdo::id<<endl;
     SendMessage( SetCanOpenMsg(sdo::rx0+id, 0 ,data) );
 
 //    //and wait for write response
