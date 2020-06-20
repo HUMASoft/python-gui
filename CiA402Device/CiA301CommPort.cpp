@@ -489,7 +489,7 @@ co_msg CiA301CommPort::SetCanOpenMsg(unsigned short id_co, unsigned short rtr, v
     cout<<msg_co.data_co<<endl;
     msg_co.rtr=rtr;
     //msg_co.fun_code=fund_code;
-    cout<<"cob id: " << std::hex << msg_co.id_co << std::dec << " rtr: " << msg_co.rtr << endl;
+    // cout<<"cob id: " << std::hex << msg_co.id_co << std::dec << " rtr: " << msg_co.rtr << endl;
 
 //    cout<<"data: ";
 //    for (int i = 0; i < msg_co.dlc_co; i++) {
@@ -505,8 +505,8 @@ co_msg CiA301CommPort::SetCanOpenMsg(unsigned short id_co, unsigned short rtr, v
 /* Transforma mensaje de canopen a can y lo envía al puerto  */
 int CiA301CommPort::SendMessage(co_msg input)
 {
-//    cout<<"SendMessage " << endl;
-//    cout<<"sent cob id " << std::hex << input.id_co << std::dec <<" rtr: " << input.rtr << endl;
+   cout<<"SendMessage " << endl;
+   cout<<"sent cob id " << std::hex << input.id_co << std::dec <<" rtr: " << input.rtr << endl;
 //            cout<<"sent data: ";
 //            for (int i = 0; i < input.dlc_co; i++)
 //            {
