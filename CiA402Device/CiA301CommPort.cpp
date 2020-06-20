@@ -112,8 +112,6 @@ long CiA301CommPort::WriteSDO(const vector<uint8_t> &address, const vector<uint8
 
     int size=value.size();
     cout<<sdo::rx0+id <<endl;
-    cout<<rx0<<endl;
-    cout<<id<<endl;
     SendMessage( SetCanOpenMsg(sdo::rx0+id, 0 ,data) );
 
 //    //and wait for write response
@@ -486,7 +484,7 @@ co_msg CiA301CommPort::SetCanOpenMsg(unsigned short id_co, unsigned short rtr, v
     co_msg msg_co;
     msg_co.id_co=id_co;
     msg_co.dlc_co=coDataFrame.size();
-    cout<<msg_co.id_co<<endl;
+
     memcpy(msg_co.data_co, coDataFrame.data(), (msg_co.dlc_co)*sizeof(uint8_t));
     //msg_co.nodeID=nodeID;
     msg_co.rtr=rtr;
