@@ -534,11 +534,11 @@ int CiA301CommPort::SendMessage(co_msg input)
 
 
         /* Write the message to the Port */
-        cout<<usescockets<<endl;
         if(usesockets)
         {
             uint32_t tmpid = send_msg.id;
             uint16_t tmpdlc = send_msg.dlc;
+            cout<<tmpid<<endl;
             port->PutMsg(tmpid, send_msg.data, tmpdlc);
 
         }
