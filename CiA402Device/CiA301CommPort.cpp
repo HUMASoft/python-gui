@@ -111,9 +111,6 @@ long CiA301CommPort::WriteSDO(const vector<uint8_t> &address, const vector<uint8
     //like in CiA 301
 
     int size=value.size();
-    cout<<sdo::rx0+id <<endl;
-    cout<<sdo::rx0<<endl;
-    //cout<<sdo::id<<endl;
     SendMessage( SetCanOpenMsg(sdo::rx0+id, 0 ,data) );
 
 //    //and wait for write response
@@ -436,7 +433,7 @@ long CiA301CommPort::CanOpenToCanBus(const co_msg & input, can_msg & output)
 {
 
         output.id=input.id_co;
-
+        cout<<output.id<<endl;
 
         //output.fi=input.id_co;
         //output.fi<<=4;
@@ -482,7 +479,8 @@ long CiA301CommPort::CanBusToCanOpen(const can_msg & input, co_msg & output)
 
 
 co_msg CiA301CommPort::SetCanOpenMsg(unsigned short id_co, unsigned short rtr, vector<uint8_t> coDataFrame){
-
+    cout<<"El id es:"<<endl;
+    cout<<id_co<<endl;
     co_msg msg_co;
     msg_co.id_co=id_co;
     msg_co.dlc_co=coDataFrame.size();
@@ -516,6 +514,7 @@ int CiA301CommPort::SendMessage(co_msg input)
 //                printf("%02x ",input.data_co[i]);
 //            }
 //            cout<<endl;
+    cout<<CanOpenToCanBus(input,send_msg)<<endl;
     if (CanOpenToCanBus(input,send_msg) < 0)
     {
         cout<<"Error al transformar el mensaje"<<endl;
