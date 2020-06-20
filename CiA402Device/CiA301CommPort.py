@@ -158,6 +158,8 @@ CiA301CommPort_swigregister(CiA301CommPort)
 # This file is compatible with both classic and new-style classes.
 
 cvar = _CiA301CommPort.cvar
+tx0 = cvar.tx0
+rx0 = cvar.rx0
 tx0enable = cvar.tx0enable
 tx0sub1 = cvar.tx0sub1
 tx0sub2 = cvar.tx0sub2
