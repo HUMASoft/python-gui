@@ -93,11 +93,10 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
     //in socketcan, only one device will be listened, given a port, trough SetFilter
     //blocking. It will wait until filtered message arrives
     //cout << " (buff_size) " << (buff_size) << endl;
-    cout<<portId<<endl;
+
     //Poll data only if not buffer available.
     if (buffSizeId<=0)
     {
-        cout<<frame.can_id<<endl;
         buffSizeId = poll(poll_setId, 1, timeoutPoll);
 //        cout << " (buffSizeId) " << (buffSizeId) << endl;
 //        cout << " (revents 0) " << hex << (poll_setId[0].revents) << dec << endl;
@@ -116,7 +115,6 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
             size=0;
             data[0] = '\0';
             //perror("Timeout in poll read");
-            cout<<frame.can_id<<endl;
             return -1;
 
         }
@@ -132,7 +130,7 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
     //return third parameter
     size=frame.can_dlc;
     buffSizeId--;
-
+    cout<<canId<<endl;
     return (buffSizeId);
 
 
