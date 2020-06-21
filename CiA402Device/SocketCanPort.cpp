@@ -110,7 +110,7 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
         }
         if(buffSizeId==0)
         {
-            cout<<'present'<<endl;
+            cout<<"jorge"<<endl;
             cout << ("Timeout in poll read in the port ")<<  getPortId() << endl;
             size=0;
             data[0] = '\0';
@@ -130,7 +130,7 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
     //return third parameter
     size=frame.can_dlc;
     buffSizeId--;
-    cout<<canId<<endl;
+    cout<<"good"<<endl;
     return (buffSizeId);
 
 
@@ -147,7 +147,6 @@ long SocketCanPort::PutMsg(const uint32_t &canId, uint8_t * const data, uint8_t 
 
 
     nbytes = write(portId, &frame, sizeof(struct can_frame) );
-    cout<<portId<<endl;
     /* send frame */
     if (nbytes != sizeof(struct can_frame))
     {
