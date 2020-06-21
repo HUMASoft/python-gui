@@ -331,7 +331,7 @@ long CiA402Device::SwitchOff()
     status=CheckStatus();
     //filter state
     status = status&0x6f; //mask 01101111=6f
-
+    cout<<status<<endl;
     switch(status)
     {
 //    case 0x00:
