@@ -92,7 +92,7 @@ class Master_Window(Cia402device.CiA402Device):
 
     def SwitchOff(self):
         port = int(self.port.get())
-        pm1 = SocketCanPort.SocketCanPort("can1")
+        pm1 = SocketCanPort.SocketCanPort("vcan1")
         cia402 = Cia402device.CiA402Device(port, pm1);
         cia402.SwitchOff();
         self.var1.set(False)
