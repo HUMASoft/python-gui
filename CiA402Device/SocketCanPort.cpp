@@ -140,15 +140,13 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
 long SocketCanPort::PutMsg(const uint32_t &canId, uint8_t * const data, uint8_t const data_size)
 {
     //set frame
-    cout<<"i am here"<<endl;
     frame.can_id = canId;
     memcpy ( frame.data,  data, data_size );
     frame.can_dlc = data_size;
 
 
     nbytes = write(portId, &frame, sizeof(struct can_frame) );
-    cout<<nbytes<<enld;
-    cout<<sizeof(struct can_frame)<<endl;
+    cout<<portId<<endl;
     /* send frame */
     if (nbytes != sizeof(struct can_frame))
     {
