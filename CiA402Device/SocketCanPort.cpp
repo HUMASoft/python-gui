@@ -175,7 +175,7 @@ long SocketCanPort::Init(string canPort)
     //PortId: This socket will only get messages for some id. Used by GetMsg Function.
     //Filter sets in SetFilter function by caller (id unknown for this class).
     portId  = socket(PF_CAN, SOCK_RAW, CAN_RAW);
-    cout<<portId<endl;
+    cout<<portId<<endl;
     if(portId < 0)
     {
         perror("Error while opening socket. Is there a connection available? \n "
