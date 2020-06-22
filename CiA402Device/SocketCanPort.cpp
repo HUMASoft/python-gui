@@ -182,16 +182,15 @@ long SocketCanPort::Init(string canPort)
         return -1;
     }
     //get and show index
-    ioctl(portId, SIOCGIFINDEX, &ifr);
+    ioctl(portId, SIOCGIFINDEX, &ifr); //portid : 6 e index = 3
    // printf("%s portId at index %d\n", ifr.ifr_name, ifr.ifr_ifindex);
-    addr.can_ifindex = ifr.ifr_ifindex;
-    cout<<addr.can_ifindex<<endl;
+    addr.can_ifindex = ifr.ifr_ifindex; //3
     if(bind(portId, (struct sockaddr *)&addr, sizeof(addr)) < 0)
     {
         perror("Error in socket bind");
         return -2;
     }
-   // printf("portId index %d\n", portId);
+   // printf("portId index %d\n", portId); //6
 
 
 
@@ -219,7 +218,7 @@ long SocketCanPort::Init(string canPort)
     rfilterNMT[0].can_mask = 0x7FF;
     setsockopt(portNMT, SOL_CAN_RAW, CAN_RAW_FILTER, &rfilterNMT, sizeof(rfilterNMT));
 
-
+    cout<<poll_setId<<endl;
     //Set poll objects for portId
     poll_setId[0].fd = portId;
     poll_setId[0].events = POLLIN | POLLERR | POLLPRI;
