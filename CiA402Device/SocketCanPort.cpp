@@ -130,6 +130,7 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
     //return third parameter
     size=frame.can_dlc;
     buffSizeId--;
+    cout<<al fin:<<endl;
     cout<<canId<<endl;
     return (buffSizeId);
 
