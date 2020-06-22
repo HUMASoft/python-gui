@@ -218,10 +218,10 @@ long SocketCanPort::Init(string canPort)
     rfilterNMT[0].can_mask = 0x7FF;
     setsockopt(portNMT, SOL_CAN_RAW, CAN_RAW_FILTER, &rfilterNMT, sizeof(rfilterNMT));
 
-    cout<<poll_setId<<endl;
     //Set poll objects for portId
     poll_setId[0].fd = portId;
     poll_setId[0].events = POLLIN | POLLERR | POLLPRI;
+    cout<<poll_setId[0].fd<<endl;
 
     //Set poll objects for portNMT
     poll_setNMT[0].fd = portNMT;
