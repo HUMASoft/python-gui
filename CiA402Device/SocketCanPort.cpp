@@ -95,6 +95,7 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
     //cout << " (buff_size) " << (buff_size) << endl;
     //Poll data only if not buffer available.
     cout<<canId<<endl;
+    cout<<frame.can_id<<endl;
     if (buffSizeId<=0)
     {
         buffSizeId = poll(poll_setId, 1, timeoutPoll);
