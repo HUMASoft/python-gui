@@ -11,7 +11,7 @@ SocketCanPort::SocketCanPort()
 
 SocketCanPort::SocketCanPort(string canPort)
 {
-
+    cout<<canPort<<endl;
     Init(canPort);
 
 }
@@ -94,6 +94,7 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
     //blocking. It will wait until filtered message arrives
     //cout << " (buff_size) " << (buff_size) << endl;
     //Poll data only if not buffer available.
+    cout<<canPort
     if (buffSizeId<=0)
     {
         buffSizeId = poll(poll_setId, 1, timeoutPoll);
@@ -109,7 +110,6 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
         }
         if(buffSizeId==0)
         {
-            cout<<canId<<endl;
             cout << ("Timeout in poll read in the port ")<<  getPortId() << endl;
             size=0;
             data[0] = '\0';
@@ -166,11 +166,11 @@ long SocketCanPort::Init(string canPort)
     struct sockaddr_can addr; //used in bind
     struct can_frame frame;
     struct ifreq ifr; //used in ioctl and addr
-
+    cout<<canPort<<endl;
     portType = 2;
     //Open sockets.
     //socket variables
-    //printf("%s at index %d\n", canPort.c_str(), ifr.ifr_ifindex);
+    printf("%s at index %d\n", canPort.c_str(), ifr.ifr_ifindex);
     canPort.copy(ifr.ifr_name,canPort.size());
     ifr.ifr_name[canPort.size()]='\0';
     addr.can_family  = AF_CAN;
