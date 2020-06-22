@@ -11,9 +11,7 @@ SocketCanPort::SocketCanPort()
 
 SocketCanPort::SocketCanPort(string canPort)
 {
-    cout<<canPort<<endl;
     Init(canPort);
-
 }
 
 SocketCanPort::~SocketCanPort()
@@ -165,7 +163,6 @@ long SocketCanPort::Init(string canPort)
     struct sockaddr_can addr; //used in bind
     struct can_frame frame;
     struct ifreq ifr; //used in ioctl and addr
-    cout<<canPort<<endl;
     portType = 2;
     //Open sockets.
     //socket variables
