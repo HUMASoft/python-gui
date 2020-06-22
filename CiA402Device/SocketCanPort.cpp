@@ -98,7 +98,6 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
     if (buffSizeId<=0)
     {
         buffSizeId = poll(poll_setId, 1, timeoutPoll);
-        cout<<frame.can_id<<endl;
 //        cout << " (buffSizeId) " << (buffSizeId) << endl;
 //        cout << " (revents 0) " << hex << (poll_setId[0].revents) << dec << endl;
         if(buffSizeId<0)
@@ -130,8 +129,6 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
     //return third parameter
     size=frame.can_dlc;
     buffSizeId--;
-    cout<<al fin:<<endl;
-    cout<<canId<<endl;
     return (buffSizeId);
 
 
