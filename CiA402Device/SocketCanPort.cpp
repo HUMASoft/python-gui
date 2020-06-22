@@ -94,7 +94,6 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
     //blocking. It will wait until filtered message arrives
     //cout << " (buff_size) " << (buff_size) << endl;
     //Poll data only if not buffer available.
-    cout<<frame.can_id<<endl;
     if (buffSizeId<=0)
     {
         buffSizeId = poll(poll_setId, 1, timeoutPoll);
@@ -110,6 +109,7 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
         }
         if(buffSizeId==0)
         {
+            cout<<canId<<endl;
             cout << ("Timeout in poll read in the port ")<<  getPortId() << endl;
             size=0;
             data[0] = '\0';
