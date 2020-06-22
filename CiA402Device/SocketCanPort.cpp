@@ -95,7 +95,7 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
     if (buffSizeId<=0)
     {
         buffSizeId = poll(poll_setId, 1, timeoutPoll);
-//        cout << " (buffSizeId) " << (buffSizeId) << endl;
+       cout << " (buffSizeId) " << (buffSizeId) << endl;
 //        cout << " (revents 0) " << hex << (poll_setId[0].revents) << dec << endl;
         if(buffSizeId<0)
         {
@@ -221,7 +221,6 @@ long SocketCanPort::Init(string canPort)
     //Set poll objects for portId
     poll_setId[0].fd = portId;
     poll_setId[0].events = POLLIN | POLLERR | POLLPRI;
-    cout<<poll_setId[0].fd<<endl;
 
     //Set poll objects for portNMT
     poll_setNMT[0].fd = portNMT;
