@@ -113,6 +113,7 @@ long SocketCanPort::GetMsg(uint32_t &canId, uint8_t *data, uint8_t &size)
             cout << ("Timeout in poll read in the port ")<<  getPortId() << endl;
             size=0;
             data[0] = '\0';
+            cout<<canId<<endl;
             //perror("Timeout in poll read");
             return -1;
 
