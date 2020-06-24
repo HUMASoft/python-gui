@@ -1632,6 +1632,14 @@ SwigPyObject_repr(SwigPyObject *v, PyObject *args)
   return repr;  
 }
 
+/* We need a version taking two PyObject* parameters so it's a valid
+ * PyCFunction to use in swigobject_methods[]. */
+SWIGRUNTIME PyObject *
+SwigPyObject_repr2(PyObject *v, PyObject *SWIGUNUSEDPARM(args))
+{
+  return SwigPyObject_repr((SwigPyObject*)v);
+}
+
 SWIGRUNTIME int
 SwigPyObject_compare(SwigPyObject *v, SwigPyObject *w)
 {
@@ -1761,11 +1769,7 @@ SwigPyObject_append(PyObject* v, PyObject* next)
 }
 
 SWIGRUNTIME PyObject* 
-#ifdef METH_NOARGS
-SwigPyObject_next(PyObject* v)
-#else
 SwigPyObject_next(PyObject* v, PyObject *SWIGUNUSEDPARM(args))
-#endif
 {
   SwigPyObject *sobj = (SwigPyObject *) v;
   if (sobj->next) {    
@@ -1799,6 +1803,20 @@ SwigPyObject_acquire(PyObject* v, PyObject *SWIGUNUSEDPARM(args))
   sobj->own = SWIG_POINTER_OWN;
   return SWIG_Py_Void();
 }
+
+#ifdef METH_NOARGS
+static PyObject*
+SwigPyObject_disown2(PyObject* v, PyObject *SWIGUNUSEDPARM(args))
+{
+  return SwigPyObject_disown(v);
+}
+
+static PyObject*
+SwigPyObject_acquire2(PyObject* v, PyObject *SWIGUNUSEDPARM(args))
+{
+  return SwigPyObject_acquire(v);
+}
+#endif
 
 SWIGINTERN PyObject*
 SwigPyObject_own(PyObject *v, PyObject *args)
@@ -1840,12 +1858,12 @@ SwigPyObject_own(PyObject *v, PyObject *args)
 #ifdef METH_O
 static PyMethodDef
 swigobject_methods[] = {
-  {(char *)"disown",  (PyCFunction)SwigPyObject_disown,  METH_NOARGS,  (char *)"releases ownership of the pointer"},
-  {(char *)"acquire", (PyCFunction)SwigPyObject_acquire, METH_NOARGS,  (char *)"acquires ownership of the pointer"},
+  {(char *)"disown",  (PyCFunction)SwigPyObject_disown2, METH_NOARGS,  (char *)"releases ownership of the pointer"},
+  {(char *)"acquire", (PyCFunction)SwigPyObject_acquire2,METH_NOARGS,  (char *)"acquires ownership of the pointer"},
   {(char *)"own",     (PyCFunction)SwigPyObject_own,     METH_VARARGS, (char *)"returns/sets ownership of the pointer"},
   {(char *)"append",  (PyCFunction)SwigPyObject_append,  METH_O,       (char *)"appends another 'this' object"},
   {(char *)"next",    (PyCFunction)SwigPyObject_next,    METH_NOARGS,  (char *)"returns the next 'this' object"},
-  {(char *)"__repr__",(PyCFunction)SwigPyObject_repr,    METH_NOARGS,  (char *)"returns object representation"},
+  {(char *)"__repr__",(PyCFunction)SwigPyObject_repr2,   METH_NOARGS,  (char *)"returns object representation"},
   {0, 0, 0, 0}  
 };
 #else
@@ -1856,7 +1874,7 @@ swigobject_methods[] = {
   {(char *)"own",     (PyCFunction)SwigPyObject_own,     METH_VARARGS,  (char *)"returns/sets ownership of the pointer"},
   {(char *)"append",  (PyCFunction)SwigPyObject_append,  METH_VARARGS,  (char *)"appends another 'this' object"},
   {(char *)"next",    (PyCFunction)SwigPyObject_next,    METH_VARARGS,  (char *)"returns the next 'this' object"},
-  {(char *)"__repr__",(PyCFunction)SwigPyObject_repr,   METH_VARARGS,  (char *)"returns object representation"},
+  {(char *)"__repr__",(PyCFunction)SwigPyObject_repr,    METH_VARARGS,  (char *)"returns object representation"},
   {0, 0, 0, 0}  
 };
 #endif
@@ -4765,40 +4783,40 @@ SWIGINTERN PyObject *CiA402Device_swigregister(PyObject *SWIGUNUSEDPARM(self), P
 }
 
 static PyMethodDef SwigMethods[] = {
-	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
-	 { (char *)"new_CiA402Device", _wrap_new_CiA402Device, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_CheckStatus", _wrap_CiA402Device_CheckStatus, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_PrintStatus", _wrap_CiA402Device_PrintStatus, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_SwitchOn", _wrap_CiA402Device_SwitchOn, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_SwitchOff", _wrap_CiA402Device_SwitchOff, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_QuickStop", _wrap_CiA402Device_QuickStop, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_GetPosition", _wrap_CiA402Device_GetPosition, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_GetVelocity", _wrap_CiA402Device_GetVelocity, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_GetFilteredVelocity", _wrap_CiA402Device_GetFilteredVelocity, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_GetMeanVelocity", _wrap_CiA402Device_GetMeanVelocity, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_GetAmps", _wrap_CiA402Device_GetAmps, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_GetFilterdAmps", _wrap_CiA402Device_GetFilterdAmps, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_SetCommunications", _wrap_CiA402Device_SetCommunications, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_CheckError", _wrap_CiA402Device_CheckError, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_OperationMode", _wrap_CiA402Device_OperationMode, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_Setup_Velocity_Mode", _wrap_CiA402Device_Setup_Velocity_Mode, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_Setup_Torque_Mode", _wrap_CiA402Device_Setup_Torque_Mode, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_SetTorque", _wrap_CiA402Device_SetTorque, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_SetAmpRaw", _wrap_CiA402Device_SetAmpRaw, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_ForceSwitchOff", _wrap_CiA402Device_ForceSwitchOff, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_SetPosition", _wrap_CiA402Device_SetPosition, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_SetupPositionMode", _wrap_CiA402Device_SetupPositionMode, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_SetPositionRECURSIVE_test", _wrap_CiA402Device_SetPositionRECURSIVE_test, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_SetTarget_VELOCITY_PROPORCIONAL", _wrap_CiA402Device_SetTarget_VELOCITY_PROPORCIONAL, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_Reset", _wrap_CiA402Device_Reset, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_StartNode", _wrap_CiA402Device_StartNode, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_SetVelocity", _wrap_CiA402Device_SetVelocity, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_SetEnc_res", _wrap_CiA402Device_SetEnc_res, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_SetRed_Mot", _wrap_CiA402Device_SetRed_Mot, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_SetSampling_period", _wrap_CiA402Device_SetSampling_period, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_Scaling", _wrap_CiA402Device_Scaling, METH_VARARGS, NULL},
-	 { (char *)"delete_CiA402Device", _wrap_delete_CiA402Device, METH_VARARGS, NULL},
-	 { (char *)"CiA402Device_swigregister", CiA402Device_swigregister, METH_VARARGS, NULL},
+	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
+	 { "new_CiA402Device", _wrap_new_CiA402Device, METH_VARARGS, NULL},
+	 { "CiA402Device_CheckStatus", _wrap_CiA402Device_CheckStatus, METH_VARARGS, NULL},
+	 { "CiA402Device_PrintStatus", _wrap_CiA402Device_PrintStatus, METH_VARARGS, NULL},
+	 { "CiA402Device_SwitchOn", _wrap_CiA402Device_SwitchOn, METH_VARARGS, NULL},
+	 { "CiA402Device_SwitchOff", _wrap_CiA402Device_SwitchOff, METH_VARARGS, NULL},
+	 { "CiA402Device_QuickStop", _wrap_CiA402Device_QuickStop, METH_VARARGS, NULL},
+	 { "CiA402Device_GetPosition", _wrap_CiA402Device_GetPosition, METH_VARARGS, NULL},
+	 { "CiA402Device_GetVelocity", _wrap_CiA402Device_GetVelocity, METH_VARARGS, NULL},
+	 { "CiA402Device_GetFilteredVelocity", _wrap_CiA402Device_GetFilteredVelocity, METH_VARARGS, NULL},
+	 { "CiA402Device_GetMeanVelocity", _wrap_CiA402Device_GetMeanVelocity, METH_VARARGS, NULL},
+	 { "CiA402Device_GetAmps", _wrap_CiA402Device_GetAmps, METH_VARARGS, NULL},
+	 { "CiA402Device_GetFilterdAmps", _wrap_CiA402Device_GetFilterdAmps, METH_VARARGS, NULL},
+	 { "CiA402Device_SetCommunications", _wrap_CiA402Device_SetCommunications, METH_VARARGS, NULL},
+	 { "CiA402Device_CheckError", _wrap_CiA402Device_CheckError, METH_VARARGS, NULL},
+	 { "CiA402Device_OperationMode", _wrap_CiA402Device_OperationMode, METH_VARARGS, NULL},
+	 { "CiA402Device_Setup_Velocity_Mode", _wrap_CiA402Device_Setup_Velocity_Mode, METH_VARARGS, NULL},
+	 { "CiA402Device_Setup_Torque_Mode", _wrap_CiA402Device_Setup_Torque_Mode, METH_VARARGS, NULL},
+	 { "CiA402Device_SetTorque", _wrap_CiA402Device_SetTorque, METH_VARARGS, NULL},
+	 { "CiA402Device_SetAmpRaw", _wrap_CiA402Device_SetAmpRaw, METH_VARARGS, NULL},
+	 { "CiA402Device_ForceSwitchOff", _wrap_CiA402Device_ForceSwitchOff, METH_VARARGS, NULL},
+	 { "CiA402Device_SetPosition", _wrap_CiA402Device_SetPosition, METH_VARARGS, NULL},
+	 { "CiA402Device_SetupPositionMode", _wrap_CiA402Device_SetupPositionMode, METH_VARARGS, NULL},
+	 { "CiA402Device_SetPositionRECURSIVE_test", _wrap_CiA402Device_SetPositionRECURSIVE_test, METH_VARARGS, NULL},
+	 { "CiA402Device_SetTarget_VELOCITY_PROPORCIONAL", _wrap_CiA402Device_SetTarget_VELOCITY_PROPORCIONAL, METH_VARARGS, NULL},
+	 { "CiA402Device_Reset", _wrap_CiA402Device_Reset, METH_VARARGS, NULL},
+	 { "CiA402Device_StartNode", _wrap_CiA402Device_StartNode, METH_VARARGS, NULL},
+	 { "CiA402Device_SetVelocity", _wrap_CiA402Device_SetVelocity, METH_VARARGS, NULL},
+	 { "CiA402Device_SetEnc_res", _wrap_CiA402Device_SetEnc_res, METH_VARARGS, NULL},
+	 { "CiA402Device_SetRed_Mot", _wrap_CiA402Device_SetRed_Mot, METH_VARARGS, NULL},
+	 { "CiA402Device_SetSampling_period", _wrap_CiA402Device_SetSampling_period, METH_VARARGS, NULL},
+	 { "CiA402Device_Scaling", _wrap_CiA402Device_Scaling, METH_VARARGS, NULL},
+	 { "delete_CiA402Device", _wrap_delete_CiA402Device, METH_VARARGS, NULL},
+	 { "CiA402Device_swigregister", CiA402Device_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -5410,9 +5428,9 @@ extern "C" {
             char *ndoc = (char*)malloc(ldoc + lptr + 10);
             if (ndoc) {
               char *buff = ndoc;
-              strncpy(buff, methods[i].ml_doc, ldoc);
+              memcpy(buff, methods[i].ml_doc, ldoc);
               buff += ldoc;
-              strncpy(buff, "swig_ptr: ", 10);
+              memcpy(buff, "swig_ptr: ", 10);
               buff += 10;
               SWIG_PackVoidPtr(buff, ptr, ty->name, lptr);
               methods[i].ml_doc = ndoc;
@@ -5474,8 +5492,8 @@ SWIG_init(void) {
     (char *)"this", &SwigPyBuiltin_ThisClosure, NULL, NULL, NULL
   };
   static SwigPyGetSet thisown_getset_closure = {
-    (PyCFunction) SwigPyObject_own,
-    (PyCFunction) SwigPyObject_own
+    SwigPyObject_own,
+    SwigPyObject_own
   };
   static PyGetSetDef thisown_getset_def = {
     (char *)"thisown", SwigPyBuiltin_GetterClosure, SwigPyBuiltin_SetterClosure, NULL, &thisown_getset_closure

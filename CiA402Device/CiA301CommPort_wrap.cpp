@@ -1632,6 +1632,14 @@ SwigPyObject_repr(SwigPyObject *v, PyObject *args)
   return repr;  
 }
 
+/* We need a version taking two PyObject* parameters so it's a valid
+ * PyCFunction to use in swigobject_methods[]. */
+SWIGRUNTIME PyObject *
+SwigPyObject_repr2(PyObject *v, PyObject *SWIGUNUSEDPARM(args))
+{
+  return SwigPyObject_repr((SwigPyObject*)v);
+}
+
 SWIGRUNTIME int
 SwigPyObject_compare(SwigPyObject *v, SwigPyObject *w)
 {
@@ -1761,11 +1769,7 @@ SwigPyObject_append(PyObject* v, PyObject* next)
 }
 
 SWIGRUNTIME PyObject* 
-#ifdef METH_NOARGS
-SwigPyObject_next(PyObject* v)
-#else
 SwigPyObject_next(PyObject* v, PyObject *SWIGUNUSEDPARM(args))
-#endif
 {
   SwigPyObject *sobj = (SwigPyObject *) v;
   if (sobj->next) {    
@@ -1799,6 +1803,20 @@ SwigPyObject_acquire(PyObject* v, PyObject *SWIGUNUSEDPARM(args))
   sobj->own = SWIG_POINTER_OWN;
   return SWIG_Py_Void();
 }
+
+#ifdef METH_NOARGS
+static PyObject*
+SwigPyObject_disown2(PyObject* v, PyObject *SWIGUNUSEDPARM(args))
+{
+  return SwigPyObject_disown(v);
+}
+
+static PyObject*
+SwigPyObject_acquire2(PyObject* v, PyObject *SWIGUNUSEDPARM(args))
+{
+  return SwigPyObject_acquire(v);
+}
+#endif
 
 SWIGINTERN PyObject*
 SwigPyObject_own(PyObject *v, PyObject *args)
@@ -1840,12 +1858,12 @@ SwigPyObject_own(PyObject *v, PyObject *args)
 #ifdef METH_O
 static PyMethodDef
 swigobject_methods[] = {
-  {(char *)"disown",  (PyCFunction)SwigPyObject_disown,  METH_NOARGS,  (char *)"releases ownership of the pointer"},
-  {(char *)"acquire", (PyCFunction)SwigPyObject_acquire, METH_NOARGS,  (char *)"acquires ownership of the pointer"},
+  {(char *)"disown",  (PyCFunction)SwigPyObject_disown2, METH_NOARGS,  (char *)"releases ownership of the pointer"},
+  {(char *)"acquire", (PyCFunction)SwigPyObject_acquire2,METH_NOARGS,  (char *)"acquires ownership of the pointer"},
   {(char *)"own",     (PyCFunction)SwigPyObject_own,     METH_VARARGS, (char *)"returns/sets ownership of the pointer"},
   {(char *)"append",  (PyCFunction)SwigPyObject_append,  METH_O,       (char *)"appends another 'this' object"},
   {(char *)"next",    (PyCFunction)SwigPyObject_next,    METH_NOARGS,  (char *)"returns the next 'this' object"},
-  {(char *)"__repr__",(PyCFunction)SwigPyObject_repr,    METH_NOARGS,  (char *)"returns object representation"},
+  {(char *)"__repr__",(PyCFunction)SwigPyObject_repr2,   METH_NOARGS,  (char *)"returns object representation"},
   {0, 0, 0, 0}  
 };
 #else
@@ -1856,7 +1874,7 @@ swigobject_methods[] = {
   {(char *)"own",     (PyCFunction)SwigPyObject_own,     METH_VARARGS,  (char *)"returns/sets ownership of the pointer"},
   {(char *)"append",  (PyCFunction)SwigPyObject_append,  METH_VARARGS,  (char *)"appends another 'this' object"},
   {(char *)"next",    (PyCFunction)SwigPyObject_next,    METH_VARARGS,  (char *)"returns the next 'this' object"},
-  {(char *)"__repr__",(PyCFunction)SwigPyObject_repr,   METH_VARARGS,  (char *)"returns object representation"},
+  {(char *)"__repr__",(PyCFunction)SwigPyObject_repr,    METH_VARARGS,  (char *)"returns object representation"},
   {0, 0, 0, 0}  
 };
 #endif
@@ -4202,23 +4220,23 @@ SWIGINTERN PyObject *Swig_var_started_get(void) {
 
 
 static PyMethodDef SwigMethods[] = {
-	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
-	 { (char *)"new_CiA301CommPort", _wrap_new_CiA301CommPort, METH_VARARGS, NULL},
-	 { (char *)"CiA301CommPort_ReadSDO", _wrap_CiA301CommPort_ReadSDO, METH_VARARGS, NULL},
-	 { (char *)"CiA301CommPort_ReadNMT", _wrap_CiA301CommPort_ReadNMT, METH_VARARGS, NULL},
-	 { (char *)"CiA301CommPort_WriteNMT", _wrap_CiA301CommPort_WriteNMT, METH_VARARGS, NULL},
-	 { (char *)"CiA301CommPort_WritePDO", _wrap_CiA301CommPort_WritePDO, METH_VARARGS, NULL},
-	 { (char *)"CiA301CommPort_FlushBuffer", _wrap_CiA301CommPort_FlushBuffer, METH_VARARGS, NULL},
-	 { (char *)"CiA301CommPort_WriteSDO", _wrap_CiA301CommPort_WriteSDO, METH_VARARGS, NULL},
-	 { (char *)"CiA301CommPort_WritePDO4", _wrap_CiA301CommPort_WritePDO4, METH_VARARGS, NULL},
-	 { (char *)"CiA301CommPort_ReadErrorNMT", _wrap_CiA301CommPort_ReadErrorNMT, METH_VARARGS, NULL},
-	 { (char *)"CiA301CommPort_ReadPDO", _wrap_CiA301CommPort_ReadPDO, METH_VARARGS, NULL},
-	 { (char *)"CiA301CommPort_DisablePDOs", _wrap_CiA301CommPort_DisablePDOs, METH_VARARGS, NULL},
-	 { (char *)"CiA301CommPort_EnablePDOs", _wrap_CiA301CommPort_EnablePDOs, METH_VARARGS, NULL},
-	 { (char *)"CiA301CommPort_data4x8to32", _wrap_CiA301CommPort_data4x8to32, METH_VARARGS, NULL},
-	 { (char *)"CiA301CommPort_WritePDO1", _wrap_CiA301CommPort_WritePDO1, METH_VARARGS, NULL},
-	 { (char *)"delete_CiA301CommPort", _wrap_delete_CiA301CommPort, METH_VARARGS, NULL},
-	 { (char *)"CiA301CommPort_swigregister", CiA301CommPort_swigregister, METH_VARARGS, NULL},
+	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
+	 { "new_CiA301CommPort", _wrap_new_CiA301CommPort, METH_VARARGS, NULL},
+	 { "CiA301CommPort_ReadSDO", _wrap_CiA301CommPort_ReadSDO, METH_VARARGS, NULL},
+	 { "CiA301CommPort_ReadNMT", _wrap_CiA301CommPort_ReadNMT, METH_VARARGS, NULL},
+	 { "CiA301CommPort_WriteNMT", _wrap_CiA301CommPort_WriteNMT, METH_VARARGS, NULL},
+	 { "CiA301CommPort_WritePDO", _wrap_CiA301CommPort_WritePDO, METH_VARARGS, NULL},
+	 { "CiA301CommPort_FlushBuffer", _wrap_CiA301CommPort_FlushBuffer, METH_VARARGS, NULL},
+	 { "CiA301CommPort_WriteSDO", _wrap_CiA301CommPort_WriteSDO, METH_VARARGS, NULL},
+	 { "CiA301CommPort_WritePDO4", _wrap_CiA301CommPort_WritePDO4, METH_VARARGS, NULL},
+	 { "CiA301CommPort_ReadErrorNMT", _wrap_CiA301CommPort_ReadErrorNMT, METH_VARARGS, NULL},
+	 { "CiA301CommPort_ReadPDO", _wrap_CiA301CommPort_ReadPDO, METH_VARARGS, NULL},
+	 { "CiA301CommPort_DisablePDOs", _wrap_CiA301CommPort_DisablePDOs, METH_VARARGS, NULL},
+	 { "CiA301CommPort_EnablePDOs", _wrap_CiA301CommPort_EnablePDOs, METH_VARARGS, NULL},
+	 { "CiA301CommPort_data4x8to32", _wrap_CiA301CommPort_data4x8to32, METH_VARARGS, NULL},
+	 { "CiA301CommPort_WritePDO1", _wrap_CiA301CommPort_WritePDO1, METH_VARARGS, NULL},
+	 { "delete_CiA301CommPort", _wrap_delete_CiA301CommPort, METH_VARARGS, NULL},
+	 { "CiA301CommPort_swigregister", CiA301CommPort_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -4823,9 +4841,9 @@ extern "C" {
             char *ndoc = (char*)malloc(ldoc + lptr + 10);
             if (ndoc) {
               char *buff = ndoc;
-              strncpy(buff, methods[i].ml_doc, ldoc);
+              memcpy(buff, methods[i].ml_doc, ldoc);
               buff += ldoc;
-              strncpy(buff, "swig_ptr: ", 10);
+              memcpy(buff, "swig_ptr: ", 10);
               buff += 10;
               SWIG_PackVoidPtr(buff, ptr, ty->name, lptr);
               methods[i].ml_doc = ndoc;
@@ -4887,8 +4905,8 @@ SWIG_init(void) {
     (char *)"this", &SwigPyBuiltin_ThisClosure, NULL, NULL, NULL
   };
   static SwigPyGetSet thisown_getset_closure = {
-    (PyCFunction) SwigPyObject_own,
-    (PyCFunction) SwigPyObject_own
+    SwigPyObject_own,
+    SwigPyObject_own
   };
   static PyGetSetDef thisown_getset_def = {
     (char *)"thisown", SwigPyBuiltin_GetterClosure, SwigPyBuiltin_SetterClosure, NULL, &thisown_getset_closure

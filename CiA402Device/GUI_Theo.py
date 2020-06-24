@@ -83,7 +83,7 @@ class Master_Window(Cia402device.CiA402Device):
     def SwitchOn(self):
         global porter
         porter = int(self.port.get())
-        pm1 = SocketCanPort.SocketCanPort("vcan1")
+        pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(porter, pm1);
         #cia402.Reset()
         cia402.SwitchOn();
@@ -92,7 +92,7 @@ class Master_Window(Cia402device.CiA402Device):
 
     def SwitchOff(self):
         port = int(self.port.get())
-        pm1 = SocketCanPort.SocketCanPort("vcan1")
+        pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
         cia402.SwitchOff();
         self.var1.set(False)
@@ -323,7 +323,7 @@ class Window3(Cia402device.CiA402Device):
         self.errrr.place(x = 50, y = 230)
 
     def getmsg(self):
-        pm1 = SocketCanPort.SocketCanPort("vcan1")
+        pm1 = SocketCanPort.SocketCanPort("can1")
         err,cid,dat,siz = pm1.GetMsg()
         # print(cid)
         # self.canid.delete('0', END)
