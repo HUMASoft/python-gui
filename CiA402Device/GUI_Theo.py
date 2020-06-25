@@ -327,9 +327,9 @@ class Window3(Cia402device.CiA402Device):
 
     def getmsg(self):
         err,cid,dat,siz = pm1.GetMsg()
-        print(cid)
+        #print(cid)
         self.canid.delete('0', END)
-        self.canid.insert(0, str(cid))
+        self.canid.insert(0, str(hex(cid)))
         self.dat.delete('0', END)
         self.dat.insert(0, str(dat)) 
         self.siz.delete('0', END)
