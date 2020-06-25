@@ -214,7 +214,8 @@ class Window3:
         self.quitButton = Button(self.frame, text = 'Quit error window.', command = self.master.destroy)
         self.quitButton.place(x = 170, y = 140)
         #Get Msg
-        self.gmsg = Button(self.frame, text = 'Get error message.', command = self.getmsg)
+        #Stop/Start Simulation
+        self.gmsg = Button(self.frame,text = 'Get error message.', command = lambda : self.loop_msg(True))
         self.gmsg.place(x = 170, y = 90)
         #Labels 
         lbl1 = Label(self.frame, text = 'Can id:')
@@ -238,12 +239,25 @@ class Window3:
         self.err_typ.place(x = 80, y = 180)
         self.errrr = Entry(self.frame, width = 10)
         self.errrr.place(x = 50, y = 230)
+        self.cont = 0
 
+    def loop_msg(self, toggle=False):
+        global tracking_var
+        if toggle:
+            if tracking_var:
+                tracking_var = False
+            else:
+                tracking_var = True
+
+
+        if tracking_var:
+            self.getmsg()
+            self.frame.after(1000, self.loop_msg) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
     def getmsg(self):
-        print(err)
-        print(cid)
-        print(dat)
-        print(siz)
+        self.cont = self.cont + 1
+        pos = self.cont
+        self.canid.delete('0', END)      
+        self.canid.insert(0, str(pos)) 
 
 def main(): 
     root = tk.Tk() 

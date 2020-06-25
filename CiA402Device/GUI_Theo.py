@@ -297,7 +297,7 @@ class Window3(Cia402device.CiA402Device):
         self.quitButton = Button(self.frame, text = 'Quit error window.', command = self.master.destroy)
         self.quitButton.place(x = 170, y = 140)
         #Get Msg
-        self.gmsg = Button(self.frame, text = 'Get error message.', command = self.getmsg)
+        self.gmsg = Button(self.frame,text = 'Get error message.', command = lambda : self.loop_msg(True))
         self.gmsg.place(x = 170, y = 90)
         #Labels 
         lbl1 = Label(self.frame, text = 'Can id:')
@@ -351,7 +351,6 @@ class Window3(Cia402device.CiA402Device):
                 tracking_var = False
             else:
                 tracking_var = True
-
         if tracking_var:
             self.getmsg()
             self.frame.after(1000, self.loop) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
