@@ -208,15 +208,15 @@ class Window3:
         self.Style = Style()
         self.Style.theme_use('default')
         self.master.title('Theo´s error window')
-        self.master.geometry('580x280+100+150')
+        self.master.geometry('630x400+100+150')
         self.frame.pack(fill = BOTH, expand = 1)
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit error window.', command = self.master.destroy)
-        self.quitButton.place(x = 410, y = 140)
+        self.quitButton.place(x = 200, y = 300)
         #Get Msg
         #Stop/Start Simulation
         self.gmsg = Button(self.frame,text = 'Get error message.', command = lambda : self.loop_msg(True))
-        self.gmsg.place(x = 410, y = 90)
+        self.gmsg.place(x = 10, y = 300)
         #Labels 
         lbl1 = Label(self.frame, text = 'Can id:')
         lbl1.place(x = 10, y = 30)
@@ -228,6 +228,8 @@ class Window3:
         lbl4.place(x = 10, y = 180)
         lbl5 = Label(self.frame, text = 'Error:')
         lbl5.place(x = 10, y = 230)
+        lbl6 = Label(self.frame, text = 'Filter messages by first number:')
+        lbl6.place(x = 410, y = 30)
         #textboxes
         self.canid = Entry(self.frame, width = 40)
         self.canid.place(x = 60, y = 30)
@@ -243,48 +245,48 @@ class Window3:
         #Checkboxes
         # error, 0
         self.var0 = IntVar()        
-        self.check_0 = Checkbutton(self.frame, text = 'Position mode',  variable = self.var0, command = self.posmode)
-        self.check_0.place(x = 410, y = 20)
+        self.check_0 = Checkbutton(self.frame, text = '0',  variable = self.var0, command = self.zeromode)
+        self.check_0.place(x = 410, y = 50)
         # error, 1
         self.var1 = IntVar()        
-        self.check_1 = Checkbutton(self.frame, text = 'Velocity mode', variable = self.var1, command = self.velmode)
-        self.check_1.place(x = 410, y = 40)
+        self.check_1 = Checkbutton(self.frame, text = '1', variable = self.var1, command = self.zeromode)
+        self.check_1.place(x = 410, y = 70)
         # error, 2
         self.var2 = IntVar()        
-        self.check_2 = Checkbutton(self.frame, text = 'Torque mode',  variable = self.var2, command = self.torquemode)
-        self.check_2.place(x = 410, y = 60)
+        self.check_2 = Checkbutton(self.frame, text = '2',  variable = self.var2, command = self.zeromode)
+        self.check_2.place(x = 410, y = 90)
         # error, 3
         self.var3 = IntVar()        
-        self.check_3 = Checkbutton(self.frame, text = 'Position mode',  variable = self.var3, command = self.posmode)
-        self.check_3.place(x = 410, y = 80)
+        self.check_3 = Checkbutton(self.frame, text = '3',  variable = self.var3, command = self.zeromode)
+        self.check_3.place(x = 410, y = 110)
         # error, 4
         self.var4 = IntVar()        
-        self.check_4 = Checkbutton(self.frame, text = 'Velocity mode', variable = self.var4, command = self.velmode)
-        self.check_4.place(x = 410, y = 100)
+        self.check_4 = Checkbutton(self.frame, text = '4', variable = self.var4, command = self.zeromode)
+        self.check_4.place(x = 410, y = 140)
         # error, 5
         self.var5 = IntVar()        
-        self.check_5 = Checkbutton(self.frame, text = 'Torque mode',  variable = self.var5, command = self.torquemode)
-        self.check_5.place(x = 410, y = 120)
+        self.check_5 = Checkbutton(self.frame, text = '5',  variable = self.var5, command = self.zeromode)
+        self.check_5.place(x = 410, y = 170)
         # error, 6
         self.var6 = IntVar()        
-        self.check_6 = Checkbutton(self.frame, text = 'Velocity mode', variable = self.var6, command = self.velmode)
-        self.check_6.place(x = 410, y = 140)
+        self.check_6 = Checkbutton(self.frame, text = '6', variable = self.var6, command = self.zeromode)
+        self.check_6.place(x = 410, y = 200)
         # error, 7
         self.var7 = IntVar()        
-        self.check_7 = Checkbutton(self.frame, text = 'Torque mode',  variable = self.var7, command = self.torquemode)
-        self.check_7.place(x = 410, y = 160)
+        self.check_7 = Checkbutton(self.frame, text = '7',  variable = self.var7, command = self.zeromode)
+        self.check_7.place(x = 410, y = 230)
         # error, 8
         self.var8 = IntVar()        
-        self.check_8 = Checkbutton(self.frame, text = 'Position mode',  variable = self.var8, command = self.posmode)
-        self.check_8.place(x = 410, y = 180)
+        self.check_8 = Checkbutton(self.frame, text = '8',  variable = self.var8, command = self.zeromode)
+        self.check_8.place(x = 410, y = 260)
         # error, 9
         self.var9 = IntVar()        
-        self.check_9 = Checkbutton(self.frame, text = 'Velocity mode', variable = self.var9, command = self.velmode)
-        self.check_9.place(x = 410, y = 200)
+        self.check_9 = Checkbutton(self.frame, text = '9', variable = self.var9, command = self.zeromode)
+        self.check_9.place(x = 410, y = 290)
         #error, F
         self.varF = IntVar()        
-        self.check_F = Checkbutton(self.frame, text = 'Torque mode',  variable = self.varF, command = self.torquemode)
-        self.check_F.place(x = 410, y = 220)
+        self.check_F = Checkbutton(self.frame, text = 'F',  variable = self.varF, command = self.zeromode)
+        self.check_F.place(x = 410, y = 320)
 
     def loop_msg(self, toggle=False):
         global tracking_var
@@ -303,7 +305,10 @@ class Window3:
         self.cont = self.cont + 1
         pos = self.cont
         self.canid.delete('0', END)      
-        self.canid.insert(0, str(pos)) 
+        self.canid.insert(0, str(pos))
+
+    def zeromode(self):
+        A = 'HELLO' 
 
 def main(): 
     root = tk.Tk() 
