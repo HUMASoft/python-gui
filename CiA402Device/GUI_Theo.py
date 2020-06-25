@@ -321,6 +321,52 @@ class Window3(Cia402device.CiA402Device):
         self.err_typ.place(x = 80, y = 180)
         self.errrr = Entry(self.frame, width = 20)
         self.errrr.place(x = 50, y = 230)
+        #Checkboxes
+        # error, 0
+        self.var0 = IntVar()        
+        self.check_0 = Checkbutton(self.frame, text = 'Position mode',  variable = self.var0, command = self.posmode)
+        self.check_0.place(x = 410, y = 20)
+        # error, 1
+        self.var1 = IntVar()        
+        self.check_1 = Checkbutton(self.frame, text = 'Velocity mode', variable = self.var1, command = self.velmode)
+        self.check_1.place(x = 410, y = 40)
+        # error, 2
+        self.var2 = IntVar()        
+        self.check_2 = Checkbutton(self.frame, text = 'Torque mode',  variable = self.var2, command = self.torquemode)
+        self.check_2.place(x = 410, y = 60)
+        # error, 3
+        self.var3 = IntVar()        
+        self.check_3 = Checkbutton(self.frame, text = 'Position mode',  variable = self.var3, command = self.posmode)
+        self.check_3.place(x = 410, y = 80)
+        # error, 4
+        self.var4 = IntVar()        
+        self.check_4 = Checkbutton(self.frame, text = 'Velocity mode', variable = self.var4, command = self.velmode)
+        self.check_4.place(x = 410, y = 100)
+        # error, 5
+        self.var5 = IntVar()        
+        self.check_5 = Checkbutton(self.frame, text = 'Torque mode',  variable = self.var5, command = self.torquemode)
+        self.check_5.place(x = 410, y = 120)
+        # error, 6
+        self.var6 = IntVar()        
+        self.check_6 = Checkbutton(self.frame, text = 'Velocity mode', variable = self.var6, command = self.velmode)
+        self.check_6.place(x = 410, y = 140)
+        # error, 7
+        self.var7 = IntVar()        
+        self.check_7 = Checkbutton(self.frame, text = 'Torque mode',  variable = self.var7, command = self.torquemode)
+        self.check_7.place(x = 410, y = 160)
+        # error, 8
+        self.var8 = IntVar()        
+        self.check_8 = Checkbutton(self.frame, text = 'Position mode',  variable = self.var8, command = self.posmode)
+        self.check_8.place(x = 410, y = 180)
+        # error, 9
+        self.var9 = IntVar()        
+        self.check_9 = Checkbutton(self.frame, text = 'Velocity mode', variable = self.var9, command = self.velmode)
+        self.check_9.place(x = 410, y = 200)
+        #error, F
+        self.varF = IntVar()        
+        self.check_F = Checkbutton(self.frame, text = 'Torque mode',  variable = self.varF, command = self.torquemode)
+        self.check_F.place(x = 410, y = 220)
+
         global pm1
         pm1 = SocketCanPort.SocketCanPort("can1")
         self.cont = 1
