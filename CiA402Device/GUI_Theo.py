@@ -291,14 +291,14 @@ class Window3(Cia402device.CiA402Device):
         self.Style = Style()
         self.Style.theme_use('default')
         self.master.title('Theo´s error window')
-        self.master.geometry('380x280+100+150')
+        self.master.geometry('580x280+100+150')
         self.frame.pack(fill = BOTH, expand = 1)
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit error window.', command = self.master.destroy)
-        self.quitButton.place(x = 170, y = 140)
+        self.quitButton.place(x = 410, y = 140)
         #Get Msg
         self.gmsg = Button(self.frame,text = 'Get error message.', command = lambda : self.loop_msg(True))
-        self.gmsg.place(x = 170, y = 90)
+        self.gmsg.place(x = 410, y = 90)
         #Labels 
         lbl1 = Label(self.frame, text = 'Can id:')
         lbl1.place(x = 10, y = 30)
@@ -311,11 +311,11 @@ class Window3(Cia402device.CiA402Device):
         lbl5 = Label(self.frame, text = 'Error:')
         lbl5.place(x = 10, y = 230)
         #textboxes
-        self.canid = Entry(self.frame, width = 10)
+        self.canid = Entry(self.frame, width = 40)
         self.canid.place(x = 60, y = 30)
-        self.dat = Entry(self.frame, width = 10)
+        self.dat = Entry(self.frame, width = 40)
         self.dat.place(x = 50, y = 80)
-        self.siz = Entry(self.frame, width = 10)
+        self.siz = Entry(self.frame, width = 40)
         self.siz.place(x = 50, y = 130)
         self.err_typ = Entry(self.frame, width = 10)
         self.err_typ.place(x = 80, y = 180)
