@@ -323,6 +323,7 @@ class Window3(Cia402device.CiA402Device):
         self.errrr.place(x = 50, y = 230)
         global pm1
         pm1 = SocketCanPort.SocketCanPort("can1")
+        self.cont = 1
 
 
     def getmsg(self):
@@ -333,14 +334,24 @@ class Window3(Cia402device.CiA402Device):
         #Obtengo lo nuevo
         err,cid,dat,siz = pm1.GetMsg()
         #Inserto lo nuevo
-        self.canid.delete('0', END)
-        self.canid.insert(0, self.old_id + ', ' + str(hex(cid)))
-        self.dat.delete('0', END)
-        self.dat.insert(0, self.old_id + ', ' + str(dat)) 
-        self.siz.delete('0', END)
-        self.siz.insert(0, self.old_siz + ', ' + str(siz)) 
-        self.err_typ.delete('0', END)
-        self.err_typ.insert(0, str(err))
+        if self.cont > 1:
+            self.canid.delete('0', END)
+            self.canid.insert(0, self.old_id + ', ' + str(hex(cid)))
+            self.dat.delete('0', END)
+            self.dat.insert(0, self.old_dat + ', ' + str(dat)) 
+            self.siz.delete('0', END)
+            self.siz.insert(0, self.old_siz + ', ' + str(siz)) 
+            self.err_typ.delete('0', END)
+            self.err_typ.insert(0, str(err))
+        else:
+            self.canid.delete('0', END)
+            self.canid.insert(0, str(hex(cid)))
+            self.dat.delete('0', END)
+            self.dat.insert(0, str(dat)) 
+            self.siz.delete('0', END)
+            self.siz.insert(0, str(siz)) 
+            self.err_typ.delete('0', END)
+            self.err_typ.insert(0, str(err))
         if err == -1:
             self.siz.delete('0', END)
             self.dat.delete('0', END)
@@ -365,7 +376,8 @@ class Window3(Cia402device.CiA402Device):
                 tracking_var = True
         if tracking_var:
             self.getmsg()
-            self.frame.after(1000, self.loop) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
+            self.cont = self.cont + 1
+            self.frame.after(1000, self.loop_msg) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
 
 
 
