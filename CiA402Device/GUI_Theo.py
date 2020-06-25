@@ -337,11 +337,14 @@ class Window3(Cia402device.CiA402Device):
         self.err_typ.delete('0', END)
         self.err_typ.insert(0, str(err))
         if err == -1:
-             self.errrr.delete('0', END)
-             self.errrr.insert(0, 'Timeout in poll read.')
+            self.errrr.delete('0', END)
+            self.errrr.insert(0, 'Timeout in poll read.')
         elif err == -2:
-             self.errrr.delete('0', END)
-             self.errrr.insert(0, 'Error in poll read.') 
+            self.errrr.delete('0', END)
+            self.errrr.insert(0, 'Error in poll read.')
+        elif err == 0:
+            self.errrr.delete('0', END)
+
 
 
 
