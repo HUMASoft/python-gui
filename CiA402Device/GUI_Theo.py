@@ -327,7 +327,6 @@ class Window3(Cia402device.CiA402Device):
 
     def getmsg(self):
         err,cid,dat,siz = pm1.GetMsg()
-        #print(cid)
         self.canid.delete('0', END)
         self.canid.insert(0, str(hex(cid)))
         self.dat.delete('0', END)
@@ -344,6 +343,18 @@ class Window3(Cia402device.CiA402Device):
             self.errrr.insert(0, 'Error in poll read.')
         elif err == 0:
             self.errrr.delete('0', END)
+
+    def loop_msg(self, toggle=False):
+        global tracking_var
+        if toggle:
+            if tracking_var:
+                tracking_var = False
+            else:
+                tracking_var = True
+
+        if tracking_var:
+            self.getmsg()
+            self.frame.after(1000, self.loop) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
 
 
 
