@@ -85,7 +85,7 @@ class Master_Window(Cia402device.CiA402Device):
         porter = int(self.port.get())
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(porter, pm1);
-        #cia402.Reset()
+        cia402.Reset()
         cia402.SwitchOn();
         self.var1.set(True)
         self.var2.set(False)
@@ -322,26 +322,26 @@ class Window3(Cia402device.CiA402Device):
         self.errrr = Entry(self.frame, width = 20)
         self.errrr.place(x = 50, y = 230)
         global pm1
-        pm1 = SocketCanPort.SocketCanPort("vcan1")
+        pm1 = SocketCanPort.SocketCanPort("can1")
 
 
     def getmsg(self):
         err,cid,dat,siz = pm1.GetMsg()
-        # print(cid)
-        # self.canid.delete('0', END)
-        # self.canid.insert(0, str(cid))
-        # self.dat.delete('0', END)
-        # self.dat.insert(0, str(dat)) 
-        # self.siz.delete('0', END)
-        # self.siz.insert(0, str(siz)) 
-        # self.err_typ.delete('0', END)
-        # self.err_typ.insert(0, str(err))
-        # if err == -1:
-        #     self.errrr.delete('0', END)
-        #     self.errrr.insert(0, 'Timeout in poll read.')
-        # elif err == -2:
-        #     self.errrr.delete('0', END)
-        #     self.errrr.insert(0, 'Error in poll read.') 
+        print(cid)
+        self.canid.delete('0', END)
+        self.canid.insert(0, str(cid))
+        self.dat.delete('0', END)
+        self.dat.insert(0, str(dat)) 
+        self.siz.delete('0', END)
+        self.siz.insert(0, str(siz)) 
+        self.err_typ.delete('0', END)
+        self.err_typ.insert(0, str(err))
+        if err == -1:
+             self.errrr.delete('0', END)
+             self.errrr.insert(0, 'Timeout in poll read.')
+        elif err == -2:
+             self.errrr.delete('0', END)
+             self.errrr.insert(0, 'Error in poll read.') 
 
 
 
