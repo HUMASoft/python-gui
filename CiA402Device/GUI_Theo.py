@@ -321,9 +321,10 @@ class Window3(Cia402device.CiA402Device):
         self.err_typ.place(x = 80, y = 180)
         self.errrr = Entry(self.frame, width = 20)
         self.errrr.place(x = 50, y = 230)
+        pm1 = SocketCanPort.SocketCanPort("vcan1")
+
 
     def getmsg(self):
-        pm1 = SocketCanPort.SocketCanPort("can1")
         err,cid,dat,siz = pm1.GetMsg()
         # print(cid)
         # self.canid.delete('0', END)
