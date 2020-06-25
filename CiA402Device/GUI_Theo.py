@@ -297,7 +297,7 @@ class Window3(Cia402device.CiA402Device):
         self.quitButton = Button(self.frame, text = 'Quit error window.', command = self.master.destroy)
         self.quitButton.place(x = 170, y = 140)
         #Get Msg
-        self.gmsg = Button(self.frame, text = 'Get error message.', command = self.loop_msg)
+        self.gmsg = Button(self.frame, text = 'Get error message.', command = self.getmsg)
         self.gmsg.place(x = 170, y = 90)
         #Labels 
         lbl1 = Label(self.frame, text = 'Can id:')
