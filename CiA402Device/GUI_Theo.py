@@ -291,14 +291,14 @@ class Window3(Cia402device.CiA402Device):
         self.Style = Style()
         self.Style.theme_use('default')
         self.master.title('Theo´s error window')
-        self.master.geometry('580x280+100+150')
+        self.master.geometry('630x400+100+150')
         self.frame.pack(fill = BOTH, expand = 1)
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit error window.', command = self.master.destroy)
-        self.quitButton.place(x = 410, y = 140)
+        self.quitButton.place(x = 200, y = 300)
         #Get Msg
         self.gmsg = Button(self.frame,text = 'Get error message.', command = lambda : self.loop_msg(True))
-        self.gmsg.place(x = 410, y = 90)
+        self.gmsg.place(x = 10, y = 300)
         #Labels 
         lbl1 = Label(self.frame, text = 'Can id:')
         lbl1.place(x = 10, y = 30)
