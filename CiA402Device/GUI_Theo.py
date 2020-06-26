@@ -381,8 +381,8 @@ class Window3(Cia402device.CiA402Device):
         self.old_siz= self.siz.get()
         #Obtengo lo nuevo
         err,cid,dat,siz = pm1.GetMsg()
-        if self.var7 == True:
-            print('HELLO')
+        print(self.var7.get())
+            #print('HELLO')
             
         #Inserto lo nuevo
         if self.cont > 1:
