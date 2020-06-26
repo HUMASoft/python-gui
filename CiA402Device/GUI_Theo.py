@@ -189,7 +189,7 @@ class Window2(Cia402device.CiA402Device):
         self.check_t.place(x = 0, y = 60)
         #pos graph
         self.varpg = IntVar()        
-        self.graph_p = Checkbutton(self.frame, text = 'Check to graph position when simulating',  variable = self.varpg, command = self.posmode)
+        self.graph_p = Checkbutton(self.frame, text = 'Check to graph position when simulating',  variable = self.varpg)
         self.graph_p.place(x = 250, y = 160)
 
     def get_position(self):
