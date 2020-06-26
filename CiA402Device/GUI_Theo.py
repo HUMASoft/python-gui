@@ -371,7 +371,7 @@ class Window3(Cia402device.CiA402Device):
 
         global pm1
         pm1 = SocketCanPort.SocketCanPort("can1")
-        self.cont = 1
+        self.cont = 0
 
 
     def getmsg(self):
