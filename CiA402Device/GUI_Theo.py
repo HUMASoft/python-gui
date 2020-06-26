@@ -384,6 +384,8 @@ class Window3(Cia402device.CiA402Device):
         lister = self.checkbox_check()
         #Inserto lo nuevo solo si está marcado:
         for i in range(0,len(lister)):
+            print(lister[i])
+            print(str(hex(cid))[2])
             if lister[i] == str(hex(cid))[2]:
                 filtered = True
             else:
