@@ -383,16 +383,12 @@ class Window3(Cia402device.CiA402Device):
         err,cid,dat,siz = pm1.GetMsg()
         lister = self.checkbox_check()
         #Inserto lo nuevo solo si está marcado:
-        print(str(hex(cid))[2])
         for i in range(0,len(lister)):
             if lister[i] == str(hex(cid))[2]:
                 filtered = True
             else:
                 filtered = False
-        print(filtered)
-        print(lister)
         if filtered == True:
-            self.cont = self.cont + 1
             if self.cont > 1:
                 self.canid.delete('0', END)
                 self.canid.insert(0, self.old_id + ', ' + str(hex(cid)))
@@ -429,6 +425,7 @@ class Window3(Cia402device.CiA402Device):
                 tracking_var = True
         if tracking_var:
             self.getmsg()
+            self.cont = self.cont + 1
             self.frame.after(1000, self.loop_msg) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
 
     def checkbox_check(self):
