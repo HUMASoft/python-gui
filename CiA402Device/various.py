@@ -245,47 +245,47 @@ class Window3:
         #Checkboxes
         # error, 0
         self.var0 = IntVar()        
-        self.check_0 = Checkbutton(self.frame, text = '0',  variable = self.var0, command = self.zeromode)
+        self.check_0 = Checkbutton(self.frame, text = '0',  variable = self.var0)
         self.check_0.place(x = 410, y = 50)
         # error, 1
         self.var1 = IntVar()        
-        self.check_1 = Checkbutton(self.frame, text = '1', variable = self.var1, command = self.zeromode)
+        self.check_1 = Checkbutton(self.frame, text = '1', variable = self.var1)
         self.check_1.place(x = 410, y = 70)
         # error, 2
         self.var2 = IntVar()        
-        self.check_2 = Checkbutton(self.frame, text = '2',  variable = self.var2, command = self.zeromode)
+        self.check_2 = Checkbutton(self.frame, text = '2',  variable = self.var2)
         self.check_2.place(x = 410, y = 90)
         # error, 3
         self.var3 = IntVar()        
-        self.check_3 = Checkbutton(self.frame, text = '3',  variable = self.var3, command = self.zeromode)
+        self.check_3 = Checkbutton(self.frame, text = '3',  variable = self.var3)
         self.check_3.place(x = 410, y = 110)
         # error, 4
         self.var4 = IntVar()        
-        self.check_4 = Checkbutton(self.frame, text = '4', variable = self.var4, command = self.zeromode)
+        self.check_4 = Checkbutton(self.frame, text = '4', variable = self.var4)
         self.check_4.place(x = 410, y = 140)
         # error, 5
         self.var5 = IntVar()        
-        self.check_5 = Checkbutton(self.frame, text = '5',  variable = self.var5, command = self.zeromode)
+        self.check_5 = Checkbutton(self.frame, text = '5',  variable = self.var5)
         self.check_5.place(x = 410, y = 170)
         # error, 6
         self.var6 = IntVar()        
-        self.check_6 = Checkbutton(self.frame, text = '6', variable = self.var6, command = self.zeromode)
+        self.check_6 = Checkbutton(self.frame, text = '6', variable = self.var6)
         self.check_6.place(x = 410, y = 200)
         # error, 7
         self.var7 = IntVar()        
-        self.check_7 = Checkbutton(self.frame, text = '7',  variable = self.var7, command = self.zeromode)
+        self.check_7 = Checkbutton(self.frame, text = '7',  variable = self.var7)
         self.check_7.place(x = 410, y = 230)
         # error, 8
         self.var8 = IntVar()        
-        self.check_8 = Checkbutton(self.frame, text = '8',  variable = self.var8, command = self.zeromode)
+        self.check_8 = Checkbutton(self.frame, text = '8',  variable = self.var8)
         self.check_8.place(x = 410, y = 260)
         # error, 9
         self.var9 = IntVar()        
-        self.check_9 = Checkbutton(self.frame, text = '9', variable = self.var9, command = self.zeromode)
+        self.check_9 = Checkbutton(self.frame, text = '9', variable = self.var9)
         self.check_9.place(x = 410, y = 290)
         #error, F
         self.varF = IntVar()        
-        self.check_F = Checkbutton(self.frame, text = 'F',  variable = self.varF, command = self.zeromode)
+        self.check_F = Checkbutton(self.frame, text = 'F',  variable = self.varF)
         self.check_F.place(x = 410, y = 320)
 
     def loop_msg(self, toggle=False):
@@ -296,19 +296,52 @@ class Window3:
             else:
                 tracking_var = True
 
-
         if tracking_var:
             self.getmsg()
             self.frame.after(1000, self.loop_msg) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
+
     def getmsg(self):
+        #Compruebo cuales están marcados
+        lister = self.checkbox_check()
+        cid = 1567
+        for i in range(0,len(lister)):
+            if lister[i] == str(hex(cid))[2]:
+                filtered = True
+            else:
+                filtered = False
+        print(filtered)
         self.old_id = self.canid.get()
         self.cont = self.cont + 1
         pos = self.cont
         self.canid.delete('0', END)      
         self.canid.insert(0, str(pos))
 
-    def zeromode(self):
-        A = 'HELLO' 
+    def checkbox_check(self):
+        lis = list()
+        if self.var0.get() == 1:
+            lis.append('0')
+        if self.var1.get() == 1:
+            lis.append('1')
+        if self.var2.get() == 1:
+            lis.append('2')
+        if self.var3.get() == 1:
+            lis.append('3')
+        if self.var4.get() == 1:
+            lis.append('4')
+        if self.var5.get() == 1:
+            lis.append('5')
+        if self.var6.get() == 1:
+            lis.append('6')
+        if self.var7.get() == 1:
+            lis.append('7')
+        if self.var8.get() == 1:
+            lis.append('8')
+        if self.var9.get() == 1:
+            lis.append('9')
+        if self.varF.get() == 1:
+            lis.append('F')
+        return lis
+
 
 def main(): 
     root = tk.Tk() 
