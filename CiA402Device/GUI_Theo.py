@@ -388,6 +388,8 @@ class Window3(Cia402device.CiA402Device):
                 filtered = True
             else:
                 filtered = False
+        print(filtered)
+        print(lister)
         if filtered == True:
             if self.cont > 1:
                 self.canid.delete('0', END)
@@ -415,7 +417,7 @@ class Window3(Cia402device.CiA402Device):
             self.errrr.insert(0, 'Error in poll read.')
         elif err == 0:
             self.errrr.delete('0', END)
-            
+
     def loop_msg(self, toggle=False):
         global tracking_var
         if toggle:
