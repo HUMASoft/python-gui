@@ -325,8 +325,7 @@ class Window2(Cia402device.CiA402Device):
             plt.plot(m_vel[:], 'ro') #ro indica r(red)o(circles)
             plt.grid(True)
             plt.ylabel('Velocity')
-            plt.xlabel('Sample measure')
-            plt.title('Simulation graphs')
+            plt.xlabel('Sample measure point')
             #pinto
             plt.show()
 
