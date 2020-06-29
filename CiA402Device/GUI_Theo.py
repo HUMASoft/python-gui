@@ -407,7 +407,9 @@ class Window3(Cia402device.CiA402Device):
             self.cont = self.cont + 1
             if self.cont > 1:
                 #self.canid.delete('0', END)
+                self.canid.configure(state = 'normal')
                 self.canid.insert('end', str(hex(cid)) + '/n')
+                self.canid.configure(state = 'disabled')
                 self.dat.delete('0', END)
                 self.dat.insert(0, self.old_dat + ', ' + str(dat)) 
                 self.siz.delete('0', END)
