@@ -297,6 +297,7 @@ class Window2(Cia402device.CiA402Device):
             self.get_mean_velocity()
             self.get_amps()
             self.get_filtered_amps()
+            global tsamp
             tsamp = self.sample.get()
             self.frame.after(tsamp, self.loop) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
         else:
