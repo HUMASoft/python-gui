@@ -406,8 +406,8 @@ class Window3(Cia402device.CiA402Device):
         if filtered == True:
             self.cont = self.cont + 1
             if self.cont > 1:
-                self.canid.delete('0', END)
-                self.canid.insert('0', self.old_id + '/n' + str(hex(cid)))
+                #self.canid.delete('0', END)
+                self.canid.insert('end', str(hex(cid)) + '/n')
                 self.dat.delete('0', END)
                 self.dat.insert(0, self.old_dat + ', ' + str(dat)) 
                 self.siz.delete('0', END)
