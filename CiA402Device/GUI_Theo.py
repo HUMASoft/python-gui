@@ -383,7 +383,7 @@ class Window3(Cia402device.CiA402Device):
 
     def getmsg(self):
         #Recupero lo viejo
-        self.old_id = self.canid.get()
+        #self.old_id = self.canid.get()
         # self.old_dat = self.dat.get()
         # self.old_siz= self.siz.get()
         #Obtengo lo nuevo
@@ -405,8 +405,8 @@ class Window3(Cia402device.CiA402Device):
                 self.err_typ.delete('0', END)
                 self.err_typ.insert(0, str(err))
             else:
-                self.canid.delete('0', END)
-                self.canid.insert(0, str(hex(cid)))
+                #self.canid.delete('0', END)
+                self.canid.insert(END, str(hex(cid))+ '\n')
                 self.err_typ.delete('0', END)
                 self.err_typ.insert(0, str(err))
         if err == -1:
