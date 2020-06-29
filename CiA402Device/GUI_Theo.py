@@ -33,7 +33,7 @@ class Master_Window(Cia402device.CiA402Device):
         self.frame = Frame(self.master)
         self.Style = Style()
         self.Style.theme_use('default')
-        self.master.title('Theo´s testing GUI')
+        self.master.title('Teo´s testing GUI')
         self.master.geometry('450x280+500+150')
         self.frame.pack(fill = BOTH, expand = 1)
         #Buttons
@@ -106,7 +106,7 @@ class Window2(Cia402device.CiA402Device):
         self.frame = Frame(self.master)
         self.Style = Style()
         self.Style.theme_use('default')
-        self.master.title('Theo´s control window')
+        self.master.title('Teo´s control window')
         self.master.geometry('700x360+800+150')
         self.frame.pack(fill = BOTH, expand = 1)
         #Buttons
@@ -316,7 +316,7 @@ class Window3(Cia402device.CiA402Device):
         self.frame = Frame(self.master)
         self.Style = Style()
         self.Style.theme_use('default')
-        self.master.title('Theo´s error window')
+        self.master.title('Teo´s error window')
         self.master.geometry('630x400+100+150')
         self.frame.pack(fill = BOTH, expand = 1)
         #Quit
@@ -326,7 +326,7 @@ class Window3(Cia402device.CiA402Device):
         self.gmsg = Button(self.frame,text = 'Get error message.', command = lambda : self.loop_msg(True))
         self.gmsg.place(x = 10, y = 350)
         #Labels 
-        lbl1 = Label(self.frame, text = 'Can id:')
+        lbl1 = Label(self.frame, text = 'Messages: ')
         lbl1.place(x = 10, y = 30)
         lbl4 = Label(self.frame, text = 'Error type:')
         lbl4.place(x = 10, y = 260)
