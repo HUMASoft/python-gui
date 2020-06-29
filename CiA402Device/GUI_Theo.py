@@ -190,8 +190,12 @@ class Window2(Cia402device.CiA402Device):
         self.vart = IntVar()        
         self.check_t = Checkbutton(self.frame, text = 'Torque mode',  variable = self.vart, command = self.torquemode)
         self.check_t.place(x = 0, y = 60)
-        global measures
-        measures = list()
+        global m_pos, m_vel, m_tor
+        m_pos = list()
+        m_vel = list()
+        m_tor = list()
+
+
     def get_position(self):
         port = porter
         pm1 = SocketCanPort.SocketCanPort("can1")
@@ -199,7 +203,7 @@ class Window2(Cia402device.CiA402Device):
         pos = cia402.GetPosition(); 
         self.position.delete('0', END)
         self.position.insert(0, str(pos)) 
-        measures.append(pos)
+        m_pos.append(pos)
 
     def get_velocity(self):
         port = porter
@@ -207,7 +211,9 @@ class Window2(Cia402device.CiA402Device):
         cia402 = Cia402device.CiA402Device(port, pm1);
         vel = cia402.GetVelocity();
         self.velocity.delete('0', END)
-        self.velocity.insert(0, str(vel)) 
+        self.velocity.insert(0, str(vel))
+        m_vel.append(vel)
+ 
         
     def get_mean_velocity(self):
         port = porter
@@ -297,20 +303,31 @@ class Window2(Cia402device.CiA402Device):
             self.get_filtered_amps()
             global tsamp
             tsamp = self.sample.get()
-            self.frame.after(tsamp, self.loop) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
+            self.frame.after(tsamp, self.loop) #tsamp es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
         else:
             #Acabada la simulación saco la gráfica
             tmeasured = self.time_frame.get()
             #Saco cuantos componentes son:
             nbr_pts = int(tmeasured)/(int(tsamp)/1000)
-            final_vec = measures[-int(nbr_pts):]
-            #Pinto la gráfica
+            final_vec_p = m_pos[-int(nbr_pts):]
+            final_vec_v = m_vel[-int(nbr_pts):]
+
+            #Pinto las gráficas
+            #Posición
             plt.subplot(211)
-            plt.plot(measures[:],'b', lw = 1.5, label = 'Position') #label hace referencia a la leyenda
+            plt.plot(m_pos[:],'b', lw = 1.5, label = 'Position') #label hace referencia a la leyenda
             plt.legend(loc=0) #posiciones de localización de 0 a 5 están en tabla 5-4 del libro. 0 es la mejor posible
-            plt.plot(measures[:], 'ro') #ro indica r(red)o(circles)
+            plt.plot(m_pos[:], 'ro') #ro indica r(red)o(circles)
             plt.grid(True)
             plt.ylabel('Position')
+            #Velocidad
+            plt.subplot(212)
+            plt.plot(m_vel[:],'g', lw = 1.5, label = 'Velocity') #label hace referencia a la leyenda
+            plt.legend(loc=0) #posiciones de localización de 0 a 5 están en tabla 5-4 del libro. 0 es la mejor posible
+            plt.plot(m_vel[:], 'ro') #ro indica r(red)o(circles)
+            plt.grid(True)
+            plt.ylabel('Velocity')
+            #pinto
             plt.show()
 
 class Window3(Cia402device.CiA402Device):
