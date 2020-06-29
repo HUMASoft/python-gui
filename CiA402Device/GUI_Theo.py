@@ -383,8 +383,8 @@ class Window3(Cia402device.CiA402Device):
     def getmsg(self):
         #Recupero lo viejo
         self.old_id = self.canid.get()
-        self.old_dat = self.dat.get()
-        self.old_siz= self.siz.get()
+        # self.old_dat = self.dat.get()
+        # self.old_siz= self.siz.get()
         #Obtengo lo nuevo
         err,cid,dat,siz = pm1.GetMsg()
         lister = self.checkbox_check()
