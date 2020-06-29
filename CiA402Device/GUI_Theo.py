@@ -369,47 +369,47 @@ class Window3(Cia402device.CiA402Device):
         #Checkboxes
         # error, 0
         self.var0 = IntVar()        
-        self.check_0 = Checkbutton(self.frame, text = '0',  variable = self.var0)
+        self.check_0 = Checkbutton(self.frame, text = '0, Error Reset or no error.',  variable = self.var0)
         self.check_0.place(x = 410, y = 50)
         # error, 1
         self.var1 = IntVar()        
-        self.check_1 = Checkbutton(self.frame, text = '1', variable = self.var1)
+        self.check_1 = Checkbutton(self.frame, text = '1, Generic error.', variable = self.var1)
         self.check_1.place(x = 410, y = 70)
         # error, 2
         self.var2 = IntVar()        
-        self.check_2 = Checkbutton(self.frame, text = '2',  variable = self.var2)
+        self.check_2 = Checkbutton(self.frame, text = '2, Current messages.',  variable = self.var2)
         self.check_2.place(x = 410, y = 90)
         # error, 3
         self.var3 = IntVar()        
-        self.check_3 = Checkbutton(self.frame, text = '3',  variable = self.var3)
+        self.check_3 = Checkbutton(self.frame, text = '3, Voltage messages.',  variable = self.var3)
         self.check_3.place(x = 410, y = 110)
         # error, 4
         self.var4 = IntVar()        
-        self.check_4 = Checkbutton(self.frame, text = '4', variable = self.var4)
+        self.check_4 = Checkbutton(self.frame, text = '4, Temperature messages.', variable = self.var4)
         self.check_4.place(x = 410, y = 140)
         # error, 5
         self.var5 = IntVar()        
-        self.check_5 = Checkbutton(self.frame, text = '5',  variable = self.var5)
+        self.check_5 = Checkbutton(self.frame, text = '5, Device software messages.',  variable = self.var5)
         self.check_5.place(x = 410, y = 170)
         # error, 6
         self.var6 = IntVar()        
-        self.check_6 = Checkbutton(self.frame, text = '6', variable = self.var6)
+        self.check_6 = Checkbutton(self.frame, text = '6, Device hardware messages.', variable = self.var6)
         self.check_6.place(x = 410, y = 200)
         # error, 7
         self.var7 = IntVar()        
-        self.check_7 = Checkbutton(self.frame, text = '7',  variable = self.var7)
+        self.check_7 = Checkbutton(self.frame, text = '7, Additional modules messages',  variable = self.var7)
         self.check_7.place(x = 410, y = 230)
         # error, 8
         self.var8 = IntVar()        
-        self.check_8 = Checkbutton(self.frame, text = '8',  variable = self.var8)
+        self.check_8 = Checkbutton(self.frame, text = '8, Monitoring messages.',  variable = self.var8)
         self.check_8.place(x = 410, y = 260)
         # error, 9
         self.var9 = IntVar()        
-        self.check_9 = Checkbutton(self.frame, text = '9', variable = self.var9)
+        self.check_9 = Checkbutton(self.frame, text = '9, External error messages.', variable = self.var9)
         self.check_9.place(x = 410, y = 290)
         #error, F
         self.varF = IntVar()        
-        self.check_F = Checkbutton(self.frame, text = 'F',  variable = self.varF)
+        self.check_F = Checkbutton(self.frame, text = 'F, Additional functions and device specific messages.',  variable = self.varF)
         self.check_F.place(x = 410, y = 320)
 
         global pm1
