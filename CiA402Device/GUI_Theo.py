@@ -304,8 +304,8 @@ class Window2(Cia402device.CiA402Device):
             #Acabada la simulación saco la gráfica
             tmeasured = self.time_frame.get()
             #Saco cuantos componentes son:
-            nbr_pts = tmeasured/(tsamp/1000)
-            final_vec = measures[-nbr_pts:]
+            nbr_pts = int(tmeasured)/(int(tsamp)/1000)
+            final_vec = measures[-int(nbr_pts):]
             print(measures)
             print('final_vec es')
             print(final_vec)
@@ -326,7 +326,7 @@ class Window3(Cia402device.CiA402Device):
         self.gmsg = Button(self.frame,text = 'Get error message.', command = lambda : self.loop_msg(True))
         self.gmsg.place(x = 10, y = 350)
         #Labels 
-        lbl1 = Label(self.frame, text = 'Messages: ')
+        lbl1 = Label(self.frame, text = 'Messages:')
         lbl1.place(x = 10, y = 30)
         lbl4 = Label(self.frame, text = 'Error type:')
         lbl4.place(x = 10, y = 260)
@@ -337,7 +337,7 @@ class Window3(Cia402device.CiA402Device):
         #textboxes
         #self.canid = Entry(self.frame, width = 40)
         self.canid = Text(self.frame, width = 40)
-        self.canid.place(x = 60, y = 30, height = 220)
+        self.canid.place(x = 80, y = 30, height = 220)
         self.err_typ = Entry(self.frame, width = 10)
         self.err_typ.place(x = 80, y = 260)
         self.errrr = Entry(self.frame, width = 20)
