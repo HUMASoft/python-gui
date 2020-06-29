@@ -3,7 +3,9 @@ from tkinter.ttk import *
 from tkinter import Tk, BOTH, IntVar, END, Text
 import SocketCanPort
 import Cia402device
-
+import numpy as np
+import matplotlib as mpl
+import matplotlib.pyplot as plt
 
 """
 Import clase Tkinter:
@@ -302,9 +304,14 @@ class Window2(Cia402device.CiA402Device):
             #Saco cuantos componentes son:
             nbr_pts = int(tmeasured)/(int(tsamp)/1000)
             final_vec = measures[-int(nbr_pts):]
-            print(measures)
-            print('final_vec es')
-            print(final_vec)
+            #Pinto la gráfica
+            plt.subplot(211)
+            plt.plot(y[:,0],'b', lw = 1.5, label = 'Position') #label hace referencia a la leyenda
+            plt.legend(loc=0) #posiciones de localización de 0 a 5 están en tabla 5-4 del libro. 0 es la mejor posible
+            plt.plot(y[:,0], 'ro') #ro indica r(red)o(circles)
+            plt.grid(True)
+            plt.ylabel('Position')
+            plt.show()
 
 class Window3(Cia402device.CiA402Device):
     def __init__(self, master):
