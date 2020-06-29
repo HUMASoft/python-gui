@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter.ttk import *
-from tkinter import Tk, BOTH, IntVar, END
+from tkinter import Tk, BOTH, IntVar, END, Text
 
 """
 Import clase Tkinter:
@@ -242,7 +242,7 @@ class Window3:
         lbl6 = Label(self.frame, text = 'Filter messages by first number:')
         lbl6.place(x = 410, y = 30)
         #textboxes
-        self.canid = Entry(self.frame, width = 40)
+        self.canid = Text(self.frame, width = 40)
         self.canid.place(x = 60, y = 30, height = 220)
         self.err_typ = Entry(self.frame, width = 10)
         self.err_typ.place(x = 80, y = 260)
