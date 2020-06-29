@@ -342,7 +342,7 @@ class Window3(Cia402device.CiA402Device):
         self.Style = Style()
         self.Style.theme_use('default')
         self.master.title('Teo´s error window')
-        self.master.geometry('630x400+100+150')
+        self.master.geometry('800x400+100+150')
         self.frame.pack(fill = BOTH, expand = 1)
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit error window.', command = self.master.destroy)
