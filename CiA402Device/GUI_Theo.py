@@ -230,7 +230,8 @@ class Window2(Cia402device.CiA402Device):
         amps = cia402.GetAmps();
         self.amps.delete('0', END)
         self.amps.insert(0, str(amps)) 
-    
+        m_tor.append(amps)
+
     def get_filtered_amps(self):
         port = porter
         pm1 = SocketCanPort.SocketCanPort("can1")
@@ -293,7 +294,6 @@ class Window2(Cia402device.CiA402Device):
             else:
                 tracking_var = True
 
-
         if tracking_var:
             
             self.get_position()
@@ -329,8 +329,8 @@ class Window2(Cia402device.CiA402Device):
             plt.xlabel('Sample measure point')
             #Amperaje
             plt.subplot(223)
-            plt.plot(m_vel[:],'b', lw = 1.5) #label hace referencia a la leyenda
-            plt.plot(m_vel[:], 'ro') #ro indica r(red)o(circles)
+            plt.plot(m_tor[:],'b', lw = 1.5) #label hace referencia a la leyenda
+            plt.plot(m_tor[:], 'ro') #ro indica r(red)o(circles)
             plt.grid(True)
             plt.ylabel('Amps')
             plt.xlabel('Sample measure point')
