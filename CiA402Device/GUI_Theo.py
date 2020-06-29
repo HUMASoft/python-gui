@@ -426,6 +426,11 @@ class Window3(Cia402device.CiA402Device):
             self.canid.insert(END, msg + '\n')
             self.err_typ.delete('0', END)
             self.err_typ.insert(0, str(err))
+        elif not lister:
+            msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(dat) + ', Size: ' +str(siz)
+            self.canid.insert(END, msg + '\n')
+            self.err_typ.delete('0', END)
+            self.err_typ.insert(0, str(err))
         if err == -1:
             self.errrr.delete('0', END)
             self.errrr.insert(0, 'Timeout in poll read.')
