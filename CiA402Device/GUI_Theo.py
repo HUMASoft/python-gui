@@ -129,9 +129,9 @@ class Window2(Cia402device.CiA402Device):
         self.svel.place(x = 100, y = 180)
         #textboxes
         self.sample = Entry(self.frame, width = 10)
-        self.sample.place(x = 250, y = 130)
+        self.sample.place(x = 0, y = 350)
         self.time_frame = Entry(self.frame, width = 10)
-        self.time_frame.place(x = 350, y = 130)
+        self.time_frame.place(x = 0, y = 300)
         self.velocity = Entry(self.frame, width = 10)
         self.velocity.place(x = 570, y = 100)
         self.position = Entry(self.frame, width = 10)
@@ -172,11 +172,11 @@ class Window2(Cia402device.CiA402Device):
         lbl11 = Label(self.frame, text = 'Simulation mode:')
         lbl11.place(x = 0, y = 0)
         pltlbl3 = Label(self.frame, text = 'Sample time [ms]:')
-        pltlbl3.place(x = 250, y = 110)
+        pltlbl3.place(x = 0, y = 330)
         pltlbl1 = Label(self.frame, text = 'Plot time frame [s]:')
-        pltlbl1.place(x = 360, y = 110)
-        pltlbl2 = Label(self.frame, text = 'Simulation plot:')
-        pltlbl2.place(x = 250, y = 90)
+        pltlbl1.place(x = 0, y = 280)
+        pltlbl2 = Label(self.frame, text = 'Simulation plot setup:')
+        pltlbl2.place(x = 0, y = 260)
         #Checkboxes
         #pos mode
         self.varp = IntVar()        
