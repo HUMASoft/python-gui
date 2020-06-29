@@ -297,10 +297,16 @@ class Window2(Cia402device.CiA402Device):
             self.get_mean_velocity()
             self.get_amps()
             self.get_filtered_amps()
-            print(measures)
             tsamp = self.sample.get()
-            print(tsamp)
-            self.frame.after(1000, self.loop) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
+            self.frame.after(tsamp, self.loop) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
+        else:
+            #Acabada la simulación saco la gráfica
+            tmeasured = self.time_frame.get()
+            #Saco cuantos componentes son:
+            nbr_pts = tmeasured/(tsamp/1000)
+            final_vec = measures[-nbr_pts:]
+            print(measures)
+            print(final_vec)
 
 class Window3(Cia402device.CiA402Device):
     def __init__(self, master):
