@@ -174,7 +174,7 @@ class Window2(Cia402device.CiA402Device):
         pltlbl3 = Label(self.frame, text = 'Sample time [ms]:')
         pltlbl3.place(x = 250, y = 110)
         pltlbl1 = Label(self.frame, text = 'Plot time frame [s]:')
-        pltlbl1.place(x = 350, y = 110)
+        pltlbl1.place(x = 360, y = 110)
         pltlbl2 = Label(self.frame, text = 'Simulation plot:')
         pltlbl2.place(x = 250, y = 90)
         #Checkboxes
@@ -315,18 +315,18 @@ class Window2(Cia402device.CiA402Device):
             #Pinto las gráficas
             #Posición
             plt.subplot(211)
-            plt.plot(m_pos[:],'b', lw = 1.5, label = 'Position') #label hace referencia a la leyenda
-            plt.legend(loc=0) #posiciones de localización de 0 a 5 están en tabla 5-4 del libro. 0 es la mejor posible
+            plt.plot(m_pos[:],'b', lw = 1.5) #label hace referencia a la leyenda
             plt.plot(m_pos[:], 'ro') #ro indica r(red)o(circles)
             plt.grid(True)
             plt.ylabel('Position')
             #Velocidad
             plt.subplot(212)
-            plt.plot(m_vel[:],'g', lw = 1.5, label = 'Velocity') #label hace referencia a la leyenda
-            plt.legend(loc=0) #posiciones de localización de 0 a 5 están en tabla 5-4 del libro. 0 es la mejor posible
+            plt.plot(m_vel[:],'g', lw = 1.5) #label hace referencia a la leyenda
             plt.plot(m_vel[:], 'ro') #ro indica r(red)o(circles)
             plt.grid(True)
             plt.ylabel('Velocity')
+            plt.xlabel('Sample measure')
+            plt.title('Simulation graphs')
             #pinto
             plt.show()
 
