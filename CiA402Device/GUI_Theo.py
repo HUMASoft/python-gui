@@ -314,17 +314,25 @@ class Window2(Cia402device.CiA402Device):
 
             #Pinto las gráficas
             #Posición
-            plt.subplot(211)
+            plt.subplot(221)
             plt.plot(m_pos[:],'b', lw = 1.5) #label hace referencia a la leyenda
             plt.plot(m_pos[:], 'ro') #ro indica r(red)o(circles)
             plt.grid(True)
             plt.ylabel('Position')
+            plt.xlabel('Sample measure point')
             #Velocidad
-            plt.subplot(212)
-            plt.plot(m_vel[:],'g', lw = 1.5) #label hace referencia a la leyenda
+            plt.subplot(222)
+            plt.plot(m_vel[:],'b', lw = 1.5) #label hace referencia a la leyenda
             plt.plot(m_vel[:], 'ro') #ro indica r(red)o(circles)
             plt.grid(True)
             plt.ylabel('Velocity')
+            plt.xlabel('Sample measure point')
+            #Amperaje
+            plt.subplot(223)
+            plt.plot(m_vel[:],'b', lw = 1.5) #label hace referencia a la leyenda
+            plt.plot(m_vel[:], 'ro') #ro indica r(red)o(circles)
+            plt.grid(True)
+            plt.ylabel('Amps')
             plt.xlabel('Sample measure point')
             #pinto
             plt.show()
