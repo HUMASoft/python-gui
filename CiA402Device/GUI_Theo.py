@@ -298,6 +298,8 @@ class Window2(Cia402device.CiA402Device):
             self.get_amps()
             self.get_filtered_amps()
             print(measures)
+            tsamp = self.sample.get()
+            print(tsamp)
             self.frame.after(1000, self.loop) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
 
 class Window3(Cia402device.CiA402Device):
