@@ -306,6 +306,7 @@ class Window2(Cia402device.CiA402Device):
             nbr_pts = tmeasured/(tsamp/1000)
             final_vec = measures[-nbr_pts:]
             print(measures)
+            print('final_vec es')
             print(final_vec)
 
 class Window3(Cia402device.CiA402Device):
