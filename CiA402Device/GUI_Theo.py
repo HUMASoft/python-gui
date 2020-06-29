@@ -188,10 +188,6 @@ class Window2(Cia402device.CiA402Device):
         self.vart = IntVar()        
         self.check_t = Checkbutton(self.frame, text = 'Torque mode',  variable = self.vart, command = self.torquemode)
         self.check_t.place(x = 0, y = 60)
-        #pos graph
-        self.varpg = IntVar()        
-        self.graph_p = Checkbutton(self.frame, text = 'Check to graph position when simulating',  variable = self.varpg)
-        self.graph_p.place(x = 250, y = 160)
         global measures
         measures = list()
     def get_position(self):
