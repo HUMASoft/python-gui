@@ -4,6 +4,7 @@ from tkinter import Tk, BOTH, IntVar, END, Text
 import SocketCanPort
 import Cia402device
 
+
 """
 Import clase Tkinter:
     Tk class: Crea ventana
@@ -191,7 +192,8 @@ class Window2(Cia402device.CiA402Device):
         self.varpg = IntVar()        
         self.graph_p = Checkbutton(self.frame, text = 'Check to graph position when simulating',  variable = self.varpg)
         self.graph_p.place(x = 250, y = 160)
-
+        global measures
+        measures = list()
     def get_position(self):
         port = porter
         pm1 = SocketCanPort.SocketCanPort("can1")
@@ -199,7 +201,7 @@ class Window2(Cia402device.CiA402Device):
         pos = cia402.GetPosition(); 
         self.position.delete('0', END)
         self.position.insert(0, str(pos)) 
-        
+        measures.append(pos)
 
     def get_velocity(self):
         port = porter
@@ -295,7 +297,7 @@ class Window2(Cia402device.CiA402Device):
             self.get_mean_velocity()
             self.get_amps()
             self.get_filtered_amps()
-
+            print(measures)
             self.frame.after(1000, self.loop) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
 
 class Window3(Cia402device.CiA402Device):
