@@ -407,12 +407,12 @@ class Window3(Cia402device.CiA402Device):
         self.check_F.place(x = 410, y = 320)
 
         global pm1
-        global filtered
         pm1 = SocketCanPort.SocketCanPort("can1")
 
 
     def getmsg(self):
         #Obtengo lo nuevo
+        filtered == False
         err,cid,dat,siz = pm1.GetMsg()
         lister = self.checkbox_check()
         #Inserto lo nuevo solo si está marcado:
