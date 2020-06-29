@@ -378,14 +378,9 @@ class Window3(Cia402device.CiA402Device):
 
         global pm1
         pm1 = SocketCanPort.SocketCanPort("can1")
-        self.cont = 0
 
 
     def getmsg(self):
-        #Recupero lo viejo
-        #self.old_id = self.canid.get()
-        # self.old_dat = self.dat.get()
-        # self.old_siz= self.siz.get()
         #Obtengo lo nuevo
         err,cid,dat,siz = pm1.GetMsg()
         lister = self.checkbox_check()
@@ -397,16 +392,8 @@ class Window3(Cia402device.CiA402Device):
             else:
                 filtered = False
         if filtered == True:
-            self.cont = self.cont + 1
-            if self.cont > 1:
-                #self.canid.delete('0', END)
-                self.canid.insert(END, str(hex(cid)) + '\n')
-                self.canid.insert(0, self.old_id + ', ' + str(hex(cid)))
-                self.err_typ.delete('0', END)
-                self.err_typ.insert(0, str(err))
-            else:
-                #self.canid.delete('0', END)
-                self.canid.insert(END, str(hex(cid))+ '\n')
+                msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(dat) + ', Size: ' +str(siz)
+                self.canid.insert(END, msg + '\n')
                 self.err_typ.delete('0', END)
                 self.err_typ.insert(0, str(err))
         if err == -1:
