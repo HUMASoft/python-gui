@@ -306,9 +306,9 @@ class Window2(Cia402device.CiA402Device):
             final_vec = measures[-int(nbr_pts):]
             #Pinto la gráfica
             plt.subplot(211)
-            plt.plot(measures[:,0],'b', lw = 1.5, label = 'Position') #label hace referencia a la leyenda
+            plt.plot(measures[:],'b', lw = 1.5, label = 'Position') #label hace referencia a la leyenda
             plt.legend(loc=0) #posiciones de localización de 0 a 5 están en tabla 5-4 del libro. 0 es la mejor posible
-            plt.plot(measures[:,0], 'ro') #ro indica r(red)o(circles)
+            plt.plot(measures[:], 'ro') #ro indica r(red)o(circles)
             plt.grid(True)
             plt.ylabel('Position')
             plt.show()
