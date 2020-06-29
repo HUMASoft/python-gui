@@ -415,31 +415,32 @@ class Window3(Cia402device.CiA402Device):
         #Obtengo lo nuevo
         err,cid,dat,siz = pm1.GetMsg()
         lister = self.checkbox_check()
-        #Inserto lo nuevo solo si está marcado:
-        for i in range(0,len(lister)):
-            if str(lister[i]) == str(hex(cid))[2]:
-                filtered = True
-                break
-            else:
-                filtered = False
-        if filtered == True:
+        if not lister:
             msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(dat) + ', Size: ' +str(siz)
             self.canid.insert(END, msg + '\n')
             self.err_typ.delete('0', END)
             self.err_typ.insert(0, str(err))
-        elif not lister:
-            msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(dat) + ', Size: ' +str(siz)
-            self.canid.insert(END, msg + '\n')
-            self.err_typ.delete('0', END)
-            self.err_typ.insert(0, str(err))
-        if err == -1:
-            self.errrr.delete('0', END)
-            self.errrr.insert(0, 'Timeout in poll read.')
-        elif err == -2:
-            self.errrr.delete('0', END)
-            self.errrr.insert(0, 'Error in poll read.')
-        elif err == 0:
-            self.errrr.delete('0', END)
+        else:
+            #Inserto lo nuevo solo si está marcado:
+            for i in range(0,len(lister)):
+                if str(lister[i]) == str(hex(cid))[2]:
+                    filtered = True
+                    break
+                else:
+                    filtered = False
+            if filtered == True:
+                msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(dat) + ', Size: ' +str(siz)
+                self.canid.insert(END, msg + '\n')
+                self.err_typ.delete('0', END)
+                self.err_typ.insert(0, str(err))
+            if err == -1:
+                self.errrr.delete('0', END)
+                self.errrr.insert(0, 'Timeout in poll read.')
+            elif err == -2:
+                self.errrr.delete('0', END)
+                self.errrr.insert(0, 'Error in poll read.')
+            elif err == 0:
+                self.errrr.delete('0', END)
 
     def loop_msg(self, toggle=False):
         global tracking_var
