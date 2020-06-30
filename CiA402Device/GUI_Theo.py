@@ -44,10 +44,12 @@ class Master_Window(Cia402device.CiA402Device):
         #Button to open window 2
         self.bw2 = Button(self.frame, text = 'Open control window', width = 20, command = self.new_window2)
         self.bw2.place(x = 250, y = 130)
+        self.bw2['state'] = 'disabled'
         #Button to open window 3
         self.bw3 = Button(self.frame, text = 'Open error window', width = 20, command = self.new_window3)
         self.bw3.place(x = 250, y = 180)
-        self.bw3.['font']=helv36
+        self.bw3['state'] = 'disabled'
+
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit GUI', width = 15, command = self.master.quit)
         self.quitButton.place(x = 250, y = 230)
@@ -93,6 +95,9 @@ class Master_Window(Cia402device.CiA402Device):
         cia402 = Cia402device.CiA402Device(porter, pm1);
         cia402.Reset()
         cia402.SwitchOn();
+        self.bw2['state'] = 'active'
+        self.bw3['state'] = 'active'
+
         self.var1.set(True)
         self.var2.set(False)
 
