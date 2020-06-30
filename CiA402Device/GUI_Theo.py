@@ -434,8 +434,8 @@ class Window3(Cia402device.CiA402Device):
             if int(siz) < 4:
                 msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(hex(dat)) + ', Size: ' +str(siz)
                 self.canid.insert(END, msg + '\n')
-                print(str(hex(cid))[3])
-                warning = warning_generator(str(hex(cid))[3])
+                #print(str(hex(cid))[2])
+                warning = self.warning_generator(str(hex(cid))[2])
                 self.err_typ.insert(END, warning + '\n')
 
 
@@ -453,7 +453,7 @@ class Window3(Cia402device.CiA402Device):
                 if int(siz) < 4:
                     msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(dat) + ', Size: ' +str(siz)
                     self.canid.insert(END, msg + '\n')
-                    warning = warning_generator(str(hex(cid))[3])
+                    warning = self.warning_generator(str(hex(cid))[2])
                     self.err_typ.insert(END, warning + '\n')
 
 
