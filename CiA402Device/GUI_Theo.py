@@ -371,9 +371,9 @@ class Window3(Cia402device.CiA402Device):
         lbl6 = Label(self.frame, text = 'Filter messages by first number:')
         lbl6.place(x = 410, y = 30)
         #textboxes
-        self.canid = Text(self.frame, width = 55)
+        self.canid = Text(self.frame, width = 48)
         self.canid.place(x = 10, y = 30, height = 220)
-        self.err_typ = Text(self.frame, width = 55)
+        self.err_typ = Text(self.frame, width = 48)
         self.err_typ.place(x = 10, y = 280, height = 40)
         #Checkboxes
         # error, 0
@@ -431,7 +431,7 @@ class Window3(Cia402device.CiA402Device):
         err,cid,dat,siz = pm1.GetMsg()
         lister = self.checkbox_check()
         if not lister:
-            msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(dat) + ', Size: ' +str(siz)
+            msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(hex(dat)) + ', Size: ' +str(siz)
             self.canid.insert(END, msg + '\n')
 
         else:
