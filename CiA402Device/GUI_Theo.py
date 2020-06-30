@@ -194,6 +194,8 @@ class Window2(Cia402device.CiA402Device):
         self.vart = IntVar()        
         self.check_t = Checkbutton(self.frame, text = 'Torque mode',  variable = self.vart, command = self.torquemode)
         self.check_t.place(x = 0, y = 110)
+        #contador
+        self.cont = 0
         global m_pos, m_vel, m_tor
         m_pos = list()
         m_vel = list()
@@ -292,11 +294,15 @@ class Window2(Cia402device.CiA402Device):
 
     def loop(self, toggle=False):
         global tracking_var
-        if toggle:
-            if tracking_var:
-                tracking_var = False
-            else:
-                tracking_var = True
+        time_lim = self.exec_time.get() #Limite de tiempo
+        if time_lim <= self.cont:
+            tracking_var = False
+        else:
+            if toggle:
+                if tracking_var:
+                    tracking_var = False
+                else:
+                    tracking_var = True
 
         if tracking_var:
             
@@ -307,6 +313,9 @@ class Window2(Cia402device.CiA402Device):
             self.get_filtered_amps()
             global tsamp
             tsamp = self.sample.get()
+            frec = tsamp/1000 #Numero de segundos de muestreo
+            #Actualizo el contador
+            self.cont = self.cont + frec 
             self.frame.after(tsamp, self.loop) #tsamp es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
         else:
             #Acabada la simulación saco la gráfica
