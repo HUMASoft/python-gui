@@ -122,11 +122,11 @@ class Window2(Cia402device.CiA402Device):
         self.svel = Button(self.frame, text = 'Set Velocity', command = self.bsvel)
         self.svel.place(x = 100, y = 130)
         #Set Position
-        self.svel = Button(self.frame, text = 'Set Position', command = self.bspos)
-        self.svel.place(x = 100, y = 230)
+        self.spos = Button(self.frame, text = 'Set Position', command = self.bspos)
+        self.spos.place(x = 300, y = 20)
         #Set Torque
-        self.svel = Button(self.frame, text = 'Set Torque', command = self.bstorque)
-        self.svel.place(x = 100, y = 180)
+        self.stor = Button(self.frame, text = 'Set Torque', command = self.bstorque)
+        self.stor.place(x = 100, y = 180)
         #textboxes
         self.sample = Entry(self.frame, width = 10)
         self.sample.place(x = 0, y = 350)
@@ -147,7 +147,7 @@ class Window2(Cia402device.CiA402Device):
         self.settorq = Entry(self.frame, width = 10)
         self.settorq.place(x = 0, y = 180)
         self.setpos = Entry(self.frame, width = 10)
-        self.setpos.place(x = 0, y = 130)
+        self.setpos.place(x = 220, y = 20)
         #Labels 
         lbl1 = Label(self.frame, text = 'Position [rad]:', foreground="white")
         lbl1.place(x = 570, y = 30)
@@ -162,13 +162,13 @@ class Window2(Cia402device.CiA402Device):
         lbl6 = Label(self.frame, text = 'Experimental data:', foreground="white")
         lbl6.place(x = 410, y = 40)
         lbl7 = Label(self.frame, text = 'Execution setup data:')
-        lbl7.place(x = 0, y = 90)
+        lbl7.place(x = 130, y = 0)
         lbl8 = Label(self.frame, text = 'Velocity [rad/s]:')
-        lbl8.place(x = 0, y = 210)
+        lbl8.place(x = 130, y = 40)
         lbl9 = Label(self.frame, text = 'Torque:')
-        lbl9.place(x = 0, y = 160)
+        lbl9.place(x = 130, y = 60)
         lbl10 = Label(self.frame, text = 'Position [rad]:')
-        lbl10.place(x = 0, y = 110)
+        lbl10.place(x = 130, y = 20)
         lbl11 = Label(self.frame, text = 'Execution mode:')
         lbl11.place(x = 0, y = 0)
         pltlbl3 = Label(self.frame, text = 'Execution sample time [ms]:')
@@ -352,20 +352,16 @@ class Window3(Cia402device.CiA402Device):
         self.gmsg.place(x = 10, y = 350)
         #Labels 
         lbl1 = Label(self.frame, text = 'Messages:')
-        lbl1.place(x = 10, y = 30)
-        lbl4 = Label(self.frame, text = 'Error type:')
+        lbl1.place(x = 10, y = 10)
+        lbl4 = Label(self.frame, text = 'Error description:')
         lbl4.place(x = 10, y = 260)
-        lbl5 = Label(self.frame, text = 'Error:')
-        lbl5.place(x = 10, y = 300)
         lbl6 = Label(self.frame, text = 'Filter messages by first number:')
         lbl6.place(x = 410, y = 30)
         #textboxes
-        self.canid = Text(self.frame, width = 40)
-        self.canid.place(x = 80, y = 30, height = 220)
-        self.err_typ = Entry(self.frame, width = 10)
-        self.err_typ.place(x = 80, y = 260)
-        self.errrr = Entry(self.frame, width = 20)
-        self.errrr.place(x = 50, y = 300)
+        self.canid = Text(self.frame, width = 55)
+        self.canid.place(x = 10, y = 30, height = 220)
+        self.err_typ = Text(self.frame, width = 55)
+        self.err_typ.place(x = 10, y = 280, height = 40)
         #Checkboxes
         # error, 0
         self.var0 = IntVar()        
@@ -424,8 +420,7 @@ class Window3(Cia402device.CiA402Device):
         if not lister:
             msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(dat) + ', Size: ' +str(siz)
             self.canid.insert(END, msg + '\n')
-            self.err_typ.delete('0', END)
-            self.err_typ.insert(0, str(err))
+
         else:
             #Inserto lo nuevo solo si está marcado:
             for i in range(0,len(lister)):
@@ -437,16 +432,8 @@ class Window3(Cia402device.CiA402Device):
             if filtered == True:
                 msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(dat) + ', Size: ' +str(siz)
                 self.canid.insert(END, msg + '\n')
-                self.err_typ.delete('0', END)
-                self.err_typ.insert(0, str(err))
-            if err == -1:
-                self.errrr.delete('0', END)
-                self.errrr.insert(0, 'Timeout in poll read.')
-            elif err == -2:
-                self.errrr.delete('0', END)
-                self.errrr.insert(0, 'Error in poll read.')
-            elif err == 0:
-                self.errrr.delete('0', END)
+
+
 
     def loop_msg(self, toggle=False):
         global tracking_var

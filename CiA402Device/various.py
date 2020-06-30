@@ -93,29 +93,30 @@ class Window2(Master_Window):
         self.frame = Frame(self.master)
         self.Style = Style()
         self.Style.theme_use('default')
-        self.master.title('Theo´s control window')
-        self.master.geometry('700x360+800+150')
+        self.master.title('Teo´s control window')
+        self.master.geometry('700x400+800+150')
         self.frame.pack(fill = BOTH, expand = 1)
+        #Buttons
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit', command = self.master.destroy)
         self.quitButton.place(x = 300, y = 290)
         #Stop/Start Simulation
-        self.ssb = Button(self.frame, text = 'Stop/Start Simulation', command = lambda : self.loop(True))
+        self.ssb = Button(self.frame, text = 'Start/Stop Execution', command = lambda : self.loop(True))
         self.ssb.place(x = 410, y = 10)
         #Set Velocity
-        self.svel = Button(self.frame, text = 'Set Velocity', command = self.get_position)
+        self.svel = Button(self.frame, text = 'Set Velocity', command = self.bsvel)
         self.svel.place(x = 100, y = 130)
         #Set Position
-        self.svel = Button(self.frame, text = 'Set Position', command = self.get_position)
-        self.svel.place(x = 100, y = 230)
+        self.spos = Button(self.frame, text = 'Set Position', command = self.bspos)
+        self.spos.place(x = 310, y = 20)
         #Set Torque
-        self.svel = Button(self.frame, text = 'Set Torque', command = self.get_position)
-        self.svel.place(x = 100, y = 180)
+        self.stor = Button(self.frame, text = 'Set Torque', command = self.bstorque)
+        self.stor.place(x = 100, y = 180)
         #textboxes
         self.sample = Entry(self.frame, width = 10)
-        self.sample.place(x = 250, y = 130)
+        self.sample.place(x = 0, y = 350)
         self.time_frame = Entry(self.frame, width = 10)
-        self.time_frame.place(x = 350, y = 130)
+        self.time_frame.place(x = 0, y = 300)
         self.velocity = Entry(self.frame, width = 10)
         self.velocity.place(x = 570, y = 100)
         self.position = Entry(self.frame, width = 10)
@@ -127,40 +128,40 @@ class Window2(Master_Window):
         self.filtamps = Entry(self.frame, width = 10)
         self.filtamps.place(x = 570, y = 250)
         self.setvel = Entry(self.frame, width = 10)
-        self.setvel.place(x = 0, y = 130)
+        self.setvel.place(x = 0, y = 230)
         self.settorq = Entry(self.frame, width = 10)
         self.settorq.place(x = 0, y = 180)
         self.setpos = Entry(self.frame, width = 10)
-        self.setpos.place(x = 0, y = 230)
+        self.setpos.place(x = 220, y = 20)
         #Labels 
-        lbl1 = Label(self.frame, text = 'Position:', foreground="white")
+        lbl1 = Label(self.frame, text = 'Position [rad]:', foreground="white")
         lbl1.place(x = 570, y = 30)
-        lbl2 = Label(self.frame, text = 'Velocity:', foreground="white")
+        lbl2 = Label(self.frame, text = 'Velocity [rad/s]:', foreground="white")
         lbl2.place(x = 570, y = 80)
-        lbl3 = Label(self.frame, text = 'Mean Velocity:', foreground="white")
+        lbl3 = Label(self.frame, text = 'Mean Velocity [rad/s]:', foreground="white")
         lbl3.place(x = 570, y = 130)
         lbl4 = Label(self.frame, text = 'Amps:', foreground="white")
         lbl4.place(x = 570, y = 180)
         lbl5 = Label(self.frame, text = 'Filtered amps:', foreground="white")
         lbl5.place(x = 570, y = 230)
-        lbl6 = Label(self.frame, text = 'Simulation data:', foreground="white")
+        lbl6 = Label(self.frame, text = 'Experimental data:', foreground="white")
         lbl6.place(x = 410, y = 40)
-        lbl7 = Label(self.frame, text = 'Simulation setup data:')
-        lbl7.place(x = 0, y = 90)
-        lbl8 = Label(self.frame, text = 'Velocity:')
-        lbl8.place(x = 0, y = 110)
+        lbl7 = Label(self.frame, text = 'Execution setup data:')
+        lbl7.place(x = 130, y = 0)
+        lbl8 = Label(self.frame, text = 'Velocity [rad/s]:')
+        lbl8.place(x = 130, y = 40)
         lbl9 = Label(self.frame, text = 'Torque:')
-        lbl9.place(x = 0, y = 160)
-        lbl10 = Label(self.frame, text = 'Position:')
-        lbl10.place(x = 0, y = 210)
-        lbl11 = Label(self.frame, text = 'Simulation mode:')
+        lbl9.place(x = 130, y = 60)
+        lbl10 = Label(self.frame, text = 'Position [rad]:')
+        lbl10.place(x = 130, y = 20)
+        lbl11 = Label(self.frame, text = 'Execution mode:')
         lbl11.place(x = 0, y = 0)
-        pltlbl3 = Label(self.frame, text = 'Sample time:')
-        pltlbl3.place(x = 250, y = 110)
-        pltlbl1 = Label(self.frame, text = 'Plot time frame:')
-        pltlbl1.place(x = 350, y = 110)
-        pltlbl2 = Label(self.frame, text = 'Simulation plot:')
-        pltlbl2.place(x = 250, y = 90)
+        pltlbl3 = Label(self.frame, text = 'Execution sample time [ms]:')
+        pltlbl3.place(x = 0, y = 330)
+        pltlbl1 = Label(self.frame, text = 'Execution plot time [s]:')
+        pltlbl1.place(x = 0, y = 280)
+        pltlbl2 = Label(self.frame, text = 'Execution plot:')
+        pltlbl2.place(x = 0, y = 260)
         #Checkboxes
         #pos mode
         self.varp = IntVar()        
@@ -172,21 +173,61 @@ class Window2(Master_Window):
         self.check_v.place(x = 0, y = 40)
         #torquemode
         self.vart = IntVar()        
-        self.check_t = Checkbutton(self.frame, text = 'Torque mode',  variable = self.vart, command = self.tormode)
+        self.check_t = Checkbutton(self.frame, text = 'Torque mode',  variable = self.vart, command = self.torquemode)
         self.check_t.place(x = 0, y = 60)
-        #pos graph
-        self.varpg = IntVar()        
-        self.graph_p = Checkbutton(self.frame, text = 'Check to graph position when simulating',  variable = self.varpg, command = self.posmode)
-        self.graph_p.place(x = 250, y = 160)
+        global m_pos, m_vel, m_tor
+        m_pos = list()
+        m_vel = list()
+        m_tor = list()
 
-        #counter
-        self.cont = 0
 
     def get_position(self):
-        self.cont = self.cont + 1
-        pos = self.cont
-        self.position.delete('0', END)      
-        self.position.insert(0, str(pos)) 
+        port = porter
+
+
+    def get_velocity(self):
+        port = porter
+
+ 
+        
+    def get_mean_velocity(self):
+        port = porter
+
+        
+    def get_amps(self):
+        port = porter
+
+
+    def get_filtered_amps(self):
+        port = porter
+
+
+    def bsvel(self):
+        port = porter
+
+    
+    def bstorque(self):
+        port = porter
+
+    
+    def bspos(self):
+        port = porter
+
+
+
+    def posmode(self):
+        self.varv.set(False)
+        self.vart.set(False)
+
+
+    def velmode(self):
+        self.varp.set(False)
+        self.vart.set(False)
+
+    def torquemode(self):
+        self.varv.set(False)
+        self.varp.set(False)
+
 
     def loop(self, toggle=False):
         global tracking_var
@@ -196,25 +237,46 @@ class Window2(Master_Window):
             else:
                 tracking_var = True
 
-
         if tracking_var:
+            
             self.get_position()
-            self.frame.after(1000, self.loop) #1000 es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
+            self.get_velocity()
+            self.get_mean_velocity()
+            self.get_amps()
+            self.get_filtered_amps()
+            global tsamp
+            tsamp = self.sample.get()
+            self.frame.after(tsamp, self.loop) #tsamp es el numero de milisegundos que dura el intervalo entre la llamada a la función loop
+        else:
+            #Acabada la simulación saco la gráfica
+            tmeasured = self.time_frame.get()
+            #Saco cuantos componentes son:
+            nbr_pts = int(tmeasured)/(int(tsamp)/1000)
+            final_vec_p = m_pos[-int(nbr_pts):]
+            final_vec_v = m_vel[-int(nbr_pts):]
 
-    def posmode(self):
-        print('pos mode')
-        self.varv.set(False)
-        self.vart.set(False)
-
-    def velmode(self):
-        print('vel mode')
-        self.varp.set(False)
-        self.vart.set(False)
-
-    def tormode(self):
-        print('torque mode')
-        self.varv.set(False)
-        self.varp.set(False)
+            #Pinto las gráficas
+            #Posición
+            plt.subplot(311)
+            plt.plot(m_pos[:],'b', lw = 1.5) #label hace referencia a la leyenda
+            plt.plot(m_pos[:], 'ro') #ro indica r(red)o(circles)
+            plt.grid(True)
+            plt.ylabel('Position')
+            #Velocidad
+            plt.subplot(312)
+            plt.plot(m_vel[:],'b', lw = 1.5) #label hace referencia a la leyenda
+            plt.plot(m_vel[:], 'ro') #ro indica r(red)o(circles)
+            plt.grid(True)
+            plt.ylabel('Velocity')
+            #Amperaje
+            plt.subplot(313)
+            plt.plot(m_tor[:],'b', lw = 1.5) #label hace referencia a la leyenda
+            plt.plot(m_tor[:], 'ro') #ro indica r(red)o(circles)
+            plt.grid(True)
+            plt.ylabel('Amps')
+            plt.xlabel('Sample measure point')
+            #pinto
+            plt.show()
 
 class Window3:
     def __init__(self, master):
@@ -222,77 +284,73 @@ class Window3:
         self.frame = Frame(self.master)
         self.Style = Style()
         self.Style.theme_use('default')
-        self.master.title('Theo´s error window')
-        self.master.geometry('630x400+100+150')
+        self.master.title('Teo´s error window')
+        self.master.geometry('800x400+100+150')
         self.frame.pack(fill = BOTH, expand = 1)
         #Quit
-        self.quitButton = Button(self.frame, text = 'Quit error window.', command = self.master.destroy)
-        self.quitButton.place(x = 200, y = 330)
+        self.quitButton = Button(self.frame, text = 'Quit error window', command = self.master.destroy)
+        self.quitButton.place(x = 200, y = 350)
         #Get Msg
-        #Stop/Start Simulation
-        self.gmsg = Button(self.frame,text = 'Get error message.', command = lambda : self.loop_msg(True))
-        self.gmsg.place(x = 10, y = 330)
+        self.gmsg = Button(self.frame,text = 'Get error message', command = lambda : self.loop_msg(True))
+        self.gmsg.place(x = 10, y = 350)
         #Labels 
-        lbl1 = Label(self.frame, text = 'Can id:')
-        lbl1.place(x = 10, y = 30)
-        lbl4 = Label(self.frame, text = 'Error type:')
+        lbl1 = Label(self.frame, text = 'Messages:')
+        lbl1.place(x = 10, y = 10)
+        lbl4 = Label(self.frame, text = 'Error description:')
         lbl4.place(x = 10, y = 260)
-        lbl5 = Label(self.frame, text = 'Error:')
-        lbl5.place(x = 10, y = 300)
         lbl6 = Label(self.frame, text = 'Filter messages by first number:')
         lbl6.place(x = 410, y = 30)
         #textboxes
-        self.canid = Entry(self.frame, width = 40)
-        self.canid.place(x = 60, y = 30, height = 220)
-        self.err_typ = Entry(self.frame, width = 10)
-        self.err_typ.place(x = 80, y = 260)
-        self.errrr = Entry(self.frame, width = 20)
-        self.errrr.place(x = 50, y = 300)
+        self.canid = Text(self.frame, width = 55)
+        self.canid.place(x = 10, y = 30, height = 220)
+        self.err_typ = Text(self.frame, width = 55)
+        self.err_typ.place(x = 10, y = 280, height = 60)
         #Checkboxes
         # error, 0
         self.var0 = IntVar()        
-        self.check_0 = Checkbutton(self.frame, text = '0',  variable = self.var0)
+        self.check_0 = Checkbutton(self.frame, text = '0, Error Reset or no error.',  variable = self.var0)
         self.check_0.place(x = 410, y = 50)
         # error, 1
         self.var1 = IntVar()        
-        self.check_1 = Checkbutton(self.frame, text = '1', variable = self.var1)
-        self.check_1.place(x = 410, y = 70)
+        self.check_1 = Checkbutton(self.frame, text = '1, Generic error.', variable = self.var1)
+        self.check_1.place(x = 410, y = 80)
         # error, 2
         self.var2 = IntVar()        
-        self.check_2 = Checkbutton(self.frame, text = '2',  variable = self.var2)
-        self.check_2.place(x = 410, y = 90)
+        self.check_2 = Checkbutton(self.frame, text = '2, Current messages.',  variable = self.var2)
+        self.check_2.place(x = 410, y = 110)
         # error, 3
         self.var3 = IntVar()        
-        self.check_3 = Checkbutton(self.frame, text = '3',  variable = self.var3)
-        self.check_3.place(x = 410, y = 110)
+        self.check_3 = Checkbutton(self.frame, text = '3, Voltage messages.',  variable = self.var3)
+        self.check_3.place(x = 410, y = 140)
         # error, 4
         self.var4 = IntVar()        
-        self.check_4 = Checkbutton(self.frame, text = '4', variable = self.var4)
-        self.check_4.place(x = 410, y = 140)
+        self.check_4 = Checkbutton(self.frame, text = '4, Temperature messages.', variable = self.var4)
+        self.check_4.place(x = 410, y = 170)
         # error, 5
         self.var5 = IntVar()        
-        self.check_5 = Checkbutton(self.frame, text = '5',  variable = self.var5)
-        self.check_5.place(x = 410, y = 170)
+        self.check_5 = Checkbutton(self.frame, text = '5, Device software messages.',  variable = self.var5)
+        self.check_5.place(x = 410, y = 200)
         # error, 6
         self.var6 = IntVar()        
-        self.check_6 = Checkbutton(self.frame, text = '6', variable = self.var6)
-        self.check_6.place(x = 410, y = 200)
+        self.check_6 = Checkbutton(self.frame, text = '6, Device hardware messages.', variable = self.var6)
+        self.check_6.place(x = 410, y = 230)
         # error, 7
         self.var7 = IntVar()        
-        self.check_7 = Checkbutton(self.frame, text = '7',  variable = self.var7)
-        self.check_7.place(x = 410, y = 230)
+        self.check_7 = Checkbutton(self.frame, text = '7, Additional modules messages',  variable = self.var7)
+        self.check_7.place(x = 410, y = 260)
         # error, 8
         self.var8 = IntVar()        
-        self.check_8 = Checkbutton(self.frame, text = '8',  variable = self.var8)
-        self.check_8.place(x = 410, y = 260)
+        self.check_8 = Checkbutton(self.frame, text = '8, Monitoring messages.',  variable = self.var8)
+        self.check_8.place(x = 410, y = 290)
         # error, 9
         self.var9 = IntVar()        
-        self.check_9 = Checkbutton(self.frame, text = '9', variable = self.var9)
-        self.check_9.place(x = 410, y = 290)
+        self.check_9 = Checkbutton(self.frame, text = '9, External error messages.', variable = self.var9)
+        self.check_9.place(x = 410, y = 320)
         #error, F
         self.varF = IntVar()        
-        self.check_F = Checkbutton(self.frame, text = 'F',  variable = self.varF)
-        self.check_F.place(x = 410, y = 320)
+        self.check_F = Checkbutton(self.frame, text = 'F, Additional functions and device specific messages.',  variable = self.varF)
+        self.check_F.place(x = 410, y = 350)
+
 
     def loop_msg(self, toggle=False):
         global tracking_var
