@@ -432,6 +432,7 @@ class Window3(Cia402device.CiA402Device):
         lister = self.checkbox_check()
         if not lister:
             msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(hex(dat)) + ', Size: ' +str(siz)
+            print(dat)
             self.canid.insert(END, msg + '\n')
 
         else:
