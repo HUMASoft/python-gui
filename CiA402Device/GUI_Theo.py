@@ -130,6 +130,8 @@ class Window2(Cia402device.CiA402Device):
         #textboxes
         self.sample = Entry(self.frame, width = 10)
         self.sample.place(x = 0, y = 210)
+        self.exec_time = Entry(self.frame, width = 10)
+        self.exec_time.place(x = 0, y = 170)
         self.time_frame = Entry(self.frame, width = 10)
         self.time_frame.place(x = 0, y = 300)
         self.velocity = Entry(self.frame, width = 10)
@@ -177,6 +179,8 @@ class Window2(Cia402device.CiA402Device):
         pltlbl1.place(x = 0, y = 280)
         pltlbl2 = Label(self.frame, text = 'Execution plot:')
         pltlbl2.place(x = 0, y = 260)
+        pltlbl4 = Label(self.frame, text = 'Execution time [s]:')
+        pltlbl4.place(x = 0, y = 150)
         #Checkboxes
         #pos mode
         self.varp = IntVar()        
