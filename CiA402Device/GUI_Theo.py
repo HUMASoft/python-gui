@@ -123,18 +123,22 @@ class Window2(Cia402device.CiA402Device):
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit', command = self.master.destroy)
         self.quitButton.place(x = 500, y = 350)
+
         #Stop/Start Simulation
         self.ssb = Button(self.frame, text = 'Start/Stop Execution', command = lambda : self.loop(True))
         self.ssb.place(x = 410, y = 20)
         #Set Velocity
         self.svel = Button(self.frame, text = 'Set Velocity', command = self.bsvel)
         self.svel.place(x = 270, y = 65)
+        self.svel['state'] = 'disabled'
         #Set Position
         self.spos = Button(self.frame, text = 'Set Position', command = self.bspos)
         self.spos.place(x = 270, y = 20)
+        self.spos['state'] = 'disabled'
         #Set Torque
         self.stor = Button(self.frame, text = 'Set Torque', command = self.bstorque)
         self.stor.place(x = 270, y = 110)
+        self.stor['state'] = 'disabled'
         #textboxes
         self.sample = Entry(self.frame, width = 10)
         self.sample.place(x = 0, y = 220)
@@ -283,6 +287,9 @@ class Window2(Cia402device.CiA402Device):
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
         cia402.SetupPositionMode();
+        self.spos['state'] = 'active'
+        self.svel['state'] = 'disabled'
+        self.stor['state'] = 'disabled'
 
     def velmode(self):
         self.varp.set(False)
@@ -290,7 +297,10 @@ class Window2(Cia402device.CiA402Device):
         port = porter
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
-        cia402.Setup_Velocity_Mode(); 
+        cia402.Setup_Velocity_Mode();
+        self.spos['state'] = 'disabled'
+        self.svel['state'] = 'active'
+        self.stor['state'] = 'disabled' 
 
     def torquemode(self):
         self.varv.set(False)
@@ -299,6 +309,9 @@ class Window2(Cia402device.CiA402Device):
         pm1 = SocketCanPort.SocketCanPort("can1")
         cia402 = Cia402device.CiA402Device(port, pm1);
         cia402.Setup_Torque_Mode();
+        self.spos['state'] = 'disabled'
+        self.svel['state'] = 'disabled'
+        self.stor['state'] = 'active'
 
     def loop(self, toggle=False):
         global tracking_var
