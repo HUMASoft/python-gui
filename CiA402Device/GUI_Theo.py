@@ -431,9 +431,9 @@ class Window3(Cia402device.CiA402Device):
         err,cid,dat,siz = pm1.GetMsg()
         lister = self.checkbox_check()
         if not lister:
-            msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(hex(dat)) + ', Size: ' +str(siz)
-            print(dat)
-            self.canid.insert(END, msg + '\n')
+            if int(siz) < 4:
+                msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(hex(dat)) + ', Size: ' +str(siz)
+                self.canid.insert(END, msg + '\n')
 
         else:
             #Inserto lo nuevo solo si está marcado:
