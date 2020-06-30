@@ -446,7 +446,7 @@ class Window3(Cia402device.CiA402Device):
             if filtered == True:
                 msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(dat) + ', Size: ' +str(siz)
                 self.canid.insert(END, msg + '\n')
-		print(str(hex(cid))[3])
+                print(str(hex(cid))[3])
                 warning = warning_generator(str(hex(cid))[3])
                 self.err_typ.insert(END, warning + '\n')
 
