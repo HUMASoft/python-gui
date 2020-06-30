@@ -446,6 +446,8 @@ class Window3(Cia402device.CiA402Device):
             if filtered == True:
                 msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(dat) + ', Size: ' +str(siz)
                 self.canid.insert(END, msg + '\n')
+                warning = warning_generator(str(hex(cid))[3])
+                self.err_typ.insert(END, warning + '\n')
 
 
 
@@ -485,6 +487,34 @@ class Window3(Cia402device.CiA402Device):
         if self.varF.get() == 1:
             lis.append('F')
         return lis
+
+    def warning_generator(self, varx):
+        if varx == '0':
+            msgg = 'Error reset or no error'
+        elif varx == '1':
+            msgg = 'Generic error'
+        elif varx == '2':
+            msgg = 'Current warning'
+        elif varx == '3':
+            msgg = 'Voltage warning'
+        elif varx == '4':
+            msgg = 'Temperature warning'
+        elif varx == '5':
+            msgg = 'Device hardware warning'
+        elif varx == '6':
+            msgg = 'Device software warning'
+        elif varx == '7':
+            msgg = 'Additional modules warning'
+        elif varx == '8':
+            msgg = 'Monitoring warning'
+        elif varx == '9':
+            msgg = 'Additional functions warning'
+        elif varx == 'F':
+            msgg = 'Device specific warning'
+        return msgg
+
+
+
 
 
 
