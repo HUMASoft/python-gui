@@ -1,12 +1,12 @@
 import tkinter as tk
 from tkinter.ttk import *
-from tkinter import Tk, BOTH, IntVar, END, Text, font
+from tkinter import Tk, BOTH, IntVar, END, Text
 import SocketCanPort
 import Cia402device
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import tkFont
+import tkinter.font as font
 
 """
 Import clase Tkinter:
@@ -32,8 +32,8 @@ initUI:
 
 class Master_Window(Cia402device.CiA402Device):
     def __init__(self, master):
-	helv36 = tkFont.Font(family="Helvetica",size=36,weight="bold")        
-	self.master = master
+    	helv36 = font.Font(family="Helvetica", size=36, weight="bold")        
+    	self.master = master
         self.frame = Frame(self.master)
         self.Style = Style()
         self.Style.theme_use('default')
@@ -44,8 +44,9 @@ class Master_Window(Cia402device.CiA402Device):
         #Button to open window 2
         self.bw2 = Button(self.frame, text = 'Open control window', width = 20, command = self.new_window2)
         self.bw2.place(x = 250, y = 130)
+        self.bw2['font'] = helv36
         #Button to open window 3
-        self.bw3 = Button(self.frame, text = 'Open error window', width = 20, font='Helvetica 18 bold', command = self.new_window3)
+        self.bw3 = Button(self.frame, text = 'Open error window', width = 20,  command = self.new_window3)
         self.bw3.place(x = 250, y = 180)
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit GUI', width = 15, command = self.master.quit)
