@@ -434,6 +434,12 @@ class Window3(Cia402device.CiA402Device):
             if int(siz) < 4:
                 msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(hex(dat)) + ', Size: ' +str(siz)
                 self.canid.insert(END, msg + '\n')
+                print(str(hex(cid))[3])
+                warning = warning_generator(str(hex(cid))[3])
+                self.err_typ.insert(END, warning + '\n')
+
+
+
 
         else:
             #Inserto lo nuevo solo si está marcado:
@@ -444,11 +450,11 @@ class Window3(Cia402device.CiA402Device):
                 else:
                     filtered = False
             if filtered == True:
-                msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(dat) + ', Size: ' +str(siz)
-                self.canid.insert(END, msg + '\n')
-                print(str(hex(cid))[3])
-                warning = warning_generator(str(hex(cid))[3])
-                self.err_typ.insert(END, warning + '\n')
+                if int(siz) < 4:
+                    msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(dat) + ', Size: ' +str(siz)
+                    self.canid.insert(END, msg + '\n')
+                    warning = warning_generator(str(hex(cid))[3])
+                    self.err_typ.insert(END, warning + '\n')
 
 
 
