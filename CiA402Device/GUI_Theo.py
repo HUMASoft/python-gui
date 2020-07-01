@@ -401,19 +401,19 @@ class Window3(Cia402device.CiA402Device):
         lbl1 = Label(self.frame, text = 'Messages:')
         lbl1.place(x = 10, y = 10)
         lbl4 = Label(self.frame, text = 'Error description:')
-        lbl4.place(x = 10, y = 260)
+        lbl4.place(x = 410, y = 10)
         lbl6 = Label(self.frame, text = 'Filter messages by first number:')
         lbl6.place(x = 410, y = 30)
         #textboxes
         self.canid = Text(self.frame, width = 48)
         self.canid.place(x = 10, y = 30, height = 220)
         self.err_typ = Text(self.frame, width = 48)
-        self.err_typ.place(x = 10, y = 280, height = 40)
+        self.err_typ.place(x = 410, y = 30, height = 220)
         #Checkboxes
         # error, 0
         self.var0 = IntVar()        
         self.check_0 = Checkbutton(self.frame, text = '0, Error Reset or no error.',  variable = self.var0)
-        self.check_0.place(x = 410, y = 50)
+        self.check_0.place(x = 460, y = 50)
         # error, 1
         self.var1 = IntVar()        
         self.check_1 = Checkbutton(self.frame, text = '1, Generic error.', variable = self.var1)
