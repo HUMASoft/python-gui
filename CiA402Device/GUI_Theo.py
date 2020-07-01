@@ -113,14 +113,14 @@ class Master_Window(Cia402device.CiA402Device):
     def check_conn(self):
         port = (self.port.get())
         if self.port.get() == "" :
-            print(no)
+            aaaa = 2
         elif int(port) == 1 or int(port) == 2 or int(port) == 3:
             self.bw2['state'] = 'active'
             self.bw3['state'] = 'active'
             self.resButton['state'] = 'active'
             self.offButton['state'] = 'active'
         else:
-            print(port)
+            aaaaa = 2
 
 
 
