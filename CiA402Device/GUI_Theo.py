@@ -472,7 +472,7 @@ class Window3(Cia402device.CiA402Device):
                     filtered = False
             if filtered == True:
                 if int(siz) < 4:
-                    msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(dat) + ', Size: ' +str(siz)
+                    msg = 'Cid: ' + str(hex(cid)) + ', Data: ' + str(hex(dat)) + ', Size: ' +str(siz)
                     self.canid.insert(END, msg + '\n')
                     warning = self.warning_generator(str(hex(cid))[2])
                     self.err_typ.insert(END, warning + '\n')
