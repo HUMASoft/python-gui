@@ -117,6 +117,11 @@ class Master_Window(Cia402device.CiA402Device):
             self.bw3['state'] = 'active'
             self.resButton['state'] = 'active'
             self.offButton['state'] = 'active'
+        elif self.port.get() = "" :
+            print(no)
+        else
+            print(port)
+
 
 
 
