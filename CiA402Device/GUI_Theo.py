@@ -49,13 +49,15 @@ class Master_Window(Cia402device.CiA402Device):
         self.bw3 = Button(self.frame, text = 'Open error window', width = 20, command = self.new_window3)
         self.bw3.place(x = 250, y = 180)
         self.bw3['state'] = 'disabled'
-
+        self.bconn = Button(self.frame, text = 'Connect port', width = 20, command = self.check_conn)
+        self.bconn.place(x = 350, y = 0)
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit GUI', width = 15, command = self.master.quit)
         self.quitButton.place(x = 250, y = 230)
         #Reset and Switch ON
         self.resButton = Button(self.frame, text = 'Switch On', command = self.SwitchOn)
         self.resButton.place(x = 300, y =30)
+        self.resButton['state'] = 'disabled'
         self.offButton = Button(self.frame, text = 'Switch Off', command = self.SwitchOff)
         self.offButton.place(x = 300, y =60)
         #Label
@@ -67,7 +69,7 @@ class Master_Window(Cia402device.CiA402Device):
         lbl.place(x = 0, y = 100)
         lblq = Label(self.frame, text='Once Teo is OFF, quit the GUI app:')
         lblq.place(x = 0, y = 235)
-        lblport = Label(self.frame, text='Before switching Teo ON entry the comm port:')
+        lblport = Label(self.frame, text='Before switching Teo ON entry the id:')
         lblport.place(x = 0, y = 0)
         #Entries:
         self.port = Entry(self.frame, width = 3)
@@ -95,9 +97,6 @@ class Master_Window(Cia402device.CiA402Device):
         cia402 = Cia402device.CiA402Device(porter, pm1);
         cia402.Reset()
         cia402.SwitchOn();
-        self.bw2['state'] = 'active'
-        self.bw3['state'] = 'active'
-
         self.var1.set(True)
         self.var2.set(False)
 
@@ -109,6 +108,15 @@ class Master_Window(Cia402device.CiA402Device):
         self.var1.set(False)
         self.var2.set(True)
         self.port.delete('0', END)
+
+    def check_conn(self):
+        port = int(self.port.get())
+        if int(port) == 1 or int(port) == 2 or int(port) == 3:
+            self.bw2['state'] = 'active'
+            self.bw3['state'] = 'active'
+            self.resButton['state'] = 'active'
+
+
 
 class Window2(Cia402device.CiA402Device):
     def __init__(self, master):
@@ -159,7 +167,7 @@ class Window2(Cia402device.CiA402Device):
         self.setvel = Entry(self.frame, width = 3)
         self.setvel.place(x = 240, y = 70)
         self.settorq = Entry(self.frame, width = 3)
-        self.settorq.place(x = 180, y = 110)
+        self.settorq.place(x = 200, y = 110)
         self.setpos = Entry(self.frame, width = 3)
         self.setpos.place(x = 230, y = 30)
         #Labels 
