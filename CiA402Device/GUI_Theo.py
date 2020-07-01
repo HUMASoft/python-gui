@@ -49,17 +49,17 @@ class Master_Window(Cia402device.CiA402Device):
         self.bw3 = Button(self.frame, text = 'Open error window', width = 20, command = self.new_window3)
         self.bw3.place(x = 250, y = 180)
         self.bw3['state'] = 'disabled'
-        self.bconn = Button(self.frame, text = 'Connect port',  command = self.check_conn)
-        self.bconn.place(x = 340, y = 0)
+        self.bconn = Button(self.frame, text = 'Connect port', width = 11, command = self.check_conn)
+        self.bconn.place(x = 296, y = 0)
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit GUI', width = 15, command = self.master.quit)
         self.quitButton.place(x = 250, y = 230)
         #Reset and Switch ON
-        self.resButton = Button(self.frame, text = 'Switch On', command = self.SwitchOn)
-        self.resButton.place(x = 300, y =30)
+        self.resButton = Button(self.frame, text = 'Switch On', width = 11, command = self.SwitchOn)
+        self.resButton.place(x = 296, y =30)
         self.resButton['state'] = 'disabled'
-        self.offButton = Button(self.frame, text = 'Switch Off', command = self.SwitchOff)
-        self.offButton.place(x = 300, y =60)
+        self.offButton = Button(self.frame, text = 'Switch Off', width = 11, command = self.SwitchOff)
+        self.offButton.place(x = 296, y =60)
         self.offButton['state'] = 'disabled'
         #Label
         lbl_title = Label(self.frame, text='Please, to start testing, switch on Teo:')
@@ -74,7 +74,7 @@ class Master_Window(Cia402device.CiA402Device):
         lblport.place(x = 0, y = 0)
         #Entries:
         self.port = Entry(self.frame, width = 3)
-        self.port.place(x = 310, y = 0)
+        self.port.place(x = 250, y = 0)
         #Checkboxes
         self.var1 = IntVar()        
         self.check_switchon = Checkbutton(self.frame,  variable = self.var1)
