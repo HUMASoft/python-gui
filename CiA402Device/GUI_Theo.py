@@ -389,21 +389,21 @@ class Window3(Cia402device.CiA402Device):
         self.Style = Style()
         self.Style.theme_use('default')
         self.master.title('Teo´s error window')
-        self.master.geometry('820x450+100+150')
+        self.master.geometry('820x470+100+150')
         self.frame.pack(fill = BOTH, expand = 1)
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit error window', command = self.master.destroy)
-        self.quitButton.place(x = 600, y = 350)
+        self.quitButton.place(x = 600, y = 370)
         #Get Msg
         self.gmsg = Button(self.frame,text = 'Get error message', command = lambda : self.loop_msg(True))
-        self.gmsg.place(x = 600, y = 300)
+        self.gmsg.place(x = 600, y = 320)
         #Labels 
         lbl1 = Label(self.frame, text = 'Messages:')
         lbl1.place(x = 10, y = 10)
         lbl4 = Label(self.frame, text = 'Error description:')
         lbl4.place(x = 410, y = 10)
         lbl6 = Label(self.frame, text = 'Filter messages by first number:')
-        lbl6.place(x = 410, y = 30)
+        lbl6.place(x = 10, y = 255)
         #textboxes
         self.canid = Text(self.frame, width = 48)
         self.canid.place(x = 10, y = 30, height = 220)
@@ -413,47 +413,47 @@ class Window3(Cia402device.CiA402Device):
         # error, 0
         self.var0 = IntVar()        
         self.check_0 = Checkbutton(self.frame, text = '0, Error Reset or no error.',  variable = self.var0)
-        self.check_0.place(x = 10, y = 260)
+        self.check_0.place(x = 10, y = 280)
         # error, 1
         self.var1 = IntVar()        
         self.check_1 = Checkbutton(self.frame, text = '1, Generic error.', variable = self.var1)
-        self.check_1.place(x = 10, y = 290)
+        self.check_1.place(x = 10, y = 310)
         # error, 2
         self.var2 = IntVar()        
         self.check_2 = Checkbutton(self.frame, text = '2, Current messages.',  variable = self.var2)
-        self.check_2.place(x = 10, y = 320)
+        self.check_2.place(x = 10, y = 340)
         # error, 3
         self.var3 = IntVar()        
         self.check_3 = Checkbutton(self.frame, text = '3, Voltage messages.',  variable = self.var3)
-        self.check_3.place(x = 10, y = 350)
+        self.check_3.place(x = 10, y = 370)
         # error, 4
         self.var4 = IntVar()        
         self.check_4 = Checkbutton(self.frame, text = '4, Temperature messages.', variable = self.var4)
-        self.check_4.place(x = 10, y = 380)
+        self.check_4.place(x = 10, y = 400)
         # error, 5
         self.var5 = IntVar()        
         self.check_5 = Checkbutton(self.frame, text = '5, Device software messages.',  variable = self.var5)
-        self.check_5.place(x = 250, y = 260)
+        self.check_5.place(x = 250, y = 280)
         # error, 6
         self.var6 = IntVar()        
         self.check_6 = Checkbutton(self.frame, text = '6, Device hardware messages.', variable = self.var6)
-        self.check_6.place(x = 250, y = 290)
+        self.check_6.place(x = 250, y = 310)
         # error, 7
         self.var7 = IntVar()        
         self.check_7 = Checkbutton(self.frame, text = '7, Additional modules messages',  variable = self.var7)
-        self.check_7.place(x = 250, y = 320)
+        self.check_7.place(x = 250, y = 340)
         # error, 8
         self.var8 = IntVar()        
         self.check_8 = Checkbutton(self.frame, text = '8, Monitoring messages.',  variable = self.var8)
-        self.check_8.place(x = 250, y = 350)
+        self.check_8.place(x = 250, y = 370)
         # error, 9
         self.var9 = IntVar()        
         self.check_9 = Checkbutton(self.frame, text = '9, External error messages.', variable = self.var9)
-        self.check_9.place(x = 250, y = 380)
+        self.check_9.place(x = 250, y = 400)
         #error, F
         self.varF = IntVar()        
         self.check_F = Checkbutton(self.frame, text = 'F, Device specific messages.',  variable = self.varF)
-        self.check_F.place(x = 250, y = 410)
+        self.check_F.place(x = 250, y = 430)
 
         global pm1
         pm1 = SocketCanPort.SocketCanPort("can1")
