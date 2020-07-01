@@ -49,8 +49,8 @@ class Master_Window(Cia402device.CiA402Device):
         self.bw3 = Button(self.frame, text = 'Open error window', width = 20, command = self.new_window3)
         self.bw3.place(x = 250, y = 180)
         self.bw3['state'] = 'disabled'
-        self.bconn = Button(self.frame, text = 'Connect port', width = 20, command = self.check_conn)
-        self.bconn.place(x = 350, y = 0)
+        self.bconn = Button(self.frame, text = 'Connect port',  command = self.check_conn)
+        self.bconn.place(x = 340, y = 0)
         #Quit
         self.quitButton = Button(self.frame, text = 'Quit GUI', width = 15, command = self.master.quit)
         self.quitButton.place(x = 250, y = 230)
@@ -60,6 +60,7 @@ class Master_Window(Cia402device.CiA402Device):
         self.resButton['state'] = 'disabled'
         self.offButton = Button(self.frame, text = 'Switch Off', command = self.SwitchOff)
         self.offButton.place(x = 300, y =60)
+        self.offButton['state'] = 'disabled'
         #Label
         lbl_title = Label(self.frame, text='Please, to start testing, switch on Teo:')
         lbl_title.place(x = 0, y = 30)
@@ -115,6 +116,7 @@ class Master_Window(Cia402device.CiA402Device):
             self.bw2['state'] = 'active'
             self.bw3['state'] = 'active'
             self.resButton['state'] = 'active'
+            self.offButton['state'] = 'active'
 
 
 
